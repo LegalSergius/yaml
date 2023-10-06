@@ -1,0 +1,40 @@
+from fastapi import FastAPI, Query
+from fastapi.openapi.utils import get_openapi
+from typing import Optional
+from models import *
+
+import yaml
+
+
+contact_info = {
+    'name': '{{ data.info.contact.name }}', 
+    'email': '{{ data.info.contact.email }}'
+}
+
+servers_info = [
+{% for url_info in data.servers%}
+    {{url_info}},    
+{% endfor%}
+]
+
+app = FastAPI()
+{% for path, info in data.paths.items() %}
+    {% for method, properties in info.items() %}
+@app.{{ method }}('{{ path }}', response_model={{ response_models[path][method] }}, summary='{{properties.summary}}', tags=[{% for tag in properties.tags %}'{{ tag }}',{% endfor %}], responses={{ properties.responses | set_responses}})
+async def {{ properties.operationId.replace('-', '_') }}({{ (properties.parameters, data.components.parameters) | set_parameters}}
+) -> {{ response_models[path][method] }}:
+    """
+    {{ properties.description }}
+    """
+    pass
+    {% endfor %}
+{% endfor %}
+
+openapi_schema = get_openapi(title='{{ data.info.title }}', version='{{ data.info.version }}', 
+    description='{{ data.info.description }}', contact=contact_info, routes=app.routes)
+
+openapi_schema['openapi'] = '{{ data.openapi }}'
+openapi_schema['servers'] = servers_info
+
+with open('generated_api.yaml', 'w', encoding='utf-8') as output_file:
+    yaml.dump(openapi_schema, output_file, allow_unicode=True)

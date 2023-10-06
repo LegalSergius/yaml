@@ -1,0 +1,18 @@
+from pydantic import BaseModel, Field
+
+
+class {{ class_name }}(BaseModel):
+    {%if 'description' in data%}
+    """
+    {{ data.description }}
+    """
+    {%endif%}
+{% for property, insights in data.properties.items() %}
+    {% if insights.type == 'object' %}
+    {{ property }}: {{ (property, class_name + (property | capitalize_properly), data.required) | check_requirement }} = {{ (data.required, insights) | field_info }}
+    {{ (property, insights, class_name) | parse_model_info}}
+    {{ ('.', class_name + property | capitalize_properly) | add_import }}
+    {% else %}
+    {{ property }}: {{ (property, insights.type | type_mapping, data.required) | check_requirement }} = {{ (data.required, insights) | field_info }}
+    {% endif %}
+{% endfor %}
