@@ -64,6 +64,7 @@ def get_response_models(model_paths):
                 path_name_parts = path[1:].split('-')
                 model_name = ''.join([path_name_parts[0], *(part.capitalize() for part in path_name_parts[1:]), 'Response'])
                 handle_model_info(model_name, model_entry)
+                model_name = capitalize_properly(model_name)
             
             response_models[path][method] = model_name
 
