@@ -1,0 +1,49 @@
+from fastapi import FastAPI, Query
+from fastapi.openapi.utils import get_openapi
+from typing import Optional
+from models import *
+from enums import *
+
+import yaml
+
+
+contact_info = {
+    {% for key, value in info.contact.items() %}
+    '{{ key }}': '{{ value }}',
+    {% endfor %}
+}
+
+servers_info = [
+{% if servers %}
+{% for url_info in servers %}
+    {{url_info}},    
+{% endfor %}
+{% endif %}
+]
+
+app = FastAPI()
+{% for path, info in paths.items() %}
+    {% for method, properties in info.items() %}
+@app.{{ method }}(
+    '{{ path }}', 
+    response_model={{ response_models[path][method]['success_model'] }}, 
+    tags={{ properties.tags | enumerate_tags }}, 
+    responses={{ opened_bracket }}{% for response_status, response_info in response_models[path][method]['responses'].items() %}'{{ response_status }}': {{ opened_bracket }}{% for response_property, property_value in response_info.items() %}'{{ response_property}}': {% if response_property == 'model' %}{{ property_value }}{% else %}'{{ property_value }}'{% endif %}, {% endfor %}{{ closed_bracket }}, {% endfor %}{{ closed_bracket }},
+    description='{{ properties.description}}')
+async def {{ properties.operationId.replace('-', '_') }}({{ api_parameters[path][method] }}
+) -> {{ response_models[path][method]['return_value'] }}:
+    """
+    {{ properties.summary }}
+    """
+    pass
+    {% endfor %}
+{% endfor %}
+
+openapi_schema = get_openapi(title='{{ info.title }}', version='{{ info.version }}', 
+    description='{{ info.description }}', contact=contact_info, routes=app.routes)
+
+openapi_schema['openapi'] = '{{ openapi }}'
+openapi_schema['servers'] = servers_info
+
+with open('generated_api.yaml', 'w', encoding='utf-8') as output_file:
+    yaml.dump(openapi_schema, output_file, allow_unicode=True)

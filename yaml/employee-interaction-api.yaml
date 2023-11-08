@@ -1,0 +1,2352 @@
+openapi: 3.0.2
+info:
+  title: employee-interaction
+  version: 0.1.0
+  contact:
+    name: Samat Baizdrakhmanov
+    url: 'https://telecom.kz'
+    email: samat@telecom.kz
+paths:
+  /employee-interaction/v1/request/:
+    get:
+      tags:
+        - /request
+      summary: Read
+      description: Retrieve all requests
+      operationId: read_employee_interaction_v1_request__get
+      parameters:
+        - required: false
+          schema:
+            title: Applicantlogin
+            type: string
+          name: applicantLogin
+          in: query
+        - required: false
+          schema:
+            title: Applicantemployeeid
+            type: integer
+          name: applicantEmployeeId
+          in: query
+        - required: false
+          schema:
+            title: Applicantindividualid
+            type: integer
+          name: applicantIndividualId
+          in: query
+        - required: false
+          schema:
+            title: Skip
+            type: integer
+            default: 0
+          name: skip
+          in: query
+        - required: false
+          schema:
+            title: Limit
+            type: integer
+            default: 100
+          name: limit
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Read Employee Interaction V1 Request  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/Request'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    post:
+      tags:
+        - /request
+      summary: Create
+      description: Create new request
+      operationId: create_employee_interaction_v1_request__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultedId'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  '/employee-interaction/v1/request/{id}':
+    get:
+      tags:
+        - /request
+      summary: Read By Id
+      description: Retrieve request by id
+      operationId: read_by_id_employee_interaction_v1_request__id__get
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Request'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    put:
+      tags:
+        - /request
+      summary: Update
+      description: Update Request
+      operationId: update_employee_interaction_v1_request__id__put
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    patch:
+      tags:
+        - /request
+      summary: Patch
+      description: Patch request
+      operationId: patch_employee_interaction_v1_request__id__patch
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestPatch'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /employee-interaction/v1/response/:
+    get:
+      tags:
+        - /response
+      summary: Read
+      description: Retrieve responses
+      operationId: read_employee_interaction_v1_response__get
+      parameters:
+        - required: false
+          schema:
+            title: Skip
+            type: integer
+            default: 0
+          name: skip
+          in: query
+        - required: false
+          schema:
+            title: Limit
+            type: integer
+            default: 100
+          name: limit
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Read Employee Interaction V1 Response  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/Response'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    post:
+      tags:
+        - /response
+      summary: Create
+      description: Create new Response
+      operationId: create_employee_interaction_v1_response__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResponseCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultedId'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  '/employee-interaction/v1/response/{id}':
+    get:
+      tags:
+        - /response
+      summary: Read By Id
+      description: Retrieve Response by id
+      operationId: read_by_id_employee_interaction_v1_response__id__get
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    put:
+      tags:
+        - /response
+      summary: Update
+      description: Update a response
+      operationId: update_employee_interaction_v1_response__id__put
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResponseUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    patch:
+      tags:
+        - /response
+      summary: Patch
+      description: Изменение статуса активности записи
+      operationId: patch_employee_interaction_v1_response__id__patch
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResponsePatch'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /employee-interaction/v1/core/interaction-relation-type/:
+    get:
+      tags:
+        - /core/interaction-relation-type
+      summary: Read
+      description: Retrieve interaction relation type
+      operationId: read_employee_interaction_v1_core_interaction_relation_type__get
+      parameters:
+        - required: false
+          schema:
+            title: Skip
+            type: integer
+            default: 0
+          name: skip
+          in: query
+        - required: false
+          schema:
+            title: Limit
+            type: integer
+            default: 100
+          name: limit
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Read Employee Interaction V1 Core Interaction Relation Type  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/InteractionRelationType'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    post:
+      tags:
+        - /core/interaction-relation-type
+      summary: Create
+      description: Create new interaction relation type
+      operationId: create_employee_interaction_v1_core_interaction_relation_type__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InteractionRelationTypeCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultedId'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  '/employee-interaction/v1/core/interaction-relation-type/{id}':
+    get:
+      tags:
+        - /core/interaction-relation-type
+      summary: Read By Id
+      description: Retrieve interaction relation type
+      operationId: read_by_id_employee_interaction_v1_core_interaction_relation_type__id__get
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InteractionRelationTypeWithStatus'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    put:
+      tags:
+        - /core/interaction-relation-type
+      summary: Update
+      description: Update an interaction relation type
+      operationId: update_employee_interaction_v1_core_interaction_relation_type__id__put
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InteractionRelationTypeUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    patch:
+      tags:
+        - /core/interaction-relation-type
+      summary: Patch
+      description: Изменение статуса активности записи
+      operationId: patch_employee_interaction_v1_core_interaction_relation_type__id__patch
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivityStatus'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /employee-interaction/v1/core/request-group/:
+    get:
+      tags:
+        - /core/request-group
+      summary: Read
+      description: Retrieve data
+      operationId: read_employee_interaction_v1_core_request_group__get
+      parameters:
+        - required: false
+          schema:
+            title: Skip
+            type: integer
+            default: 0
+          name: skip
+          in: query
+        - required: false
+          schema:
+            title: Limit
+            type: integer
+            default: 100
+          name: limit
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Read Employee Interaction V1 Core Request Group  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/RequestGroup'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    post:
+      tags:
+        - /core/request-group
+      summary: Create
+      description: Create new Request group
+      operationId: create_employee_interaction_v1_core_request_group__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestGroupCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultedId'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  '/employee-interaction/v1/core/request-group/{id}':
+    get:
+      tags:
+        - /core/request-group
+      summary: Read By Id
+      description: Retrieve request group
+      operationId: read_by_id_employee_interaction_v1_core_request_group__id__get
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestGroupWithStatus'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    put:
+      tags:
+        - /core/request-group
+      summary: Update
+      description: Update a request group
+      operationId: update_employee_interaction_v1_core_request_group__id__put
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestGroupUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    patch:
+      tags:
+        - /core/request-group
+      summary: Patch
+      description: Изменение статуса активности записи
+      operationId: patch_employee_interaction_v1_core_request_group__id__patch
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivityStatus'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /employee-interaction/v1/core/request-type/:
+    get:
+      tags:
+        - /core/request-type
+      summary: Read
+      description: Retrieve data
+      operationId: read_employee_interaction_v1_core_request_type__get
+      parameters:
+        - required: false
+          schema:
+            title: Skip
+            type: integer
+            default: 0
+          name: skip
+          in: query
+        - required: false
+          schema:
+            title: Limit
+            type: integer
+            default: 100
+          name: limit
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Read Employee Interaction V1 Core Request Type  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/RequestType'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    post:
+      tags:
+        - /core/request-type
+      summary: Create
+      description: Create new Request type
+      operationId: create_employee_interaction_v1_core_request_type__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestTypeCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultedId'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  '/employee-interaction/v1/core/request-type/{id}':
+    get:
+      tags:
+        - /core/request-type
+      summary: Read By Id
+      description: Retrieve Request type
+      operationId: read_by_id_employee_interaction_v1_core_request_type__id__get
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTypeWithStatus'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    put:
+      tags:
+        - /core/request-type
+      summary: Update
+      description: Update a Request type
+      operationId: update_employee_interaction_v1_core_request_type__id__put
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestTypeUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    patch:
+      tags:
+        - /core/request-type
+      summary: Patch
+      description: Изменение статуса активности записи
+      operationId: patch_employee_interaction_v1_core_request_type__id__patch
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestTypePatch'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /employee-interaction/v1/core/response-type/:
+    get:
+      tags:
+        - /core/response-type
+      summary: Read
+      description: Retrieve data
+      operationId: read_employee_interaction_v1_core_response_type__get
+      parameters:
+        - required: false
+          schema:
+            title: Skip
+            type: integer
+            default: 0
+          name: skip
+          in: query
+        - required: false
+          schema:
+            title: Limit
+            type: integer
+            default: 100
+          name: limit
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Read Employee Interaction V1 Core Response Type  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResponseType'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    post:
+      tags:
+        - /core/response-type
+      summary: Create
+      description: Create new Response type
+      operationId: create_employee_interaction_v1_core_response_type__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResponseTypeCreate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultedId'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  '/employee-interaction/v1/core/response-type/{id}':
+    get:
+      tags:
+        - /core/response-type
+      summary: Read By Id
+      description: Retrieve Response type
+      operationId: read_by_id_employee_interaction_v1_core_response_type__id__get
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseTypeWithStatus'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    put:
+      tags:
+        - /core/response-type
+      summary: Update
+      description: Update a Response type
+      operationId: update_employee_interaction_v1_core_response_type__id__put
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResponseTypeUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+    patch:
+      tags:
+        - /core/response-type
+      summary: Patch
+      description: Изменение статуса активности записи
+      operationId: patch_employee_interaction_v1_core_response_type__id__patch
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivityStatus'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /employee-interaction/v1/core/interaction-type/:
+    get:
+      tags:
+        - /core/interaction-type
+      summary: Read
+      description: Retrieve all data
+      operationId: read_employee_interaction_v1_core_interaction_type__get
+      parameters:
+        - required: false
+          schema:
+            title: Skip
+            type: integer
+            default: 0
+          name: skip
+          in: query
+        - required: false
+          schema:
+            title: Limit
+            type: integer
+            default: 100
+          name: limit
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Read Employee Interaction V1 Core Interaction Type  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/InteractionType'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  '/employee-interaction/v1/core/interaction-type/{id}':
+    get:
+      tags:
+        - /core/interaction-type
+      summary: Read By Id
+      description: Retrieve Interaction type by id
+      operationId: read_by_id_employee_interaction_v1_core_interaction_type__id__get
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InteractionType'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /employee-interaction/v1/core/request-state/:
+    get:
+      tags:
+        - /core/request-state
+      summary: Read
+      description: Retrieve all data
+      operationId: read_employee_interaction_v1_core_request_state__get
+      parameters:
+        - required: false
+          schema:
+            title: Skip
+            type: integer
+            default: 0
+          name: skip
+          in: query
+        - required: false
+          schema:
+            title: Limit
+            type: integer
+            default: 100
+          name: limit
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Read Employee Interaction V1 Core Request State  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/RequestState'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  '/employee-interaction/v1/core/request-state/{id}':
+    get:
+      tags:
+        - /core/request-state
+      summary: Read By Id
+      description: Retrieve data by id
+      operationId: read_by_id_employee_interaction_v1_core_request_state__id__get
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestState'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /employee-interaction/v1/core/response-state/:
+    get:
+      tags:
+        - /core/response-state
+      summary: Read
+      description: Retrieve all data
+      operationId: read_employee_interaction_v1_core_response_state__get
+      parameters:
+        - required: false
+          schema:
+            title: Skip
+            type: integer
+            default: 0
+          name: skip
+          in: query
+        - required: false
+          schema:
+            title: Limit
+            type: integer
+            default: 100
+          name: limit
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Read Employee Interaction V1 Core Response State  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResponseState'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  '/employee-interaction/v1/core/response-state/{id}':
+    get:
+      tags:
+        - /core/response-state
+      summary: Read By Id
+      description: Retrieve data by id
+      operationId: read_by_id_employee_interaction_v1_core_response_state__id__get
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseState'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /employee-interaction/v1/rules/request-state-rule/:
+    get:
+      tags:
+        - /rules/request-state-rule
+      summary: Read
+      description: Retrieve data
+      operationId: read_employee_interaction_v1_rules_request_state_rule__get
+      parameters:
+        - required: false
+          schema:
+            title: Skip
+            type: integer
+            default: 0
+          name: skip
+          in: query
+        - required: false
+          schema:
+            title: Limit
+            type: integer
+            default: 100
+          name: limit
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Read Employee Interaction V1 Rules Request State Rule  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/RequestStateRule'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  '/employee-interaction/v1/rules/request-state-rule/{id}':
+    get:
+      tags:
+        - /rules/request-state-rule
+      summary: Read By Id
+      description: Retrieve Request state rule
+      operationId: read_by_id_employee_interaction_v1_rules_request_state_rule__id__get
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestStateRuleWithStatus'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /employee-interaction/v1/rules/response-state-rule/:
+    get:
+      tags:
+        - /rules/response-state-rule
+      summary: Read
+      description: Retrieve data
+      operationId: read_employee_interaction_v1_rules_response_state_rule__get
+      parameters:
+        - required: false
+          schema:
+            title: Skip
+            type: integer
+            default: 0
+          name: skip
+          in: query
+        - required: false
+          schema:
+            title: Limit
+            type: integer
+            default: 100
+          name: limit
+          in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Read Employee Interaction V1 Rules Response State Rule  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResponseStateRule'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  '/employee-interaction/v1/rules/response-state-rule/{id}':
+    get:
+      tags:
+        - /rules/response-state-rule
+      summary: Read By Id
+      description: Retrieve Response state rule
+      operationId: read_by_id_employee_interaction_v1_rules_response_state_rule__id__get
+      parameters:
+        - required: true
+          schema:
+            title: Id
+            type: integer
+          name: id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseStateRuleWithStatus'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - OAuth2PasswordBearer: []
+  /employee-interaction/v1/health:
+    get:
+      tags:
+        - /health-check
+      summary: Read
+      description: Retrieve api health info
+      operationId: read_employee_interaction_v1_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Read Employee Interaction V1 Health Get
+      security:
+        - OAuth2PasswordBearer: []
+  /employee-interaction/v1/ping:
+    get:
+      tags:
+        - /ping
+      summary: Read
+      description: Retrieve credentials_type
+      operationId: read_employee_interaction_v1_ping_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Read Employee Interaction V1 Ping Get
+components:
+  schemas:
+    ActivityStatus:
+      title: ActivityStatus
+      required:
+        - isActive
+      type: object
+      properties:
+        isActive:
+          title: Isactive
+          type: boolean
+    CommonResponse:
+      title: CommonResponse
+      required:
+        - detail
+      type: object
+      properties:
+        detail:
+          $ref: '#/components/schemas/InfoSet'
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    InfoSet:
+      title: InfoSet
+      required:
+        - code
+        - message
+      type: object
+      properties:
+        code:
+          title: Код сообщения/ошибки
+          type: string
+        message:
+          title: Текст сообщения/ошибки
+          type: string
+    Interaction:
+      title: Interaction
+      required:
+        - title
+        - id
+        - createDate
+        - updateDate
+        - createUser
+        - updateUser
+        - createApp
+        - updateApp
+        - interactionType
+      type: object
+      properties:
+        title:
+          title: Тема
+          type: string
+        id:
+          title: ID
+          type: integer
+        createDate:
+          title: Дата создания
+          type: string
+          format: date-time
+        updateDate:
+          title: Дата изменения
+          type: string
+          format: date-time
+        createUser:
+          title: Пользователь-автор
+          type: string
+        updateUser:
+          title: Пользователь-редактор
+          type: string
+        createApp:
+          title: Приложение-автор
+          type: string
+        updateApp:
+          title: Приложение-редактор
+          type: string
+        interactionType:
+          $ref: '#/components/schemas/InteractionType'
+    InteractionRelationType:
+      title: InteractionRelationType
+      required:
+        - nameRu
+        - nameKz
+        - id
+        - createDate
+        - updateDate
+        - createUser
+        - updateUser
+        - createApp
+        - updateApp
+      type: object
+      properties:
+        nameRu:
+          title: Тип связи взаимодействия на русском языке
+          type: string
+        nameKz:
+          title: Тип связи взаимодействия на казахском языке
+          type: string
+        id:
+          title: ID
+          type: integer
+        createDate:
+          title: Дата создания
+          type: string
+          format: date-time
+        updateDate:
+          title: Дата изменения
+          type: string
+          format: date-time
+        createUser:
+          title: Пользователь-автор
+          type: string
+        updateUser:
+          title: Пользователь-редактор
+          type: string
+        createApp:
+          title: Приложение-автор
+          type: string
+        updateApp:
+          title: Приложение-редактор
+          type: string
+    InteractionRelationTypeCreate:
+      title: InteractionRelationTypeCreate
+      required:
+        - nameRu
+        - nameKz
+      type: object
+      properties:
+        nameRu:
+          title: Тип связи взаимодействия на русском языке
+          type: string
+        nameKz:
+          title: Тип связи взаимодействия на казахском языке
+          type: string
+    InteractionRelationTypeUpdate:
+      title: InteractionRelationTypeUpdate
+      required:
+        - nameRu
+        - nameKz
+      type: object
+      properties:
+        nameRu:
+          title: Тип связи взаимодействия на русском языке
+          type: string
+        nameKz:
+          title: Тип связи взаимодействия на казахском языке
+          type: string
+    InteractionRelationTypeWithStatus:
+      title: InteractionRelationTypeWithStatus
+      required:
+        - nameRu
+        - nameKz
+        - id
+        - createDate
+        - updateDate
+        - createUser
+        - updateUser
+        - createApp
+        - updateApp
+        - isActive
+      type: object
+      properties:
+        nameRu:
+          title: Тип связи взаимодействия на русском языке
+          type: string
+        nameKz:
+          title: Тип связи взаимодействия на казахском языке
+          type: string
+        id:
+          title: ID
+          type: integer
+        createDate:
+          title: Дата создания
+          type: string
+          format: date-time
+        updateDate:
+          title: Дата изменения
+          type: string
+          format: date-time
+        createUser:
+          title: Пользователь-автор
+          type: string
+        updateUser:
+          title: Пользователь-редактор
+          type: string
+        createApp:
+          title: Приложение-автор
+          type: string
+        updateApp:
+          title: Приложение-редактор
+          type: string
+        isActive:
+          title: 'Статус активности записи: true-запись не активна, false-запись активна'
+          type: boolean
+    InteractionType:
+      title: InteractionType
+      required:
+        - nameRu
+        - nameKz
+        - id
+      type: object
+      properties:
+        nameRu:
+          title: Тип взаимодействия на русском языке
+          type: string
+        nameKz:
+          title: Тип взаимодействия на казахском языке
+          type: string
+        id:
+          title: ID
+          type: integer
+    Request:
+      title: Request
+      required:
+        - number
+        - applicantId
+        - id
+        - createDate
+        - updateDate
+        - createUser
+        - updateUser
+        - createApp
+        - updateApp
+        - requestType
+        - requestState
+        - interaction
+      type: object
+      properties:
+        number:
+          title: Номер запроса
+          type: string
+        applicantId:
+          title: ID Заявителя
+          type: integer
+        id:
+          title: ID
+          type: integer
+        createDate:
+          title: Дата создания
+          type: string
+          format: date-time
+        updateDate:
+          title: Дата изменения
+          type: string
+          format: date-time
+        createUser:
+          title: Пользователь-автор
+          type: string
+        updateUser:
+          title: Пользователь-редактор
+          type: string
+        createApp:
+          title: Приложение-автор
+          type: string
+        updateApp:
+          title: Приложение-редактор
+          type: string
+        requestType:
+          $ref: '#/components/schemas/RequestType'
+        requestState:
+          $ref: '#/components/schemas/RequestState'
+        interaction:
+          $ref: '#/components/schemas/Interaction'
+    RequestCreate:
+      title: RequestCreate
+      required:
+        - number
+        - applicantId
+        - requestTypeId
+        - title
+      type: object
+      properties:
+        number:
+          title: Номер запроса
+          type: string
+        applicantId:
+          title: ID Заявителя
+          type: integer
+        requestTypeId:
+          title: ID Типа запроса
+          type: integer
+        title:
+          title: Тема заявки
+          type: string
+        executorId:
+          title: ID Исполнителя
+          type: integer
+    RequestGroup:
+      title: RequestGroup
+      required:
+        - nameRu
+        - nameKz
+        - id
+        - createDate
+        - updateDate
+        - createUser
+        - updateUser
+        - createApp
+        - updateApp
+      type: object
+      properties:
+        nameRu:
+          title: Группа запроса на русском языке
+          type: string
+        nameKz:
+          title: Группа запроса на казахском языке
+          type: string
+        id:
+          title: ID
+          type: integer
+        createDate:
+          title: Дата создания
+          type: string
+          format: date-time
+        updateDate:
+          title: Дата изменения
+          type: string
+          format: date-time
+        createUser:
+          title: Пользователь-автор
+          type: string
+        updateUser:
+          title: Пользователь-редактор
+          type: string
+        createApp:
+          title: Приложение-автор
+          type: string
+        updateApp:
+          title: Приложение-редактор
+          type: string
+    RequestGroupCreate:
+      title: RequestGroupCreate
+      required:
+        - nameRu
+        - nameKz
+      type: object
+      properties:
+        nameRu:
+          title: Группа запроса на русском языке
+          type: string
+        nameKz:
+          title: Группа запроса на казахском языке
+          type: string
+    RequestGroupUpdate:
+      title: RequestGroupUpdate
+      required:
+        - nameRu
+        - nameKz
+      type: object
+      properties:
+        nameRu:
+          title: Группа запроса на русском языке
+          type: string
+        nameKz:
+          title: Группа запроса на казахском языке
+          type: string
+    RequestGroupWithStatus:
+      title: RequestGroupWithStatus
+      required:
+        - nameRu
+        - nameKz
+        - id
+        - createDate
+        - updateDate
+        - createUser
+        - updateUser
+        - createApp
+        - updateApp
+        - isActive
+      type: object
+      properties:
+        nameRu:
+          title: Группа запроса на русском языке
+          type: string
+        nameKz:
+          title: Группа запроса на казахском языке
+          type: string
+        id:
+          title: ID
+          type: integer
+        createDate:
+          title: Дата создания
+          type: string
+          format: date-time
+        updateDate:
+          title: Дата изменения
+          type: string
+          format: date-time
+        createUser:
+          title: Пользователь-автор
+          type: string
+        updateUser:
+          title: Пользователь-редактор
+          type: string
+        createApp:
+          title: Приложение-автор
+          type: string
+        updateApp:
+          title: Приложение-редактор
+          type: string
+        isActive:
+          title: 'Статус активности записи: true-запись не активна, false-запись активна'
+          type: boolean
+    RequestPatch:
+      title: RequestPatch
+      type: object
+      properties:
+        executorId:
+          title: ID Исполнителя
+          type: integer
+        requestStateId:
+          title: ID Состояния запроса
+          type: integer
+    RequestState:
+      title: RequestState
+      required:
+        - nameRu
+        - nameKz
+        - id
+      type: object
+      properties:
+        nameRu:
+          title: Состояние запроса на русском языке
+          type: string
+        nameKz:
+          title: Состояние запроса на казахском языке
+          type: string
+        id:
+          title: ID
+          type: integer
+    RequestStateRule:
+      title: RequestStateRule
+      required:
+        - nameRu
+        - nameKz
+        - id
+        - sourceState
+        - targetState
+      type: object
+      properties:
+        nameRu:
+          title: Наименование правила изменения состояния запроса на русском языке
+          type: string
+        nameKz:
+          title: Наименование правила изменения состояния запроса на казахском языке
+          type: string
+        id:
+          title: ID
+          type: integer
+        sourceState:
+          $ref: '#/components/schemas/RequestState'
+        targetState:
+          $ref: '#/components/schemas/RequestState'
+    RequestStateRuleWithStatus:
+      title: RequestStateRuleWithStatus
+      required:
+        - nameRu
+        - nameKz
+        - id
+        - sourceState
+        - targetState
+      type: object
+      properties:
+        nameRu:
+          title: Наименование правила изменения состояния запроса на русском языке
+          type: string
+        nameKz:
+          title: Наименование правила изменения состояния запроса на казахском языке
+          type: string
+        id:
+          title: ID
+          type: integer
+        sourceState:
+          $ref: '#/components/schemas/RequestState'
+        targetState:
+          $ref: '#/components/schemas/RequestState'
+    RequestType:
+      title: RequestType
+      required:
+        - nameRu
+        - nameKz
+        - id
+        - createDate
+        - updateDate
+        - createUser
+        - updateUser
+        - createApp
+        - updateApp
+        - requestGroup
+      type: object
+      properties:
+        nameRu:
+          title: Тип запроса на русском языке
+          type: string
+        nameKz:
+          title: Тип запроса на казахском языке
+          type: string
+        id:
+          title: ID
+          type: integer
+        createDate:
+          title: Дата создания
+          type: string
+          format: date-time
+        updateDate:
+          title: Дата изменения
+          type: string
+          format: date-time
+        createUser:
+          title: Пользователь-автор
+          type: string
+        updateUser:
+          title: Пользователь-редактор
+          type: string
+        createApp:
+          title: Приложение-автор
+          type: string
+        updateApp:
+          title: Приложение-редактор
+          type: string
+        requestGroup:
+          $ref: '#/components/schemas/RequestGroup'
+    RequestTypeCreate:
+      title: RequestTypeCreate
+      required:
+        - nameRu
+        - nameKz
+        - requestGroupId
+      type: object
+      properties:
+        nameRu:
+          title: Тип запроса на русском языке
+          type: string
+        nameKz:
+          title: Тип запроса на казахском языке
+          type: string
+        requestGroupId:
+          title: ID группы запроса
+          type: integer
+    RequestTypePatch:
+      title: RequestTypePatch
+      required:
+        - requestGroupId
+        - isActive
+      type: object
+      properties:
+        requestGroupId:
+          title: ID группы запроса
+          type: integer
+        isActive:
+          title: 'Статус активности записи: true-запись не активна, false-запись активна'
+          type: boolean
+    RequestTypeUpdate:
+      title: RequestTypeUpdate
+      required:
+        - nameRu
+        - nameKz
+      type: object
+      properties:
+        nameRu:
+          title: Тип запроса на русском языке
+          type: string
+        nameKz:
+          title: Тип запроса на казахском языке
+          type: string
+    RequestTypeWithStatus:
+      title: RequestTypeWithStatus
+      required:
+        - nameRu
+        - nameKz
+        - id
+        - createDate
+        - updateDate
+        - createUser
+        - updateUser
+        - createApp
+        - updateApp
+        - isActive
+        - requestGroup
+      type: object
+      properties:
+        nameRu:
+          title: Тип запроса на русском языке
+          type: string
+        nameKz:
+          title: Тип запроса на казахском языке
+          type: string
+        id:
+          title: ID
+          type: integer
+        createDate:
+          title: Дата создания
+          type: string
+          format: date-time
+        updateDate:
+          title: Дата изменения
+          type: string
+          format: date-time
+        createUser:
+          title: Пользователь-автор
+          type: string
+        updateUser:
+          title: Пользователь-редактор
+          type: string
+        createApp:
+          title: Приложение-автор
+          type: string
+        updateApp:
+          title: Приложение-редактор
+          type: string
+        isActive:
+          title: 'Статус активности записи: true-запись не активна, false-запись активна'
+          type: boolean
+        requestGroup:
+          $ref: '#/components/schemas/RequestGroup'
+    RequestUpdate:
+      title: RequestUpdate
+      required:
+        - number
+        - applicantId
+        - title
+        - requestTypeId
+      type: object
+      properties:
+        number:
+          title: Номер запроса
+          type: string
+        applicantId:
+          title: ID Заявителя
+          type: integer
+        title:
+          title: Тема заявки
+          type: string
+        requestTypeId:
+          title: ID Типа запроса
+          type: integer
+        executorId:
+          title: ID Исполнителя
+          type: integer
+    Response:
+      title: Response
+      required:
+        - description
+        - authorId
+        - id
+        - createDate
+        - updateDate
+        - createUser
+        - updateUser
+        - createApp
+        - updateApp
+        - responseType
+        - responseState
+        - interaction
+      type: object
+      properties:
+        description:
+          title: Содержание ответа
+          type: string
+        authorId:
+          title: ID Заявителя
+          type: integer
+        id:
+          title: ID
+          type: integer
+        createDate:
+          title: Дата создания
+          type: string
+          format: date-time
+        updateDate:
+          title: Дата изменения
+          type: string
+          format: date-time
+        createUser:
+          title: Пользователь-автор
+          type: string
+        updateUser:
+          title: Пользо ватель-редактор
+          type: string
+        createApp:
+          title: Приложение-автор
+          type: string
+        updateApp:
+          title: Приложение-редактор
+          type: string
+        responseType:
+          $ref: '#/components/schemas/ResponseType'
+        responseState:
+          $ref: '#/components/schemas/ResponseState'
+        interaction:
+          $ref: '#/components/schemas/Interaction'
+    ResponseCreate:
+      title: ResponseCreate
+      required:
+        - description
+        - authorId
+        - title
+        - responseTypeId
+      type: object
+      properties:
+        description:
+          title: Содержание ответа
+          type: string
+        authorId:
+          title: ID Заявителя
+          type: integer
+        title:
+          title: Тема заявки
+          type: string
+        responseTypeId:
+          title: ID Типа ответа
+          type: integer
+    ResponsePatch:
+      title: ResponsePatch
+      required:
+        - responseStateId
+      type: object
+      properties:
+        responseStateId:
+          title: ID Состояния ответа
+          type: integer
+    ResponseState:
+      title: ResponseState
+      required:
+        - nameRu
+        - nameKz
+        - id
+      type: object
+      properties:
+        nameRu:
+          title: Состояние ответа на русском языке
+          type: string
+        nameKz:
+          title: Состояние ответа на казахском языке
+          type: string
+        id:
+          title: ID
+          type: integer
+    ResponseStateRule:
+      title: ResponseStateRule
+      required:
+        - nameRu
+        - nameKz
+        - id
+        - sourceState
+        - targetState
+      type: object
+      properties:
+        nameRu:
+          title: Наименование правила изменения состояния ответа на русском языке
+          type: string
+        nameKz:
+          title: Наименование правила изменения состояния ответа на казахском языке
+          type: string
+        id:
+          title: ID
+          type: integer
+        sourceState:
+          $ref: '#/components/schemas/ResponseState'
+        targetState:
+          $ref: '#/components/schemas/ResponseState'
+    ResponseStateRuleWithStatus:
+      title: ResponseStateRuleWithStatus
+      required:
+        - nameRu
+        - nameKz
+        - id
+        - sourceState
+        - targetState
+      type: object
+      properties:
+        nameRu:
+          title: Наименование правила изменения состояния ответа на русском языке
+          type: string
+        nameKz:
+          title: Наименование правила изменения состояния ответа на казахском языке
+          type: string
+        id:
+          title: ID
+          type: integer
+        sourceState:
+          $ref: '#/components/schemas/ResponseState'
+        targetState:
+          $ref: '#/components/schemas/ResponseState'
+    ResponseType:
+      title: ResponseType
+      required:
+        - nameRu
+        - nameKz
+        - id
+        - createDate
+        - updateDate
+        - createUser
+        - updateUser
+        - createApp
+        - updateApp
+      type: object
+      properties:
+        nameRu:
+          title: Тип ответа на русском языке
+          type: string
+        nameKz:
+          title: Тип ответа на казахском языке
+          type: string
+        id:
+          title: ID
+          type: integer
+        createDate:
+          title: Дата создания
+          type: string
+          format: date-time
+        updateDate:
+          title: Дата изменения
+          type: string
+          format: date-time
+        createUser:
+          title: Пользователь-автор
+          type: string
+        updateUser:
+          title: Пользователь-редактор
+          type: string
+        createApp:
+          title: Приложение-автор
+          type: string
+        updateApp:
+          title: Приложение-редактор
+          type: string
+    ResponseTypeCreate:
+      title: ResponseTypeCreate
+      required:
+        - nameRu
+        - nameKz
+      type: object
+      properties:
+        nameRu:
+          title: Тип ответа на русском языке
+          type: string
+        nameKz:
+          title: Тип ответа на казахском языке
+          type: string
+    ResponseTypeUpdate:
+      title: ResponseTypeUpdate
+      required:
+        - nameRu
+        - nameKz
+      type: object
+      properties:
+        nameRu:
+          title: Тип ответа на русском языке
+          type: string
+        nameKz:
+          title: Тип ответа на казахском языке
+          type: string
+    ResponseTypeWithStatus:
+      title: ResponseTypeWithStatus
+      required:
+        - nameRu
+        - nameKz
+        - id
+        - createDate
+        - updateDate
+        - createUser
+        - updateUser
+        - createApp
+        - updateApp
+        - isActive
+      type: object
+      properties:
+        nameRu:
+          title: Тип ответа на русском языке
+          type: string
+        nameKz:
+          title: Тип ответа на казахском языке
+          type: string
+        id:
+          title: ID
+          type: integer
+        createDate:
+          title: Дата создания
+          type: string
+          format: date-time
+        updateDate:
+          title: Дата изменения
+          type: string
+          format: date-time
+        createUser:
+          title: Пользователь-автор
+          type: string
+        updateUser:
+          title: Пользователь-редактор
+          type: string
+        createApp:
+          title: Приложение-автор
+          type: string
+        updateApp:
+          title: Приложение-редактор
+          type: string
+        isActive:
+          title: 'Статус активности записи: true-запись не активна, false-запись активна'
+          type: boolean
+    ResponseUpdate:
+      title: ResponseUpdate
+      required:
+        - description
+        - authorId
+        - title
+        - responseTypeId
+      type: object
+      properties:
+        description:
+          title: Содержание ответа
+          type: string
+        authorId:
+          title: ID Заявителя
+          type: integer
+        title:
+          title: Тема заявки
+          type: string
+        responseTypeId:
+          title: ID Типа ответа
+          type: integer
+    ResultedId:
+      title: ResultedId
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+    ValidationError:
+      title: ValidationError
+      required:
+        - loc
+        - msg
+        - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: /employee-interaction/v1/login/access-token
+servers:
+  - url: 'http://10.8.27.97:2929/employee-interaction/v1/'
+    description: ''

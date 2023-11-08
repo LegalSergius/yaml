@@ -1,17 +1,13 @@
-from pydantic import BaseModel, Field
+from pydantic import Field, BaseModel
 
 
-class BuildingGeoCordsResponseData(BaseModel):
+class BuildingGeoCords200ResponseData(BaseModel):
     
     """
     Данные ответа
     """
     
 
-    
     pointLon: str = Field(..., description='Долгота')
-    
 
-    
     pointLat: str = Field(..., description='Широта')
-    

@@ -1,18 +1,10 @@
-from jinja2 import Environment, FileSystemLoader
-
-import os
-
-
-MODELS_DIRECTORY_PATH = './generated_api/models'
-INIT_FILE_PATH = f'{MODELS_DIRECTORY_PATH}/__init__.py'
-REF_SIGN = '$ref'
-
-deffered_import_models = list()
-defined_parameters = dict()
-
-def clean_models_list():
-    global deffered_import_models
-    deffered_import_models = []
+from shutil import rmtree
+from yamlParser import ContentDict, YAMLTags
+from enums.yamlCommonTags import YAMLCommonTags
+from enums.yamlCompoundParameters import YAMLFieldAndQueryParameters
+from enums.yamlDataTypes import YAMLDataTypes
+from os.path import exists, isdir
+# from enums.mappings import YAML_FIELD_MAPPING_ENUMS
 
 
 def capitalize_properly(target_str):
@@ -23,202 +15,115 @@ def get_module_style_name(target_str):
     return target_str[0].lower() + target_str[1:]
 
 
-def type_mapping(openapi_type):
-    match openapi_type:
-        case 'string':
-            return str.__name__
-        case 'integer':
-            return int.__name__
-        case 'number':
-            return float.__name__
-        case 'boolean':
-            return bool.__name__
-        case 'null':
-            return 'None'
-        case _:
-            return openapi_type
+def get_last_splitted(expression, /, *, splitter='/'):
+    return expression.split(splitter)[-1]
 
 
-def parse_model_info(parsed_tuple):
-    if (isinstance(parsed_tuple, tuple) and len(parsed_tuple) == 3):
-        model_name, model_info, associated_model = parsed_tuple
-
-        handle_model_info(model_name, model_info, associated_model_name=associated_model)
-
-    return ''
-    
-
-def get_response_models(model_paths):
-    response_models = dict()
-
-    for path, info in model_paths.items():
-        response_models[path] = dict()
-        for method, method_info in info.items():
-            success_responses = method_info['responses']['200']
-            model_entry = success_responses['content']['application/json']['schema']
-            model_name = ''
-            
-            if REF_SIGN in model_entry:
-                model_name = capitalize_properly(model_entry[REF_SIGN].split('/')[-1])
-            else:
-                path_name_parts = path[1:].split('-')
-                model_name = ''.join([path_name_parts[0], *(part.capitalize() for part in path_name_parts[1:]), 'Response'])
-                handle_model_info(model_name, model_entry)
-                model_name = capitalize_properly(model_name)
-            
-            response_models[path][method] = model_name
-
-    return response_models
+def delete_if_dir_exists(directory):
+    if validate_dir_existence(directory):
+        rmtree(directory)
 
 
-def handle_model_info(model_name, info, *, associated_model_name=''):
-    env = Environment(loader=FileSystemLoader('.'))
-    env.filters['check_requirement'] = check_requirement
-    env.filters['field_info'] = field_info
-    env.filters['capitalize_properly'] = capitalize_properly
-    env.filters['parse_model_info'] = parse_model_info
-    env.filters['add_import'] = add_import
-    env.filters['type_mapping'] = type_mapping
-
-    capitalized_model_name = capitalize_properly(model_name)
-    class_name, module_name = '', ''
-
-    if len(associated_model_name):
-        new_model_name = associated_model_name + capitalized_model_name
-        class_name = new_model_name
-        module_name = get_module_style_name(new_model_name)
-    else:
-        class_name = capitalize_properly(model_name)
-        module_name = model_name
-
-    template = env.get_template('model_template.jinja2')
-    rendered_model = template.render(data=info, class_name=class_name)
-    new_import_line = f"from .{module_name} import {class_name}"
-
-    with open(INIT_FILE_PATH, 'r+', encoding='utf-8') as init_file:
-        lines = init_file.readlines()
-        new_import_line += '\n'
-
-        if new_import_line not in lines:
-            init_file.write(new_import_line)
-
-    model_file_path = f'{MODELS_DIRECTORY_PATH}/{module_name}.py'
-    
-    with open(model_file_path, 'w', encoding='utf-8') as model_file:
-        if len(deffered_import_models):
-            lines = [line + '\n' for line in rendered_model.splitlines()]
-            last_import_line_index = get_last_import_line(lines)
-
-            generated_lines = generate_model_import_lines(last_import_line_index, lines, deffered_import_models)
-
-            model_file.truncate()
-            model_file.writelines(generated_lines)
-        else:
-            model_file.write(rendered_model)
-
-    clean_models_list()
-
-
-def field_info(input_info):
-    is_required_flag, field_insights = input_info
-    parameters_string = ''
-
-    field_requirement = '...' if is_required_flag else 'None'
-    parameters_string += f", description='{field_insights['description']}'" if 'description' in field_insights else ''
-    parameters_string += f", example={repr(field_insights['example'])}" if 'example' in field_insights else ''
-
-    return f'Field({field_requirement}{parameters_string})'
-
-
-def generate_model_import_lines(last_import_line_index, lines, import_models):
-    for module, model in import_models:
-        new_import_line = f'from {module} import {capitalize_properly(model)}\n'
-
-        if new_import_line not in lines:
-            lines.insert(last_import_line_index, new_import_line)
-            last_import_line_index += 1 
-        
-    return lines
+def validate_dir_existence(directory):
+    return exists(directory) and isdir(directory)
 
 
 def get_last_import_line(file_lines):
     line_counter = 0
 
     for line in file_lines:
-        if (line.startswith('from ') and ' import ' in line) or line.startswith('import '):
-            line_counter += 1
-        else:
+        if not (line.startswith('from ') and 'import' in line) or not line.startswith('import '):
             break
-    
+
+        line_counter += 1
+        
     return line_counter
 
 
-def check_requirement(properties_info):
-    property, property_type, required_fields = properties_info
+def generate_model_import_lines(last_import_line_index, lines, import_models):    
+    for module, models in import_models.items():
+        new_import_line = f'from {module} import {', '.join(models)}\n'
 
-    if property in required_fields:
-        return property_type
-    else: 
-        add_import(('typing', 'Optional'))
-        return f'Optional[{property_type}]'
-
-
-def add_parameter_info(parameter_info):
-    global defined_parameters
-    defined_parameters = parameter_info.copy()
+        if new_import_line not in lines:
+            lines.insert(last_import_line_index, new_import_line)
+            last_import_line_index += 1 
+            
+    return lines
 
 
-def add_import(module_and_model_info):
-    module, model_name = module_and_model_info
+def define_class_module_names(model_name, associated_model_name):
+    capitalized_model_name = capitalize_properly(model_name)
 
-    deffered_import_models.append((module, model_name))
+    if len(associated_model_name):
+        new_model_name = associated_model_name + capitalized_model_name
 
-    return ''
-
-
-def generate_models(components):
-    if not os.path.exists(MODELS_DIRECTORY_PATH) or not os.path.isdir(MODELS_DIRECTORY_PATH):
-        os.mkdir(MODELS_DIRECTORY_PATH)
-
-    with open(INIT_FILE_PATH, 'w', encoding='utf-8') as _:
-        pass
-
-    for component, info in components.items():
-        handle_model_info(component, info)
+        return new_model_name, get_module_style_name(new_model_name)
+  
+    return capitalized_model_name, model_name
 
 
-def create_parameter_string(parameter_name, parameter_info):
-    parameter_type = type_mapping(parameter_info['schema']['type'])
-    is_parameter_required_flag = 'required' in parameter_info
+def return_if_null_with_type(types_list):
+    null_existence = False
+    types_count = 0
+    yaml_types_list = YAMLDataTypes.types()
 
-    type_requirement = parameter_type if is_parameter_required_flag else f'Optional[{parameter_type}]'
-    query_requirement = '...' if is_parameter_required_flag else 'None'
+    for type in types_list:
+        if type == str(YAMLDataTypes.NULL):
+            null_existence = True
+        elif type in yaml_types_list:
+            types_count += 1
 
-    return f"""\n\t{parameter_name}: {type_requirement} = Query({query_requirement}, alias='{parameter_name}', description='{parameter_info['description']}'),"""
-
-
-def set_parameters(parameters_info):
-    inner_parameters, outer_parameters = parameters_info
-
-    result_parameters_string = ''
-
-    if not len(defined_parameters):
-        add_parameter_info(outer_parameters)
-
-    for parameter in inner_parameters:
-        if REF_SIGN in parameter:
-            parameter_id = parameter[REF_SIGN].split('/')[-1]
-            if parameter_id in defined_parameters:
-                defined_parameter = defined_parameters[parameter_id]
-                defined_parameter_name = defined_parameter['name']
-                result_parameters_string += create_parameter_string(defined_parameter_name, defined_parameter)
-        else:
-            defined_parameter_name = parameter['name']
-            result_parameters_string += create_parameter_string(defined_parameter_name, parameter)
-
-    return result_parameters_string
+    return null_existence, types_count
 
 
-def set_responses(response_list):
-    return {code: {'description': response_info['description']} for code, response_info in response_list.items()}
+def field_info(required_flag, field_insights):
+    # parameters_string = ''
+    parameters = dict()
+    field_insights_content = ContentDict(field_insights)
+    
+    # default_value = field_insights_content.get(YAMLCommonTags.DEFAULT.yaml_repr())
+    default_value = field_insights_content.get('default')
+    DESCRIPTION = str(YAMLTags.DESCRIPTION)
+    EXAMPLE = str(YAMLTags.EXAMPLE)
+    NULL = str(YAMLDataTypes.NULL)
 
+    for content_key in field_insights_content.keys:
+        for enum in (YAMLCommonTags, YAMLFieldAndQueryParameters):
+            repr_object_pairs = enum.yaml_repr_pairs()
+
+            if content_key in repr_object_pairs:
+                enum_object = repr_object_pairs[content_key]
+            
+                value = repr(field_insights_content.get(content_key))
+
+                # if enum_object == YAMLCommonTags.EXAMPLE:
+                #     value = repr(value)
+
+                # parameters[content_key] = value
+                parameters[str(enum_object)] = value
+
+    # field_requirement = default_value if default_value else str(YAMLDataTypes.NULL) if field_none_flag else '...'
+    field_requirement = repr(default_value) if default_value is not None else '...' if required_flag else NULL
+    # parameters_string += f"description='{field_insights_content.get(DESCRIPTION)}'" if field_insights_content.check_key(DESCRIPTION) else ''
+    # parameters_string += f", example={repr(field_insights_content.get(EXAMPLE))}" if field_insights_content.check_key(EXAMPLE) else ''
+    parameters_string = ', '.join([f'{key}={item}' for key, item in parameters.items()])
+
+    return f'{field_requirement}, {parameters_string}'
+
+
+def yaml_repr_implementation(self):
+    return value_representation(super(type(self), self).yaml_repr())
+
+
+def value_representation(base):
+    splited_representation = base.split('_')
+    first_part = splited_representation[0]
+    capitalized_remaining_parts = (part.capitalize() for part in splited_representation[1:])
+
+    return ''.join((first_part, *capitalized_remaining_parts))
+
+
+def yaml_repr_field_implementation(self):
+    return value_representation(self.name.lower())
+
+    

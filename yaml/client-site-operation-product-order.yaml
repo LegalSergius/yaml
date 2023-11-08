@@ -1,0 +1,62 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: client-site-operation-order
+  description: Микросервис "Работы на стороне клиента. Выезд инсталлятора."
+  contact:
+    name: Максим Серов
+    email: maxim.serov@vvt.kz
+    url: none
+  license:
+    url: telecom.kz
+    name: telecom.kz
+servers:
+  - url: 'http://10.0.0.0:0000/api/client-site-operation-order/v1.0'
+paths:
+  /order:
+    post:
+      tags:
+        - Работы на стороне клиента
+      summary: Создание заказа на стороне клиента. POST-метод
+      description: Создание заказа. Работы на стороне клиента.  Выезд инсталлятора
+      operationId: post-client-site-operation-order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clientSiteOperationRequestId:
+                  type: integer
+                  description: "ID Запроса \r\n"
+              required:
+                - clientSiteOperationRequestId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  clientSiteOperationOrderId:
+                    type: integer
+                    description: 'ID Заказа '
+                required:
+                  - clientSiteOperationOrderId
+      security:
+        - auth: []
+      servers:
+        - url: 'http://10.0.0.0:0000/api/client-site-operation-order/v1.0'
+tags:
+  - name: Работы на стороне клиента
+    description: Нет описания
+components:
+  securitySchemes:
+    auth:
+      type: http
+      description: Access Token Keycloak
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - auth: []

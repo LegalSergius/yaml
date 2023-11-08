@@ -1,0 +1,2125 @@
+openapi: 3.0.0
+info:
+  title: core-be
+  version: 1.0.0
+  description: Микросервис "Междоменные приложения - Основной"
+servers:
+  - url: 'http://10.8.27.97:6182/api/core-be/v1.0'
+    description: test
+paths:
+  /business-process:
+    get:
+      summary: Получить список бизнес-процессов
+      tags:
+        - Спецификация процесса
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/businessProcess'
+      operationId: get-business-process
+      description: Метод возвращает список бизнес-процессов
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+    parameters: []
+  '/business-process/{businessProcessId}':
+    parameters:
+      - $ref: '#/components/parameters/businessProcessId'
+    get:
+      summary: Получить бизнес-процесс
+      tags:
+        - Спецификация процесса
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/businessProcess'
+      operationId: get-process-spec
+      description: Метод возвращает бизнес-процесс по идентификатору
+  '/application-frontend-view-struct/{applicationFEId}':
+    parameters:
+      - $ref: '#/components/parameters/applicationFEId'
+    get:
+      summary: Получить структуру форм FE приложения по Id FE приложения
+      tags:
+        - Приложение
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/applicationFE'
+      operationId: get-application-frontend-view-struct
+      description: Метод возвращает структуру форм FE приложения по Id FE приложения
+  /customer-party-role-specifications:
+    get:
+      summary: Получить список спецификаций роли клиента /связи с приложением
+      tags:
+        - Спецификация роли участника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partyRoleSpecifications'
+      operationId: get-customer-party-role-specs
+      description: Метод возвращает список спецификаций роли клиента /связи с приложением
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+  '/customer-party-role-specification/{partyRoleSpecId}':
+    parameters:
+      - $ref: '#/components/parameters/partyRoleSpecId'
+    get:
+      summary: Получить спецификацию роли клиента по Id /связи с приложением
+      tags:
+        - Спецификация роли участника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partyRoleSpecification'
+      operationId: get-customer-party-role-spec
+      description: Метод возвращает спецификацию роли клиента по Id /связи с приложением
+  /employee-party-role-specifications:
+    get:
+      summary: Получить список спецификаций роли сотрудника /связи с приложением
+      tags:
+        - Спецификация роли участника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partyRoleSpecifications'
+      operationId: get-employee-party-role-specs
+      description: Метод возвращает список спецификаций роли сотрудника /связи с приложением
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+  '/employee-party-role-specification/{partyRoleSpecId}':
+    parameters:
+      - $ref: '#/components/parameters/partyRoleSpecId'
+    get:
+      summary: Получить спецификацию роли сотрудника по Id /связи с приложением
+      tags:
+        - Спецификация роли участника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partyRoleSpecification'
+      operationId: get-employee-party-role-spec
+      description: Метод возвращает спецификацию роли сотрудника по Id /связи с приложением
+  /dealer-func-provider-party-role-specifications:
+    get:
+      summary: Получить список спецификаций роли функционального провайдера-дилера /связи с приложением
+      tags:
+        - Спецификация роли участника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partyRoleSpecifications'
+      operationId: get-dealer-func-provider-party-role-specs
+      description: Метод возвращает список спецификаций роли функционального провайдера-дилера /связи с приложением
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+  '/dealer-func-provider-party-role-specification/{partyRoleSpecId}':
+    parameters:
+      - $ref: '#/components/parameters/partyRoleSpecId'
+    get:
+      summary: Получить спецификацию роли функционального провайдера-дилера по Id /связи с приложением
+      tags:
+        - Спецификация роли участника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partyRoleSpecification'
+      operationId: get-dealer-func-provider-party-role-spec
+      description: Метод возвращает спецификацию роли функционального провайдера-дилера по Id /связи с приложением
+  /installer-func-provider-party-role-specifications:
+    get:
+      summary: Получить список спецификаций роли функционального провайдера-дилера /связи с приложением
+      tags:
+        - Спецификация роли участника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partyRoleSpecifications'
+      operationId: get-installer-func-provider-party-role-specs
+      description: Метод возвращает список спецификаций роли функционального провайдера-дилера /связи с приложением
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+  '/installer-func-provider-party-role-specification/{partyRoleSpecId}':
+    parameters:
+      - $ref: '#/components/parameters/partyRoleSpecId'
+    get:
+      summary: Получить спецификацию роли функционального провайдера-дилера по Id /связи с приложением
+      tags:
+        - Спецификация роли участника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partyRoleSpecification'
+      operationId: get-installer-func-provider-party-role-spec
+      description: Метод возвращает спецификацию роли функционального провайдера-дилера по Id /связи с приложением
+  /employee-func-role-specification:
+    get:
+      summary: Получить список спецификаций функциональной роли сотрудника
+      tags:
+        - Спецификация функциональной роли сотрудника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/employeeFuncRoleSpec'
+      operationId: get-employee-func-role-spec
+      description: Метод возвращает список спецификаций функциональной роли сотрудника по параметрам
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/executeTypeId'
+        - $ref: '#/components/parameters/managerEmployeeId'
+        - schema:
+            type: integer
+          in: query
+          name: businessProcessId
+          description: Бизнес-процесс_ID
+    parameters: []
+  '/employee-func-role-specification/{employeeFuncRoleSpecId}':
+    parameters:
+      - $ref: '#/components/parameters/employeeFuncRoleSpecId'
+    get:
+      summary: Получить спецификацию функциональной роли сотрудника
+      tags:
+        - Спецификация функциональной роли сотрудника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/employeeFuncRoleSpec'
+      operationId: get-employee-func-role-spec-by-id
+      description: Метод возвращает спецификацию функциональной роли сотрудника по идентификатору
+  /employee-func-role-specs-routes:
+    get:
+      deprecated: true
+      summary: Получить список маршрутов для спецификаций роли сотрудника
+      tags:
+        - Спецификация функциональной роли сотрудника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/emplFuncRoleSpecsRoutes'
+      operationId: get-employee-func-role-specs-routes
+      description: Метод возвращает список маршрутов для спецификаций роли сотрудника
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+  '/employee-func-role-spec-routes/{funcRoleSpecId}':
+    parameters:
+      - $ref: '#/components/parameters/funcRoleSpecId'
+    get:
+      deprecated: true
+      summary: Получить маршруты для спецификации роли сотрудника
+      tags:
+        - Спецификация функциональной роли сотрудника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/emplFuncRoleSpecReoutes'
+      operationId: get-employee-func-role-spec-routes
+      description: Метод возвращает маршруты для спецификаций роли сотрудника
+  /employee-func-role-specs-permissions:
+    get:
+      summary: Получить список прав в приложении для спецификаций роли сотрудника
+      tags:
+        - Спецификация функциональной роли сотрудника в приложении
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/emplFuncRoleSpecsPermissions'
+      operationId: get-employee-func-role-specs-permissions
+      description: Метод возвращает список прав в приложении для спецификаций роли сотрудника
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+  '/employee-func-role-spec-permissions/{funcRoleSpecId}':
+    parameters:
+      - $ref: '#/components/parameters/funcRoleSpecId'
+    get:
+      summary: Получить список прав в приложении для спецификации роли сотрудника
+      tags:
+        - Спецификация функциональной роли сотрудника в приложении
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/emplFuncRoleSpecPermissions'
+      operationId: get-employee-func-role-spec-permissions
+      description: Метод возвращает список прав в приложении для спецификаций роли сотрудника
+  '/function-role-spec/{frsId}/work-specification':
+    get:
+      summary: Получить список спецификаций работ
+      tags:
+        - Спецификация работы
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/workSpec'
+      operationId: get-function-role-spec-frs-id-work-specification
+      description: Метод возвращает список спецификаций работ по параметрам
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+    parameters:
+      - name: frsId
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Спецификация функциональной роли_ID
+  '/work-specification/{workSpecId}':
+    parameters:
+      - $ref: '#/components/parameters/workSpecId'
+    get:
+      summary: Получить спецификацию работы по Id
+      tags:
+        - Спецификация работы
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/workSpec'
+      operationId: get-work-spec
+      description: Метод возвращает спецификацию работы по Id
+  /skill-specifications:
+    get:
+      summary: Получить список спецификаций компетенций
+      tags:
+        - Спецификация компетенции
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/workSpecsSkillRel'
+      operationId: get-skill-specs
+      description: Метод возвращает список спецификаций компетенций
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+  '/skill-specification/{workSpecId}':
+    parameters:
+      - $ref: '#/components/parameters/workSpecId'
+    get:
+      summary: Получить спецификацию компетенций по Id спецификации работ
+      tags:
+        - Спецификация компетенции
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/workSpecSkillRel'
+      operationId: get-skill-spec
+      description: Метод возвращает спецификации компетенций по Id спецификации работ
+  /check-poss-types:
+    get:
+      summary: Получить список типов проверки технической возможности
+      tags:
+        - Прочее
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/checkPossTypes'
+      operationId: get-check-poss-types
+      description: Метод возвращает список типов проверки технической возможности
+      parameters: []
+  /value-types:
+    get:
+      summary: Получить список типов значений
+      tags:
+        - Прочее
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/valueTypes'
+      operationId: get-value-types
+      description: Метод возвращает список типов значений
+      parameters: []
+  /comm-channel-types:
+    get:
+      summary: Получить список типов каналов коммуникаций
+      tags:
+        - Прочее
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/commChannelTypes'
+      operationId: get-comm-channel-types
+      description: Метод возвращает список типов каналов коммуникаций
+      parameters: []
+  /divisions:
+    get:
+      summary: Получить список дивизионов
+      tags:
+        - Прочее
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/divisions'
+      operationId: get-divisions
+      description: Метод возвращает список дивизионов
+      parameters: []
+  /inventory-systems:
+    get:
+      summary: Получить список список систем технического учета
+      tags:
+        - Прочее
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inventorySystems'
+      operationId: get-inventory-systems
+      description: Метод возвращает список систем технического учета
+      parameters: []
+components:
+  schemas:
+    isActive:
+      type: boolean
+      description: Признак активности
+      default: true
+    createDate:
+      type: string
+      title: createDate
+      description: Дата создания
+      format: date-time
+      example: '2022-11-29T10:00:00Z'
+      readOnly: true
+    updateDate:
+      type: string
+      title: updateDate
+      description: Дата изменения
+      format: date-time
+      example: '2022-11-29T10:00:00Z'
+      readOnly: true
+    createUser:
+      type: string
+      title: createUser
+      description: 'Логин пользователя, создавшего запись'
+      example: Ivanov.I
+      readOnly: true
+    updateUser:
+      type: string
+      title: updateUser
+      description: 'Логин пользователя, изменившего запись'
+      example: Ivanov.I
+      readOnly: true
+    createApp:
+      type: string
+      title: createApp
+      description: Приложение-создатель
+      example: core-fe
+      readOnly: true
+    updateApp:
+      type: string
+      title: updateApp
+      description: Приложение-редактор
+      example: core-fe
+      readOnly: true
+    businessProcess:
+      title: businessProcess
+      type: object
+      description: Бизнес-процесс
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Бизнес-процесс_ID
+          readOnly: true
+        catalogId:
+          type: integer
+          example: 1
+          description: Каталог бизнес-процесса_ID
+          writeOnly: true
+        catalogData:
+          $ref: '#/components/schemas/businessProcessCatalog'
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: businessProcessName на русском языке
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: businessProcessName на казахском языке
+        isActive:
+          $ref: '#/components/schemas/isActive'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - catalogId
+        - nameRu
+        - nameKz
+        - isActive
+    businessProcessCatalog:
+      type: object
+      title: businessProcessCatalog
+      description: Каталог бизнес-процесса
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Каталог бизнес-процесса_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Тип 1
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Тип 1
+      readOnly: true
+      x-stoplight:
+        id: dde62b560de4b
+    businessProcessShort:
+      type: object
+      title: businessProcessShort
+      description: Бизнес-процесс
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Бизнес-процесс_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: businessProcessName на русском языке
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: businessProcessName на казахском языке
+      readOnly: true
+    applicationFE:
+      title: applicationFE
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Спецификация процесса_ID
+          readOnly: true
+        applicationSystemId:
+          type: integer
+          writeOnly: true
+          example: 1
+          description: Информационная система_ID
+        applicationSystemData:
+          $ref: '#/components/schemas/application'
+        tabNameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование вкладки на русском языке
+        tabNameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование вкладки на казахском языке
+        tabUrl:
+          type: string
+          description: URL вкладки
+          example: URL вкладки
+        viewPriority:
+          type: integer
+          example: 1
+          description: Порядок отображения
+        iconUrl:
+          type: string
+          description: URL иконки
+          example: URL иконки
+        applicationFEViews:
+          $ref: '#/components/schemas/applicationFEViews'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - nameRu
+        - nameKz
+    application:
+      title: application
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Приложение_ID
+          readOnly: true
+        typeId:
+          type: integer
+          writeOnly: true
+          example: 1
+          description: Тип приложения_ID
+        typeData:
+          $ref: '#/components/schemas/applicationType'
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование на русском языке
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+          example: '11100'
+        shortDescription:
+          type: string
+          description: Краткое описание
+          example: Краткое описание
+        isOpenAPI:
+          type: boolean
+          description: Операции через Open API?
+          default: true
+          readOnly: true
+        url:
+          type: string
+          description: URL вкладки
+          example: URL вкладки
+        isAgentPerformance:
+          type: boolean
+          description: Используется для оценки агентов?
+          default: true
+          readOnly: true
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - nameRu
+        - nameKz
+    applicationType:
+      type: object
+      title: applicationType
+      description: Тип приложения
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Тип приложения_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Тип 1
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Тип 1
+    applicationFEViews:
+      type: array
+      description: Список форм приложения frontend
+      items:
+        $ref: '#/components/schemas/applicationFEView'
+    applicationFEView:
+      title: applicationFEView
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Приложение_ID
+          readOnly: true
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование на казахском языке
+        endpoint:
+          type: string
+          description: Endpoint
+          example: some-endpoint
+        isActive:
+          $ref: '#/components/schemas/isActive'
+        applicationFEViewChildStructs:
+          type: array
+          description: Список дочерних форм приложения FE в структуре
+          items:
+            $ref: '#/components/schemas/applicationFEViewChildStructs'
+        applicationFEViewParentStructs:
+          type: array
+          description: Список родительских форм приложения FE в структуре
+          items:
+            $ref: '#/components/schemas/applicationFEViewParentStructs'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - nameRu
+        - nameKz
+    applicationFEViewChildStructs:
+      title: applicationFEViewChildStructs
+      type: object
+      description: Дочерние формы приложения
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Структура FE приложения_ID
+          readOnly: true
+        childApplicationFEViewId:
+          type: integer
+          example: 1
+          description: Форма FE приложения-ребенка_ID
+        isActive:
+          $ref: '#/components/schemas/isActive'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+    applicationFEViewParentStructs:
+      title: applicationFEViewParentStructs
+      type: object
+      description: Родительская форма приложения
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Структура FE приложения_ID
+          readOnly: true
+        parentApplicationFEViewId:
+          type: integer
+          example: 1
+          description: Форма FE приложения-родителя_ID
+        isActive:
+          $ref: '#/components/schemas/isActive'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+    partyRoleSpecifications:
+      title: partyRoleSpecifications
+      type: array
+      description: Список спецификаций роли участника_ID
+      items:
+        $ref: '#/components/schemas/partyRoleSpecification'
+      required:
+        - partyRoleSpecifications
+    partyRoleSpecification:
+      title: partyRoleSpecification
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Спецификация роли участника_ID
+          readOnly: true
+        typeId:
+          type: integer
+          writeOnly: true
+          example: 1
+          description: Тип спецификации роли участника_ID
+        typeData:
+          $ref: '#/components/schemas/partyRoleSpecificationType'
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование на русском языке
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+          example: '11100'
+        shortDescription:
+          type: string
+          description: Краткое описание
+          example: Краткое описание
+        isActive:
+          $ref: '#/components/schemas/isActive'
+        partyRoleSpecAppRels:
+          type: array
+          description: Список связей роли участника с приложением
+          items:
+            $ref: '#/components/schemas/partyRoleSpecAppRel'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - nameRu
+        - nameKz
+    partyRoleSpecificationType:
+      type: object
+      title: partyRoleSpecificationType
+      description: Тип спецификации роли участника
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Тип спецификации роли участника_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Тип 1
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Тип 1
+    partyRoleSpecAppRel:
+      type: object
+      title: partyRoleSpecificationType
+      description: Приложение
+      properties:
+        applicationId:
+          type: number
+          example: 1
+          description: Приложение_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование Приложение на русском языке
+          example: Тип 1
+        nameKz:
+          type: string
+          description: Наименование Приложение на казахском языке
+          example: Тип 1
+        isActive:
+          $ref: '#/components/schemas/isActive'
+      required:
+        - applicationId
+    funcRoleSpecifications:
+      title: funcRoleSpecifications
+      type: array
+      description: Список спецификаций функциональной роли участника_ID
+      items:
+        $ref: '#/components/schemas/funcRoleSpecification'
+      required:
+        - funcRoleSpecifications
+    funcRoleSpecification:
+      title: funcRoleSpecification
+      type: object
+      description: Спецификация функциональной роли
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Спецификация функциональной роли_ID
+          readOnly: true
+        businessProcessId:
+          type: integer
+          example: 1
+          description: Бизнес-процесс_ID
+          writeOnly: true
+        businessProcessData:
+          $ref: '#/components/schemas/businessProcessShort'
+        executeTypeId:
+          type: integer
+          example: 1
+          description: Тип выполнения_ID
+          writeOnly: true
+        executeTypeData:
+          $ref: '#/components/schemas/executeType'
+        managerEmployeeId:
+          type: integer
+          example: 1
+          description: Ответственный сотрудник_ID
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование на русском языке
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+          example: '11100'
+        isAllPermissions:
+          type: boolean
+          description: Все права?
+          default: true
+          readOnly: true
+        isActive:
+          $ref: '#/components/schemas/isActive'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - businessProcessId
+        - executeTypeId
+        - managerEmployeeId
+        - nameRu
+        - nameKz
+        - code
+        - isAllPermissions
+        - isActive
+    employeeFuncRoleSpec:
+      title: employeeFuncRoleSpec
+      type: object
+      description: Спецификация функциональной роли сотрудника
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Спецификация функциональной роли сотрудника_ID
+          readOnly: true
+        businessProcessId:
+          type: integer
+          example: 1
+          description: Бизнес-процесс_ID
+          writeOnly: true
+        businessProcessData:
+          $ref: '#/components/schemas/businessProcessShort'
+        executeTypeId:
+          type: integer
+          example: 1
+          description: Тип выполнения_ID
+          writeOnly: true
+        executeTypeData:
+          $ref: '#/components/schemas/executeType'
+        managerEmployeeId:
+          type: integer
+          example: 1
+          description: Ответственный сотрудник_ID
+        divisionId:
+          type: integer
+          example: 2
+          description: Дивизион_ID
+          writeOnly: true
+        divisionData:
+          $ref: '#/components/schemas/divisionShort'
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование на русском языке
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+          example: '11100'
+        isAllPermissions:
+          type: boolean
+          description: Все права?
+          default: true
+          readOnly: true
+        isActive:
+          $ref: '#/components/schemas/isActive'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - businessProcessId
+        - executeTypeId
+        - managerEmployeeId
+        - nameRu
+        - nameKz
+        - code
+        - isAllPermissions
+        - isActive
+        - divisionId
+    funcRoleSpecificationType:
+      type: object
+      title: funcRoleSpecificationType
+      description: Тип спецификации функциональной роли
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Тип спецификации функциональной роли участника_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Тип 1
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Тип 1
+      readOnly: true
+    executeType:
+      type: object
+      title: executeType
+      description: Тип выполнения
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Тип выполнения_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Тип 1
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Тип 1
+      readOnly: true
+    funcProviderPartyRoleSpecRel:
+      type: object
+      title: funcProviderPartyRoleSpecRel
+      description: Спецификация роли функционального провайдера
+      properties:
+        funcProviderPartyRoleSpecId:
+          type: number
+          example: 1
+          description: Приложение_ID
+          readOnly: true
+        funcProviderPartyRoleSpecNameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование 1
+        funcProviderPartyRoleSpecNameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование 1
+        isActive:
+          $ref: '#/components/schemas/isActive'
+      required:
+        - applicationId
+    emplFuncRoleSpecsRoutes:
+      title: emplployeeFunctionRoleSpecs
+      type: array
+      description: Список спецификаций функциональной роли участника_ID
+      items:
+        $ref: '#/components/schemas/emplFuncRoleSpecReoutes'
+      required:
+        - funcRoleSpecifications
+    emplFuncRoleSpecReoutes:
+      title: emplployeeFunctionRoleSpec
+      type: object
+      properties:
+        emplployeeFunctionRoleSpecId:
+          type: number
+          example: 1
+          description: Спецификация роли участника-сотрудника_ID
+          readOnly: true
+        emplployeeFunctionRoleSpecNameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование на русском языке
+        emplployeeFunctionRoleSpecNameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование на казахском языке
+        roleDefinitionRules:
+          type: array
+          description: Правила определения спецификации функциональной роли сотрудника
+          items:
+            $ref: '#/components/schemas/roleDefinitionRule'
+    roleDefinitionRule:
+      title: emplployeeFunctionRoleSpec
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Правило определения спецификации функциональной роли сотрудника_ID
+          readOnly: true
+        dateFrom:
+          type: string
+          title: dateFrom
+          description: Дата с
+          format: date
+          example: '2022-01-01'
+        dateTo:
+          type: string
+          title: dateTo
+          description: Дата по
+          format: date
+          example: '2023-01-01'
+        baseCFSActionSpecificationId:
+          type: number
+          writeOnly: true
+          example: 1
+          description: Спецификация действия для базового сервиса ориентированного на клиента_ID
+        baseCFSActionSpecificationData:
+          $ref: '#/components/schemas/baseCFSActionSpecificationData'
+        routeId:
+          type: number
+          writeOnly: true
+          example: 1
+          description: Маршрут_ID
+        routeData:
+          $ref: '#/components/schemas/routeData'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+    baseCFSActionSpecificationData:
+      type: object
+      title: baseCFSActionSpecificationData
+      description: Спецификация  действия для базового сервиса ориентированного на клиента
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Спецификация базового сервиса ориентированного на клиента_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование 1
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование 1
+    routeData:
+      type: object
+      title: routeData
+      description: Маршрут
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Маршрут_ID
+          readOnly: true
+        typeId:
+          type: number
+          writeOnly: true
+          example: 1
+          description: Маршрут_ID
+        typeData:
+          $ref: '#/components/schemas/routeType'
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Маршрут 1
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Маршрут 1
+        version:
+          type: number
+          example: 1
+          description: Версия
+          readOnly: true
+    routeType:
+      type: object
+      title: routeType
+      description: Тип маршрута
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Тип маршрута_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Тип 1
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Тип 1
+    emplFuncRoleSpecsPermissions:
+      title: emplFuncRoleSpecsPermissions
+      type: array
+      description: Список спецификаций функциональной роли участника_ID
+      items:
+        $ref: '#/components/schemas/emplFuncRoleSpecPermissions'
+      required:
+        - funcRoleSpecsRoutes
+    emplFuncRoleSpecPermissions:
+      title: emplFuncRoleSpecPermissions
+      type: object
+      properties:
+        emplployeeFunctionRoleSpecData:
+          $ref: '#/components/schemas/emplployeeFunctionRoleSpecData'
+        roleSpecApplicationPermissions:
+          type: array
+          description: Связь спецификации функциональной роли сотрудника с правом в приложении
+          items:
+            $ref: '#/components/schemas/roleSpecApplicationPermissions'
+    roleSpecApplicationPermissions:
+      title: roleSpecApplicationPermissions
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Связь спецификации ФРС с правом в приложении_ID
+          readOnly: true
+        isActive:
+          $ref: '#/components/schemas/isActive'
+        applicationPermissionId:
+          type: number
+          example: 1
+          description: Право в приложении_ID
+          writeOnly: true
+        applicationPermissionData:
+          $ref: '#/components/schemas/applicationPermissionData'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+    applicationPermissionData:
+      type: object
+      title: applicationPermissionData
+      description: Право в приложении
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Маршрут_ID
+          readOnly: true
+        code:
+          type: string
+          description: Код
+          example: '11100'
+        applicationPermissionGroupId:
+          type: number
+          writeOnly: true
+          example: 1
+          description: Группа права в приложении_ID
+        applicationPermissionGroupData:
+          $ref: '#/components/schemas/applicationPermissionGroupData'
+        applicationFEViewId:
+          type: number
+          writeOnly: true
+          example: 1
+          description: Форма приложения frontend_ID
+        applicationFEViewData:
+          $ref: '#/components/schemas/applicationFEViewData'
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Маршрут 1
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Маршрут 1
+    applicationPermissionGroupData:
+      title: applicationPermissionGroupData
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Группа права в приложении_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование на русском языке
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование на казахском языке
+    applicationFEViewData:
+      title: applicationFEViewData
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Форма в приложении_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование на русском языке
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование на казахском языке
+        endpoint:
+          type: string
+          description: Endpoint
+          example: some-endpoint
+    workSpecs:
+      title: workSpecs
+      type: array
+      description: Список спецификаций работ
+      items:
+        $ref: '#/components/schemas/workSpec'
+      required:
+        - workSpecs
+    workSpec:
+      title: workSpec
+      type: object
+      description: Спецификация работы
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Спецификация работы_ID
+          readOnly: true
+        siteTypeId:
+          type: integer
+          example: 1
+          description: Тип места работы_ID
+          writeOnly: true
+        siteTypeData:
+          $ref: '#/components/schemas/siteType'
+        code:
+          type: string
+          description: Код
+          example: '11100'
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Монтаж линии FTTH КЛС
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Монтаж линии FTTH КЛС
+        isAuto:
+          type: boolean
+          description: Выполняется автоматически?
+          default: false
+        isDemandSkillSpec:
+          type: boolean
+          default: true
+          description: Требуется указание спецификации компетенции?
+        isActive:
+          $ref: '#/components/schemas/isActive'
+        skillSpecifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/workSpecSkillSpec'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - siteTypeId
+        - code
+        - nameRu
+        - nameKz
+        - isAuto
+        - isDemandSkillSpec
+        - isActive
+    siteType:
+      type: object
+      title: siteType
+      description: Тип места работы
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Тип места работы_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Спецификация работы на стороне клиента
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Спецификация работы на стороне клиента
+    emplployeeFunctionRoleSpecData:
+      type: object
+      title: emplployeeFunctionRoleSpecData
+      description: Спецификация функциональной роли сотрудника (кратко)
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Спецификация функциональной роли сотрудника_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: SpecName на русском языке
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: SpecName на казахском языке
+    workSpecBaseCFSAction:
+      type: object
+      title: workSpecBaseCFSAction
+      description: 'Связь спецификации работы с действием для базового сервиса, ориентированного на клиента'
+      properties:
+        id:
+          type: number
+          example: 1
+          description: 'Связь спецификации работы с действием для базового сервиса, ориентированного на клиента_ID'
+          readOnly: true
+        isUse:
+          type: boolean
+          description: Признак использования
+          default: true
+          readOnly: true
+        baseCustomerFacingServiceActionId:
+          type: number
+          writeOnly: true
+          example: 1
+          description: 'Действие для базового сервиса, ориентированного на клиента_ID'
+        baseCustomerFacingServiceActionData:
+          $ref: '#/components/schemas/baseCFSActionData'
+    baseCFSActionData:
+      type: object
+      title: baseCFSActionSpecificationData
+      description: Действия для базового сервиса ориентированного на клиента (кратко)
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Действия для базового сервиса ориентированного на клиента_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование 1
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование 1
+    workSpecAddCFSAction:
+      type: object
+      title: workSpecAddCFSAction
+      description: 'Связь спецификации работы с действием для дополнительного сервиса, ориентированного на клиента'
+      properties:
+        id:
+          type: number
+          example: 1
+          description: 'Связь спецификации работы с действием для дополнительного сервиса, ориентированного на клиента_ID'
+          readOnly: true
+        isUse:
+          type: boolean
+          description: Признак использования
+          default: true
+          readOnly: true
+        addCustomerFacingServiceActionId:
+          type: number
+          writeOnly: true
+          example: 1
+          description: 'Действие для дополнительного сервиса, ориентированного на клиента_ID'
+        addCustomerFacingServiceActionData:
+          $ref: '#/components/schemas/addCFSActionData'
+    addCFSActionData:
+      type: object
+      title: addCFSActionSpecificationData
+      description: Действия для дополнительного сервиса ориентированного на клиента (кратко)
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Действия для дополнительного сервиса ориентированного на клиента_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование 1
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование 1
+    workSpecCompositePRS:
+      type: object
+      title: workSpecCompositePRS
+      description: Связь спецификации работы со спецификацией составного физического ресурса
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Связь спецификации работы со спецификацией составного физического ресурса_ID
+          readOnly: true
+        isUse:
+          type: boolean
+          description: Признак использования
+          default: true
+          readOnly: true
+        workSpecCompositePhysicalResourceSpecificationId:
+          type: number
+          writeOnly: true
+          example: 1
+          description: 'Действие для дополнительного сервиса, ориентированного на клиента_ID'
+        workSpecCompositePhysicalResourceSpecificationData:
+          $ref: '#/components/schemas/compositePhysicalResourceSpecificationData'
+    compositePhysicalResourceSpecificationData:
+      type: object
+      title: compositePhysicalResourceSpecificationData
+      description: Спецификация составного физического ресурса
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Спецификация составного физического ресурса_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование 1
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование 1
+    workSpecSkillSpec:
+      type: object
+      title: workSpecSkillSpec
+      description: Связь спецификации работы со спецификацией компетенции
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Связь спецификации работы со спецификацией компетенции_ID
+          readOnly: true
+        isUse:
+          type: boolean
+          description: Признак использования
+          default: true
+          readOnly: true
+        skillSpecificationId:
+          type: integer
+          example: 1
+          description: Спецификация компетенции_ID
+          writeOnly: true
+        skillSpecificationData:
+          $ref: '#/components/schemas/skillSpecificationData'
+    skillSpecificationData:
+      type: object
+      title: skillSpecificationData
+      description: Спецификация компетенции
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Спецификация компетенции_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Монтаж КЛС
+          readOnly: true
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Монтаж КЛС
+          readOnly: true
+    workSpecsSkillRel:
+      title: workSpecs
+      type: array
+      description: Список спецификаций работ
+      items:
+        $ref: '#/components/schemas/workSpecSkillRel'
+      required:
+        - workSpecs
+    workSpecSkillRel:
+      title: workSpec
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Спецификация процесса_ID
+          readOnly: true
+        emplployeeFunctionRoleSpecId:
+          type: number
+          writeOnly: true
+          example: 1
+          description: Спецификация роли участника-сотрудника_ID
+        emplployeeFunctionRoleSpecData:
+          $ref: '#/components/schemas/emplployeeFunctionRoleSpecData'
+        siteTypeId:
+          type: integer
+          writeOnly: true
+          example: 1
+          description: Тип места работы_ID
+        siteTypeData:
+          $ref: '#/components/schemas/siteType'
+        code:
+          type: string
+          description: Код
+          example: '11100'
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: workSpecName на русском языке
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: workSpecName на казахском языке
+        isAuto:
+          type: boolean
+          description: Выполняется автоматически?
+          default: true
+          readOnly: true
+        isActive:
+          $ref: '#/components/schemas/isActive'
+        skillSpecifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/workSpecSkillSpecRel'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - nameRu
+        - nameKz
+        - isActive
+    workSpecSkillSpecRel:
+      type: object
+      title: workSpecSkillSpec
+      description: Связь спецификации работы со спецификацией компетенции
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Связь спецификации работы со спецификацией компетенции_ID
+          readOnly: true
+        isUse:
+          type: boolean
+          description: Признак использования
+          default: true
+          readOnly: true
+        skillSpecificationId:
+          type: number
+          writeOnly: true
+          example: 1
+          description: Спецификация компетенции_ID
+        skillSpecificationData:
+          $ref: '#/components/schemas/skillSpecification'
+    skillSpecification:
+      type: object
+      title: skillSpecificationData
+      description: Спецификация компетенции
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Спецификация компетенции_ID
+          readOnly: true
+        typeId:
+          type: number
+          writeOnly: true
+          example: 1
+          description: Тип спецификации компетенции_ID
+        typeData:
+          $ref: '#/components/schemas/skillSpecificationType'
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование 1
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование 1
+        isDocumentRequired:
+          type: boolean
+          description: Требуется подтверждающий документ?
+          default: true
+          readOnly: true
+        isActive:
+          $ref: '#/components/schemas/isActive'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+    skillSpecificationType:
+      type: object
+      title: skillSpecificationType
+      description: Тип спецификации компетенции
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Тип спецификации компетенции_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Тип 1
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Тип 1
+    checkPossTypes:
+      title: checkPossTypes
+      type: array
+      description: Список типов проверки технической возможности
+      items:
+        $ref: '#/components/schemas/checkPossType'
+      required:
+        - checkPossTypes
+    checkPossType:
+      title: checkPossType
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Тип проверки технической возможности_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование на русском языке
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование на казахском языке
+    valueTypes:
+      title: valueTypes
+      type: object
+      properties:
+        valueTypes:
+          type: array
+          description: Список типов значений
+          items:
+            $ref: '#/components/schemas/valueType'
+      required:
+        - valueTypes
+    valueType:
+      title: valueType
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Тип значения_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование на русском языке
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование на казахском языке
+    inventorySystems:
+      title: inventorySystems
+      type: array
+      description: Список систем технического учета
+      items:
+        $ref: '#/components/schemas/inventorySystem'
+      required:
+        - inventorySystems
+    inventorySystem:
+      title: inventorySystem
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Система технического учета_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование на русском языке
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование на казахском языке
+    commChannelTypes:
+      type: array
+      description: Список типов канала коммуникаций
+      items:
+        $ref: '#/components/schemas/commChannelType'
+      required:
+        - commChannelTypes
+    commChannelType:
+      title: commChannelType
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Тип канала коммуникаций_ID
+          readOnly: true
+        isActive:
+          $ref: '#/components/schemas/isActive'
+        isCredential:
+          type: boolean
+          description: Адрес должен быть верифицированным?
+          default: true
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование на русском языке
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование на казахском языке
+    divisions:
+      title: divisions
+      type: array
+      description: Список дивизионов
+      items:
+        $ref: '#/components/schemas/division'
+      required:
+        - divisions
+    division:
+      title: division
+      type: object
+      description: Дивизион
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Дивизион_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Наименование на русском языке
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+          example: '11100'
+        identificationNumber:
+          type: string
+          description: БИН
+          example: 11100494-94
+        shortDescription:
+          type: string
+          description: Краткое описание
+          example: Краткое описание
+        isActive:
+          $ref: '#/components/schemas/isActive'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+    divisionShort:
+      title: division
+      type: object
+      description: Дивизион
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Дивизион_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: B2C
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: B2C
+      readOnly: true
+  parameters:
+    limit:
+      name: limit
+      in: query
+      required: true
+      schema:
+        type: number
+        maximum: 100
+        format: double
+        example: 30
+      description: 'Используется для отсечения части результатов выдачи: вернуть указанное число записей. Записи возвращаются от начала или от значения, переданного в параметр offset'
+    offset:
+      name: offset
+      in: query
+      required: true
+      schema:
+        type: number
+        format: double
+        minimum: 0
+        example: 10
+      description: 'Используется для отсечения части результатов выдачи: пропустить указанное число записей'
+    processSpecId:
+      name: processSpecId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Спецификация процесса_ID
+    applicationFEId:
+      name: applicationFEId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Приложение FrontEnd_ID
+    partyRoleSpecId:
+      name: partyRoleSpecId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Спецификация роли участника_ID
+    funcRoleSpecId:
+      name: funcRoleSpecId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Спецификация функциональной роли участника_ID
+    queryFuncRoleSpecId:
+      name: funcRoleSpecId
+      in: query
+      required: true
+      schema:
+        type: integer
+      description: Спецификация функциональной роли участника_ID
+    routeId:
+      name: routeId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Маршрут_ID
+    workSpecId:
+      name: workSpecId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Спецификация работы_ID
+    frsId:
+      name: frsId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Спецификация функциональной роли_ID
+    employeeFuncRoleSpecId:
+      name: employeeFuncRoleSpecId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Спецификация функциональной роли сотрудника_ID
+    executeTypeId:
+      name: executeTypeId
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Тип выполнения_ID
+    managerEmployeeId:
+      name: managerEmployeeId
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Сотрудник-владелец_ID
+    businessProcessId:
+      name: businessProcessId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Бизнес-процесс_ID
+  examples: {}
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Access Token Keycloak
+tags:
+  - name: Спецификация процесса
+  - name: Приложение
+  - name: Спецификация роли участника
+  - name: Спецификация функциональной роли сотрудника
+  - name: Спецификация функциональной роли сотрудника в приложении
+  - name: Спецификация работы
+  - name: Спецификация компетенции
+  - name: Прочее
+security:
+  - auth: []

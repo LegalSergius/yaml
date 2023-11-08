@@ -1,0 +1,545 @@
+openapi: 3.0.0
+x-stoplight:
+  id: fniw4qohy6hp4
+info:
+  title: Work Order API
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000/api/work-order-be/v1.0'
+    description: dev
+paths:
+  /request-work-order:
+    post:
+      summary: Создание рабочего задания в рамках запроса
+      operationId: post-request-work-order
+      responses:
+        '201':
+          $ref: '#/components/responses/Success'
+      description: Создание рабочего задания в рамках запроса
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/request-work-order'
+  /work-order:
+    get:
+      summary: Получение рабочих заданий
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/work-order'
+      operationId: get-work-order
+      parameters:
+        - $ref: '#/components/parameters/executeEmployeeId'
+        - $ref: '#/components/parameters/structUnitId'
+        - $ref: '#/components/parameters/requestId'
+        - $ref: '#/components/parameters/requestItemId'
+        - $ref: '#/components/parameters/workOrderStateId'
+  '/work-order/{workOrderId}/assign':
+    parameters:
+      - schema:
+          type: string
+        name: workOrderId
+        in: path
+        required: true
+        description: Рабочее задание_ID
+    post:
+      summary: Назначение исполнителя (Взять в работу)
+      operationId: post-work-order-workOrderId-assign
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+      description: Назначение исполнителя (Взять в работу)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                executeEmployeeId:
+                  type: integer
+                  example: 132
+                  description: Сотрудник исполнитель_ID
+  '/work-order/{workOrderId}/execute':
+    parameters:
+      - schema:
+          type: string
+        name: workOrderId
+        in: path
+        required: true
+        description: Рабочее задание_ID
+    post:
+      summary: Завершить рабочее задание
+      operationId: post-work-order-execute
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+      description: Завершить рабочее задание
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nameRu:
+                  type: string
+                  description: Результат исполнения на русском языке
+                  example: Успешно
+                nameKz:
+                  type: string
+                  description: Результат исполнения на казахском языке
+                  example: Успешно
+                note:
+                  type: string
+                  description: Код результата исполнения
+                  example: SUCCESS
+                code:
+                  type: string
+                  description: Комментарий
+                  example: Очень успешно
+components:
+  schemas:
+    request-work-order:
+      title: request-work-order
+      x-stoplight:
+        id: 94tyo0s87x36o
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 134
+          description: Рабочее задание в рамках запроса_ID
+          readOnly: true
+        requestId:
+          type: integer
+          example: 3245
+          description: Запрос_ID
+        requestItemId:
+          type: integer
+          example: 4312424
+          description: Позиция запроса_ID
+        requestSpecVersionId:
+          type: integer
+          example: 23
+          description: Версия спецификации запроса_ID
+        employeeFuncRoleSpecId:
+          type: integer
+          example: 144
+          description: Спецификация функциональной роли сотрудника_ID
+        specificationId:
+          type: integer
+          example: 65
+          description: Спецификация рабочего задания_ID
+        structUnitId:
+          type: integer
+          example: 245
+          description: Ответственное структурное подразделение_ID
+        externalId:
+          type: string
+          description: ID во внешней системе
+          example: AAA-1234-PPP
+        priorityTypeId:
+          type: integer
+          example: 1
+          description: Тип приоритета_ID
+        requester:
+          $ref: '#/components/schemas/work-order-requester'
+        workOrderItems:
+          type: array
+          description: Позиции рабочего задания
+          items:
+            $ref: '#/components/schemas/work-order-item'
+          writeOnly: true
+      required:
+        - requestId
+        - requestItemId
+        - requestSpecVersionId
+        - employeeFuncRoleSpecId
+        - specificationId
+        - structUnitId
+        - externalId
+        - priorityTypeId
+        - requester
+        - workOrderItems
+    work-order-item:
+      title: work-order-item
+      x-stoplight:
+        id: h3ayr9b29xawo
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 23443
+          description: Позиция рабочего задания_ID
+          readOnly: true
+        workOrderId:
+          type: integer
+          example: 2345
+          description: Рабочее задание_ID
+          readOnly: true
+        workSpecificationId:
+          type: integer
+          example: 104
+          description: Спецификация работы_ID
+        quantity:
+          type: integer
+          example: 1
+          description: Количество
+      required:
+        - workSpecificationId
+        - quantity
+    work-order-requester:
+      title: work-order-requester
+      x-stoplight:
+        id: 9eiwwzdch31re
+      type: object
+      description: Инициатор рабочего задания
+      properties:
+        id:
+          type: integer
+          example: 1234
+          description: Инициатор рабочего задания_ID
+          readOnly: true
+        typeId: 
+          type: integer
+          description: Тип инициатора
+          example: 1
+          writeOnly: true
+        type:
+          type: object
+          readOnly: true
+          properties:
+            id:
+              type: integer
+              description: Тип инициатора
+              example: 1
+            nameRu:
+              type: string
+              description: Наименование на русском языке
+              example: Инициатор
+            nameKz:
+              type: string
+              description: Наименование на казахском языке
+              example: Инициатор
+        name:
+          type: string
+          example: Иванов Иван Иванович
+          description: ФИО инициатора
+        contactNum:
+          type: string
+          description: Контактный номер
+          example: '7771234567'
+        employeeId:
+          type: integer
+          example: 132
+          description: Сотрудник-инициатор_ID
+        language:
+          type: string
+          example: Русский
+          description: Язык обращения
+      required:
+        - typeId
+        - name
+        - contactNum
+        - employeeId
+        - languageId
+    work-order:
+      title: work-order
+      x-stoplight:
+        id: bss7pf7dagt0t
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 134
+          description: Рабочее задание в рамках запроса_ID
+          readOnly: true
+        type:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: Тип рабочего задания_ID
+              example: 1
+            nameRu:
+              type: string
+              description: Наименование на русском языке
+              example: Рабочее задание в рамках запроса
+            nameKz:
+              type: string
+              description: Наименование на казахском языке
+              example: Рабочее задание в рамках запроса
+        state:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: Состояние рабочего задания_ID
+              example: 1
+            nameRu:
+              type: string
+              description: Наименование на русском языке
+              example: Новый
+            nameKz:
+              type: string
+              description: Наименование на казахском языке
+              example: Новый
+        specificationData:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: Спецификация рабочего задания_ID
+              example: 65
+            nameRu:
+              type: string
+              description: Наименование на русском языке
+              example: Спецификация
+            nameKz:
+              type: string
+              description: Наименование на казахском языке
+              example: Спецификация
+        structUnitId:
+          type: integer
+          example: 245
+          description: Ответственное структурное подразделение_ID
+        executeEmployee:
+          type: object
+          properties:
+            employeeId:
+              type: integer
+              description: Сотрудник исполнитель_ID
+              example: 123
+            firstName:
+              type: string
+              description: Имя
+              example: Иван
+            lastName:
+              type: string
+              description: Фамилия
+              example: Иванов
+            middleName:
+              type: string
+              description: Отчество
+              example: Иванович
+        targetDuration:
+          type: integer
+          description: Плановая продолжительность в часах
+          example: 8
+        targetDate:
+          type: string
+          format: date-time
+          description: Контрольный срок
+          example: '2021-09-27T13:01:17.000Z'
+          readOnly: true
+        executeDate:
+          type: string
+          format: date-time
+          description: Дата исполнения
+          example: '2021-09-27T13:01:17.000Z'
+          readOnly: true
+        externalId:
+          type: string
+          description: ID во внешней системе
+          example: AAA-1234-PPP
+        priorityData:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: Тип приоритета_ID
+              example: 65
+            nameRu:
+              type: string
+              description: Наименование на русском языке
+              example: Обычный
+            nameKz:
+              type: string
+              description: Наименование на казахском языке
+              example: Обычный
+        requestData:
+          $ref: '#/components/schemas/request-work-order-object'
+        planData:
+          type: object
+        requester:
+          $ref: '#/components/schemas/work-order-requester'
+        workOrderItems:
+          type: array
+          description: Позиции рабочего задания
+          items:
+            $ref: '#/components/schemas/work-order-item'
+          writeOnly: true
+        executionResult:
+          $ref: '#/components/schemas/work-order-execution-result'
+        createDate:
+          type: string
+          format: date-time
+          description: Дата создания
+          example: '2021-09-27T13:01:17.000Z'
+          readOnly: true
+        updateDate:
+          type: string
+          format: date-time
+          description: Дата обновления
+          example: '2021-09-27T13:01:17.000Z'
+          readOnly: true
+        createUser:
+          type: string
+          description: Пользователь-создатель
+          example: CRM
+          readOnly: true
+        updateUser:
+          type: string
+          description: Пользователь-редактор
+          example: CRM
+          readOnly: true
+        createApp:
+          type: string
+          description: Приложение-создатель
+          example: CRM
+          readOnly: true
+        updateApp:
+          type: string
+          description: Приложение-редактор
+          example: CRM
+          readOnly: true
+      required:
+        - specificationId
+        - structUnitId
+        - externalId
+        - priority
+        - requester
+        - workOrderItems
+    request-work-order-object:
+      title: request-work-order-object
+      x-stoplight:
+        id: vqrj7qr37ui8b
+      type: object
+      properties:
+        requestId:
+          type: integer
+          example: 3245
+          description: Запрос_ID
+        requestItemId:
+          type: integer
+          example: 4312424
+          description: Позиция запроса_ID
+        requestSpecVersionId:
+          type: integer
+          example: 23
+          description: Версия спецификации запроса_ID
+        employeeFuncRoleSpecId:
+          type: integer
+          example: 144
+          description: Спецификация функциональной роли сотрудника_ID
+    work-order-execution-result:
+      title: work-order-execution-result
+      x-stoplight:
+        id: 4gjrn9b7v3t1j
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Результат исполнения рабочего задания_ID
+          example: 3123123
+          readOnly: true
+        nameRu:
+          type: string
+          description: Результат исполнения на русском языке
+          example: Успешно
+        nameKz:
+          type: string
+          description: Результат исполнения на казахском языке
+          example: Успешно
+        note:
+          type: string
+          description: Код результата исполнения
+          example: SUCCESS
+        code:
+          type: string
+          description: Комментарий
+          example: Очень успешно
+        createDate:
+          type: string
+          format: date-time
+          description: Дата создания
+          example: '2021-09-27T13:01:17.000Z'
+          readOnly: true
+        createUser:
+          type: string
+          description: Пользователь-создатель
+          example: CRM
+          readOnly: true
+        createApp:
+          type: string
+          description: Приложение-создатель
+          example: CRM
+          readOnly: true
+  responses:
+    Success:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errCode:
+                type: string
+                example: '0'
+                description: Код ошибки
+              errMsg:
+                type: string
+                example: ОК
+                description: Текст ошибки
+              date:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 12345
+                    description: Идентификатор созданной или измененной записи
+            required:
+              - errCode
+              - errMsg
+  parameters:
+    executeEmployeeId:
+      name: executeEmployeeId
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Сотрудник исполнитель_ID
+    structUnitId:
+      name: structUnitId
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Ответственное структурное подразделение_ID
+    requestId:
+      name: requestId
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Запрос_ID
+    requestItemId:
+      name: requestItemId
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Позиция  запроса_ID
+    workOrderStateId:
+      name: workOrderStateId
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Состояние рабочего задания_ID

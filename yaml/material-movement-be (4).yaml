@@ -1,0 +1,1567 @@
+openapi: 3.0.0
+x-stoplight:
+  id: vnn0pfgc10ggs
+info:
+  title: material-movement-be
+  version: '1.0'
+  contact:
+    name: Shakhmurat Japparov
+    email: japparov.s@telecom.kz
+  description: Микросервис "Движение расходного материала"
+servers:
+  - url: 'http://localhost:3000/api/material-movement-be/v1.0'
+    description: test
+paths:
+  /frp-stock:
+    get:
+      summary: Получить склад МОЛа по параметрам
+      tags:
+        - Склад МОЛа
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/frpStock'
+      operationId: get-frp-stock
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/employeeId'
+        - $ref: '#/components/parameters/externalWorksNum'
+        - $ref: '#/components/parameters/externalStockNum'
+        - $ref: '#/components/parameters/isActive'
+      description: Получить склад МОЛа по параметрам
+  '/frp-stock/{frpStockId}':
+    parameters:
+      - $ref: '#/components/parameters/frpStockId'
+    get:
+      summary: Получить склад МОЛа по идентификатору
+      tags:
+        - Склад МОЛа
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/frpStock'
+      operationId: get-frp-stock-frpStockId
+      description: Получить склад МОЛа по идентификатору
+    patch:
+      summary: Частичное изменение параметров склада МОЛа по идентификатору
+      operationId: patch-frp-stock-frpStockId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+      description: Частичное изменение параметров склада МОЛа по идентификатору
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/frpStockPatch'
+      tags:
+        - Склад МОЛа
+  '/material-in-frp-stock/{frpStockId}':
+    parameters:
+      - $ref: '#/components/parameters/frpStockId'
+    get:
+      summary: Получить материал на складе МОЛа
+      tags:
+        - Материал на складе МОЛа
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/materialInFrpStock'
+      operationId: get-material-in-frp-stock-frpStockId
+      description: Получить материал на складе МОЛа по параметрам
+  '/material-in-employee-stock/{employeeId}':
+    parameters:
+      - schema:
+          type: integer
+        name: employeeId
+        in: path
+        required: true
+        description: Сотрудник_ID
+    get:
+      summary: Получить материал на складе сотрудника
+      tags:
+        - Материала на складе сотрудника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/materialInEmpStock'
+      operationId: get-material-in-employee-stock-employeeId
+      description: Получить материал на складе сотрудника
+  /material-frp-request:
+    parameters: []
+    get:
+      summary: Получить запрос на получение материала у МОЛа или возврат материалов МОЛу по параметрам
+      operationId: get-material-frp-request
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/materialFrpRequest'
+      tags:
+        - Запрос на получение материала у МОЛ
+      description: Получить запрос на получение материала у МОЛа или возврат материалов МОЛу по параметрам
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/dateFrom'
+        - schema:
+            type: integer
+          in: query
+          name: frpStockId
+          description: Склад МОЛа_ID
+        - $ref: '#/components/parameters/employeeId'
+        - $ref: '#/components/parameters/employeeInteractionId'
+        - $ref: '#/components/parameters/stateId'
+    post:
+      summary: Создать запрос на получение материала у МОЛа или возврат материалов МОЛу
+      operationId: post-material-frp-request
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseWithData'
+      description: Создать запрос на получение материала у МОЛа или возврат материалов МОЛу
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/materialFrpRequest'
+            examples:
+              Пример создания запроса:
+                value:
+                  materialFrpRequestTypeId: 1
+                  externalWorksNum: '2501'
+                  externalStockNum: '0001'
+                  employeeId: 23
+                  items:
+                    - materialSpecificationId: 9
+                      volume: 12
+        description: ''
+      tags:
+        - Запрос на получение материала у МОЛ
+  '/material-frp-request/{materialFrpReqId}':
+    parameters:
+      - $ref: '#/components/parameters/materialFrpReqId'
+    get:
+      summary: Получить запрос на получение материала у МОЛа или возврат материалов МОЛу по идентификатору
+      tags:
+        - Запрос на получение материала у МОЛ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/materialFrpRequest'
+      operationId: get-material-frp-request-materialFrpReqId
+      description: Получить запрос на получение материала у МОЛа или возврат материалов МОЛу по идентификатору
+    patch:
+      summary: Частичное изменение запроса на получение материала у МОЛа или возврат материалов МОЛу по идентификатору
+      operationId: patch-material-frp-request-materialFrpReqId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+      description: Частичное изменение запроса на получение материала у МОЛа или возврат материалов МОЛу по идентификатору
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/materialFrpRequestPatch'
+      tags:
+        - Запрос на получение материала у МОЛ
+  '/material-frp-request/{materialFrpReqId}/material-frp-request-item':
+    parameters:
+      - $ref: '#/components/parameters/materialFrpReqId'
+    get:
+      summary: Получить позицию запроса на получение материалов у МОЛа или возврат материалов МОЛу по параметрам
+      tags:
+        - Позиция запроса на получение материала у МОЛ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/materialFrpRequestItem'
+      operationId: get-material-frp-request-materialFrpReqId-material-frp-request-item
+      description: Получить позицию запроса на получение материалов у МОЛа или возврат материалов МОЛу по параметрам
+      parameters:
+        - $ref: '#/components/parameters/materialSpecificationId'
+    post:
+      summary: Создать позицию запроса на получение материалов у МОЛа или возврат материалов МОЛу
+      operationId: post-material-frp-request-materialFrpReqId-material-frp-request-item
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseWithDataForItem'
+      description: Создать позицию запроса на получение материалов у МОЛа или возврат материалов МОЛу
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/materialFrpRequestItem'
+            examples:
+              Пример создания позиции запроса:
+                value:
+                  materialSpecificationId: 9
+                  volume: 1
+      tags:
+        - Позиция запроса на получение материала у МОЛ
+  '/material-frp-request/{materialFrpReqId}/material-frp-request-item/{materialFrpReqItemId}':
+    parameters:
+      - $ref: '#/components/parameters/materialFrpReqId'
+      - $ref: '#/components/parameters/materialFrpReqItemId'
+    get:
+      summary: Получить позицию запроса на получение материалов у МОЛа или возврат материалов МОЛу по идентификатору
+      tags:
+        - Позиция запроса на получение материала у МОЛ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/materialFrpRequestItem'
+      operationId: get-material-frp-request-materialFrpReqId-material-frp-request-item-materialFrpReqItemId
+      description: Получить позицию запроса на получение материалов у МОЛа или возврат материалов МОЛу по идентификатору
+    patch:
+      summary: Частичное изменение позиции запроса на получение материалов у МОЛа или возврат материалов МОЛу по идентификатору
+      operationId: patch-material-frp-request-materialFrpReqId-material-frp-request-item-materialFrpReqItemId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+      description: Частичное изменение позиции запроса на получение материалов у МОЛа или возврат материалов МОЛу по идентификатору
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/materialFrpRequestItemPatch'
+        description: ''
+      tags:
+        - Позиция запроса на получение материала у МОЛ
+  /material-emp-request:
+    get:
+      summary: Получить запрос на получение материалов у сотрудника по параметрам
+      tags:
+        - Запрос на получение материала у сотрудника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/materialEmpRequest'
+      operationId: get-material-emp-request
+      description: Получить запрос на получение материалов у сотрудника по параметрам
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/employeeInteractionId'
+        - $ref: '#/components/parameters/stateId'
+        - $ref: '#/components/parameters/dateFrom'
+        - $ref: '#/components/parameters/requesterEmployeeId'
+        - $ref: '#/components/parameters/senderEmployeeId'
+    post:
+      summary: Создать запрос на получение материалов у сотрудника
+      operationId: post-material-emp-request
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseWithData'
+      description: Создать запрос на получение материалов у сотрудника
+      tags:
+        - Запрос на получение материала у сотрудника
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/materialEmpRequest'
+            examples:
+              Пример создания запроса:
+                value:
+                  requesterEmployeeId: 12
+                  senderEmployeeId: 23
+                  items:
+                    - materialSpecificationId: 9
+                      volume: 12
+        description: ''
+  '/material-emp-request/{materialEmpReqId}':
+    parameters:
+      - $ref: '#/components/parameters/materialEmpReqId'
+    get:
+      summary: Получить запрос на получение материалов у сотрудника по идентификатору
+      tags:
+        - Запрос на получение материала у сотрудника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/materialEmpRequest'
+      operationId: get-material-emp-request-materialEmpReqId
+      description: Получить запрос на получение материалов у сотрудника по идентификатору
+    patch:
+      summary: Частичное изменение запроса на получение материалов у сотрудника по идентификатору
+      operationId: patch-material-emp-request-materialEmpReqId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+      description: Частичное изменение запроса на получение материалов у сотрудника по идентификатору
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/materialEmpRequestPatch'
+        description: ''
+      tags:
+        - Запрос на получение материала у сотрудника
+  '/material-emp-request/{materialEmpReqId}/material-emp-request-item':
+    parameters:
+      - $ref: '#/components/parameters/materialEmpReqId'
+    get:
+      summary: Получить позицию запроса на получение материалов у сотрудника по параметрам
+      tags:
+        - Позиция запроса на получение материала у сотрудника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/materialEmpRequestItem'
+      operationId: get-material-emp-request-materialEmpReqId-material-emp-request-item
+      description: Получить позицию запроса на получение материалов у сотрудника по параметрам
+      parameters:
+        - $ref: '#/components/parameters/materialSpecificationId'
+    post:
+      summary: Создать позицию запроса на получение материалов у сотрудника
+      operationId: post-material-emp-request-materialEmpReqId-material-emp-request-item
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseWithDataForItem'
+      description: Создать позицию запроса на получение материалов у сотрудника
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/materialEmpRequestItem'
+            examples:
+              Пример создания позиции запроса:
+                value:
+                  materialSpecificationId: 9
+                  volume: 12
+        description: ''
+      tags:
+        - Позиция запроса на получение материала у сотрудника
+  '/material-emp-request/{materialEmpReqId}/material-emp-request-item/{materialEmpReqItemId}':
+    parameters:
+      - $ref: '#/components/parameters/materialEmpReqId'
+      - $ref: '#/components/parameters/materialEmpReqItemId'
+    get:
+      summary: Получить позицию запроса на получение материалов у сотрудника по идентификатору
+      tags:
+        - Позиция запроса на получение материала у сотрудника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/materialEmpRequestItem'
+      operationId: get-material-emp-request-materialEmpReqId-material-emp-request-item-materialEmpReqItemId
+      description: Получить позицию запроса на получение материалов у сотрудника по идентификатору
+    patch:
+      summary: Частичное изменение позиции запроса на получение материалов у сотрудника по идентификатору
+      operationId: patch-material-emp-request-materialEmpReqId-material-emp-request-item-materialEmpReqItemId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+      description: Частичное изменение позиции запроса на получение материалов у сотрудника по идентификатору
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/materialEmpRequestItemPatch'
+      tags:
+        - Позиция запроса на получение материала у сотрудника
+  /material-2frp-request:
+    get:
+      summary: Получить заявку на перемещение материала между складами МОЛа по параметрам
+      tags:
+        - Заявка на перемещение материала между складами МОЛ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/material2frpRequest'
+      operationId: get-material-2frp-request
+      description: Получить заявку на перемещение материала между складами МОЛа по параметрам
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/externalId'
+        - $ref: '#/components/parameters/stateId'
+        - $ref: '#/components/parameters/dateFrom'
+        - $ref: '#/components/parameters/employeeInteractionId'
+        - $ref: '#/components/parameters/requesterFrpStockId'
+        - $ref: '#/components/parameters/senderFrpStockId'
+    post:
+      summary: Создать заявку на перемещение материала между складами МОЛа
+      operationId: post-material-2frp-request
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseWithData'
+      description: Создать заявку на перемещение материала между складами МОЛа
+      tags:
+        - Заявка на перемещение материала между складами МОЛ
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/material2frpRequest'
+            examples:
+              Пример создания заявки:
+                value:
+                  requesterFrpStockId: 12
+                  senderFrpStockId: 23
+                  items:
+                    - materialSpecificationId: 9
+                      volume: 12
+        description: ''
+  '/material-2frp-request/{material2frpReqId}':
+    parameters:
+      - $ref: '#/components/parameters/material2frpReqId'
+    get:
+      summary: Получить заявку на перемещение материала между складами МОЛа по идентификатору
+      tags:
+        - Заявка на перемещение материала между складами МОЛ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/material2frpRequest'
+      operationId: get-material-2frp-request-material2frpReqId
+      description: Получить заявку на перемещение материала между складами МОЛа по идентификатору
+    patch:
+      summary: Частичное изменение заявки на перемещение материала между складами МОЛа по идентификатору
+      operationId: patch-material-2frp-request-material2frpReqId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+      description: Частичное изменение заявки на перемещение материала между складами МОЛа по идентификатору
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/material2frpRequestPatch'
+      tags:
+        - Заявка на перемещение материала между складами МОЛ
+  /material-frp-request-state:
+    get:
+      summary: Получить состояния запроса на получение материала у МОЛ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/materialFrpReqState'
+      operationId: get-material-frp-request-state
+      description: Получить состояния запроса на получение материала у МОЛ
+      tags:
+        - Запрос на получение материала у МОЛ
+  /material-frp-request-type:
+    get:
+      summary: Получить типы запроса на получение материалов у МОЛ
+      tags:
+        - Запрос на получение материала у МОЛ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/materialFrpRequestType'
+      operationId: get-material-frp-request-type
+      description: Получить типы запроса на получение материалов у МОЛ
+  /material-emp-request-state:
+    get:
+      summary: Получить состояния запроса на получение материалов у сотрудника
+      tags:
+        - Запрос на получение материала у сотрудника
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/materialEmpReqState'
+      operationId: get-material-emp-request-state
+      description: Получить состояния запроса на получение материалов у сотрудника
+  /material-2frp-request-state:
+    get:
+      summary: Получить состояния заявки на перемещение материала между складами МОЛ
+      tags:
+        - Заявка на перемещение материала между складами МОЛ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/material2frpReqState'
+      operationId: get-material-2frp-request-state
+      description: Получить состояния заявки на перемещение материала между складами МОЛ
+components:
+  schemas:
+    createDate:
+      type: string
+      title: createDate
+      description: Дата создания
+      format: date-time
+      example: '2022-06-28T14:15:22Z'
+      readOnly: true
+    updateDate:
+      type: string
+      title: updateDate
+      description: Дата изменения
+      format: date-time
+      example: '2022-06-28T14:15:22Z'
+      readOnly: true
+    createUser:
+      type: string
+      title: createUser
+      description: 'Логин пользователя, создавшего запись'
+      example: Japparov.S
+      readOnly: true
+    updateUser:
+      type: string
+      title: updateUser
+      description: 'Логин пользователя, изменившего запись'
+      example: Japparov.S
+      readOnly: true
+    createApp:
+      type: string
+      title: createApp
+      description: Приложение-создатель
+      example: resource-design-fe
+      readOnly: true
+    updateApp:
+      type: string
+      title: updateApp
+      description: Приложение-редактор
+      example: resource-design-fe
+      readOnly: true
+    isActive:
+      type: boolean
+      title: isActive
+      format: double
+      description: Признак активности
+      default: true
+      readOnly: true
+    response:
+      title: response
+      type: object
+      properties:
+        errCode:
+          type: number
+          description: Код ошибки
+          example: 0
+        errMsg:
+          type: string
+          description: Текст ошибки
+          example: Успешно
+      required:
+        - errCode
+        - errMsg
+    responseWithData:
+      title: responseWithData
+      type: object
+      properties:
+        errCode:
+          type: number
+          description: Код ошибки
+          example: 0
+        errMsg:
+          type: string
+          description: Текст ошибки
+          example: Успешно
+        data:
+          type: object
+          description: Данные ответа
+          required:
+            - id
+          properties:
+            id:
+              type: number
+              description: Идентификатор записи
+              example: 12
+      required:
+        - errCode
+        - errMsg
+        - data
+    responseWithDataForItem:
+      title: responseWithData
+      type: object
+      properties:
+        errCode:
+          type: number
+          description: Код ошибки
+          example: 0
+        errMsg:
+          type: string
+          description: Текст ошибки
+          example: Успешно
+        data:
+          type: object
+          description: Данные ответа
+          required:
+            - id
+            - materialSpecData
+            - availableCount
+          properties:
+            id:
+              type: number
+              description: Идентификатор записи
+              example: 12
+            materialSpecData:
+              $ref: '#/components/schemas/materialSpec'
+            availableCount:
+              type: number
+              description: Доступное количество
+              example: 35
+      required:
+        - errCode
+        - errMsg
+        - data
+    frpStock:
+      title: frpStock
+      type: object
+      description: Данные склада МОЛа
+      properties:
+        id:
+          type: integer
+          example: 12
+          description: Склад МОЛа_ID
+          readOnly: true
+        typeData:
+          $ref: '#/components/schemas/frpStockType'
+        employeeId:
+          type: integer
+          description: Сотрудник_ID
+          example: 341
+        externalWorksNum:
+          type: string
+          example: '2501'
+          description: Номер завода SAP
+        externalStockNum:
+          type: string
+          example: '0001'
+          description: Номер склада SAP
+        name:
+          type: string
+          description: Наименование
+          example: Какое-то наименование
+        isActive:
+          $ref: '#/components/schemas/isActive'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+    frpStockData:
+      title: frpStock
+      type: object
+      description: Данные склада МОЛа
+      readOnly: true
+      properties:
+        id:
+          type: integer
+          example: 12
+          description: Склад МОЛа_ID
+          readOnly: true
+        externalWorksNum:
+          type: string
+          example: '2501'
+          description: Номер завода SAP
+        externalStockNum:
+          type: string
+          example: '0001'
+          description: Номер склада SAP
+        name:
+          type: string
+          description: Наименование
+          example: Какое-то наименование
+    frpStockPatch:
+      title: frpStockPatch
+      type: object
+      description: Данные склада МОЛа
+      properties:
+        employeeId:
+          type: integer
+          description: Сотрудник_ID
+          example: 341
+        isActive:
+          type: boolean
+          default: true
+          description: Признак активности
+        typeId:
+          type: integer
+          example: 1
+          description: Тип склада МОЛа_ID
+    materialInFrpStock:
+      title: materialInFrpStock
+      type: object
+      description: Данные материала на складе МОЛа
+      properties:
+        materialSpecData:
+          $ref: '#/components/schemas/materialSpec'
+        totalCount:
+          type: number
+          description: Общее количество
+          example: 360
+          readOnly: true
+        reservedCount:
+          type: number
+          description: Забронированное количество
+          example: 34
+          readOnly: true
+        transferredCount:
+          type: number
+          description: Переданное количество
+          example: 40
+          readOnly: true
+        writeOffCount:
+          type: number
+          example: 120
+          description: Списанное количество
+          readOnly: true
+        availableCount:
+          type: number
+          description: Доступное количество
+          example: 35
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+    materialInEmpStock:
+      title: materialInEmpStock
+      type: object
+      description: Данные материала на складе сотрудника
+      properties:
+        materialSpecData:
+          $ref: '#/components/schemas/materialSpec'
+        totalCount:
+          type: number
+          description: Общее количество
+          example: 360
+          readOnly: true
+        reservedCount:
+          type: number
+          description: Забронированное количество
+          example: 34
+          readOnly: true
+        availableCount:
+          type: number
+          description: Доступное количество
+          example: 35
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+    materialSpec:
+      type: object
+      title: materialSpec
+      description: Данные спецификации материала
+      properties:
+        id:
+          type: integer
+          example: 9
+          description: Спецификация материала_ID
+        externalId:
+          type: string
+          description: ID во внешней системе
+          example: '201203599'
+        name:
+          type: string
+          description: Наименование
+          example: 'Патчкорд LC/UPC-LC/UPC, 20м'
+        externalUnitCode:
+          type: string
+          description: Код единицы измерения во внешней системе_ID
+          example: ШТ
+        materialSpecType:
+          $ref: '#/components/schemas/materialSpecType'
+        isDeleted:
+          type: boolean
+          default: false
+          description: Признак удаления
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+      readOnly: true
+    materialSpecType:
+      title: materialSpecType
+      type: object
+      description: Данные типа спецификации материала
+      properties:
+        id:
+          type: integer
+          description: Тип спецификации материала_ID
+          example: 2
+        name:
+          type: string
+          description: Наименование
+          example: KABL Кабельная продукция
+        externalId:
+          type: string
+          description: ID во внешней системе
+          example: KABL
+    materialFrpRequest:
+      title: materialFrpRequest
+      type: object
+      description: Данные запроса на получение материала у МОЛа или возврат материалов МОЛу
+      properties:
+        id:
+          type: integer
+          example: 145
+          description: Запрос на получение материалов у МОЛа или возврат материалов МОЛу_ID
+          readOnly: true
+        materialFrpRequestTypeId:
+          type: integer
+          example: 1
+          description: Тип запроса материалов у МОЛа_ID
+          enum:
+            - 1
+            - 2
+          writeOnly: true
+        materialFrpRequestTypeData:
+          $ref: '#/components/schemas/materialFrpRequestType'
+        employeeInteractionId:
+          type: integer
+          example: 326
+          description: Взаимодействие_ID
+          readOnly: true
+        frpStockData:
+          $ref: '#/components/schemas/frpStockData'
+        externalWorksNum:
+          type: string
+          example: '2501'
+          description: Номер завода SAP
+          writeOnly: true
+        externalStockNum:
+          type: string
+          example: '0001'
+          description: Номер склада SAP
+          writeOnly: true
+        employeeId:
+          type: integer
+          description: Сотрудник_ID
+          example: 23
+        stateData:
+          $ref: '#/components/schemas/materialFrpReqState'
+        items:
+          type: array
+          minItems: 1
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/materialFrpRequestItem'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - materialFrpRequestTypeId
+        - externalWorksNum
+        - externalStockNum
+        - employeeId
+        - items
+    materialFrpRequestPatch:
+      title: materialFrpRequestPatch
+      type: object
+      description: Данные запроса на получение материала у МОЛа или возврат материалов МОЛу
+      properties:
+        stateId:
+          type: integer
+          example: 1
+          description: Состояние запроса на получение материала у МОЛа или возврат материалов МОЛу_ID
+    materialFrpRequestItem:
+      title: materialFrpRequestItem
+      type: object
+      description: Данные позиции запроса на получение материалов у МОЛа или возврат материалов МОЛу
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Позиция запроса на получение материалов у МОЛа или возврат материалов МОЛу_ID
+          readOnly: true
+        materialSpecificationId:
+          type: integer
+          description: Спецификация материала_ID
+          example: 9
+          writeOnly: true
+        materialSpecData:
+          $ref: '#/components/schemas/materialSpec'
+        volume:
+          type: number
+          description: Количество
+          minimum: 1
+          example: 12
+        isDeleted:
+          type: boolean
+          default: false
+          description: Признак удаления
+          readOnly: true
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - materialSpecificationId
+        - volume
+    materialFrpRequestItemPatch:
+      title: materialFrpRequestItemPatch
+      type: object
+      description: Данные позиции запроса на получение материалов у МОЛа или возврат материалов МОЛу
+      properties:
+        volume:
+          type: number
+          description: Количество
+          minimum: 1
+          example: 12
+        isDeleted:
+          type: boolean
+          default: false
+          description: Признак удаления
+    materialFrpRequestType:
+      type: object
+      title: materialFrpRequestType
+      description: Тип запроса материалов у МОЛа
+      properties:
+        id:
+          type: integer
+          description: Тип запроса материалов у МОЛа_ID
+          example: 1
+        nameRu:
+          type: string
+          example: Получение материалов у МОЛа
+          description: Наименование на русском языке
+        nameKz:
+          type: string
+          example: Получение материалов у МОЛа
+          description: Наименование на казахском языке
+      readOnly: true
+    materialFrpReqState:
+      type: object
+      title: materialFrpReqState
+      description: Данные состояния запроса на получение материалов у МОЛа или возврат материалов МОЛу
+      properties:
+        id:
+          type: integer
+          description: Состояние запроса на получение материалов у МОЛа или возврат материалов МОЛу_ID
+          example: 1
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Новый
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Новый
+      readOnly: true
+    materialEmpRequest:
+      title: materialEmpRequest
+      type: object
+      description: Данные запроса на получение материалов у сотрудника
+      properties:
+        id:
+          type: integer
+          example: 145
+          description: Запрос на получение материалов у сотрудника_ID
+          readOnly: true
+        employeeInteractionId:
+          type: integer
+          example: 326
+          description: Взаимодействие_ID
+          readOnly: true
+        requesterEmployeeId:
+          type: integer
+          description: Сотрудник заявитель_ID
+          example: 12
+        senderEmployeeId:
+          type: integer
+          description: Сотрудник отправитель_ID
+          example: 23
+        stateData:
+          $ref: '#/components/schemas/materialEmpReqState'
+        items:
+          type: array
+          minItems: 1
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/materialEmpRequestItem'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - requesterEmployeeId
+        - senderEmployeeId
+        - items
+    materialEmpReqState:
+      type: object
+      title: materialEmpReqState
+      description: Данные состояния запроса на получение материалов у сотрудника
+      properties:
+        id:
+          type: integer
+          description: Состояние запроса на получение материалов у сотрудника_ID
+          example: 1
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Новый
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Новый
+      readOnly: true
+    materialEmpRequestItem:
+      title: materialEmpRequestItem
+      type: object
+      description: Данные позиции запроса на получение материалов у сотрудника
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Позиция запроса на получение материалов у сотрудника_ID
+          readOnly: true
+        materialSpecificationId:
+          type: integer
+          description: Спецификация материала_ID
+          example: 9
+          writeOnly: true
+        materialSpecData:
+          $ref: '#/components/schemas/materialSpec'
+        volume:
+          type: number
+          description: Количество
+          minimum: 1
+          example: 12
+        isDeleted:
+          type: boolean
+          default: false
+          description: Признак удаления
+          readOnly: true
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - materialSpecificationId
+        - volume
+    materialEmpRequestPatch:
+      title: materialEmpRequestPatch
+      type: object
+      description: Данные запроса на получение материала у сотрудника
+      properties:
+        stateId:
+          type: integer
+          example: 1
+          description: Состояние запроса на получение материалов у сотрудника_ID
+    materialEmpRequestItemPatch:
+      title: materialEmpRequestItemPatch
+      type: object
+      description: Данные позиции запроса на получение материалов у сотрудника
+      properties:
+        volume:
+          type: number
+          description: Количество
+          minimum: 1
+          example: 12
+        isDeleted:
+          type: boolean
+          default: false
+          description: Признак удаления
+    material2frpRequest:
+      title: material2frpRequest
+      type: object
+      description: Данные заявки на перемещение материала между складами МОЛа
+      properties:
+        id:
+          type: integer
+          example: 145
+          description: Заявка на перемещение материала между складами МОЛов_ID
+          readOnly: true
+        movementType:
+          $ref: '#/components/schemas/movementType'
+        employeeInteractionId:
+          type: integer
+          example: 326
+          description: Взаимодействие_ID
+          readOnly: true
+        requesterFrpStockId:
+          type: integer
+          description: Склад МОЛа заявителя_ID
+          example: 12
+        senderFrpStockId:
+          type: integer
+          description: Склад МОЛа отправителя_ID
+          example: 23
+        externalId:
+          type: string
+          description: ID во внешней системе
+          readOnly: true
+        stateData:
+          $ref: '#/components/schemas/material2frpReqState'
+        items:
+          type: array
+          minItems: 1
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/material2frpRequestItem'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - requesterFrpStockId
+        - senderFrpStockId
+        - items
+    material2frpReqState:
+      type: object
+      title: material2frpReqState
+      description: Данные состояния заявки на перемещение материала между складами МОЛа
+      properties:
+        id:
+          type: integer
+          description: Состояние заявки на перемещение материала между складами МОЛа_ID
+          example: 1
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Новый
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Новый
+      readOnly: true
+    material2frpRequestItem:
+      title: material2frpRequestItem
+      type: object
+      description: Данные позиции заявки на перемещение материала между складами МОЛа
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Позиция заявки на перемещение материала между складами МОЛа_ID
+          readOnly: true
+        materialSpecificationId:
+          type: integer
+          description: Спецификация материала_ID
+          example: 9
+          writeOnly: true
+        materialSpecData:
+          $ref: '#/components/schemas/materialSpec'
+        volume:
+          type: number
+          description: Количество
+          minimum: 1
+          example: 12
+        isDeleted:
+          type: boolean
+          default: false
+          description: Признак удаления
+          readOnly: true
+        externalId:
+          type: string
+          description: ID во внешней системе
+          readOnly: true
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - materialSpecificationId
+        - volume
+    material2frpRequestPatch:
+      title: material2frpRequestPatch
+      type: object
+      description: Данные заявки на перемещение материала между складами МОЛа
+      properties:
+        externalId:
+          type: string
+          description: ID во внешней системе
+        stateId:
+          type: integer
+          example: 1
+          description: Состояние заявки на перемещение материала между складами МОЛа_ID
+    movementType:
+      type: object
+      title: movementType
+      description: Вид движения
+      properties:
+        id:
+          type: integer
+          description: Вид движения_ID
+          example: 311
+        nameRu:
+          type: string
+          example: Перемещение с одного склада на другой в рамках одного завода
+          description: Наименование на русском языке
+        nameKz:
+          type: string
+          example: Перемещение с одного склада на другой в рамках одного завода
+          description: Наименование на казахском языке
+      readOnly: true
+    frpStockType:
+      type: object
+      title: frpStockType
+      description: Тип склада МОЛа
+      properties:
+        id:
+          type: integer
+          description: Тип склада МОЛа_ID
+          example: 1
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: ТМЗ
+        nameKz:
+          type: string
+          example: ТМЗ
+          description: Наименование на казахском языке
+      readOnly: true
+  parameters:
+    isActive:
+      name: isActive
+      in: query
+      required: false
+      schema:
+        type: boolean
+        default: true
+      description: Признак активности
+    externalId:
+      name: externalId
+      in: query
+      required: false
+      schema:
+        type: string
+        example: 56rte8430gfy
+      description: ID во внешней системе
+    stateId:
+      name: stateId
+      in: query
+      required: false
+      schema:
+        type: number
+        example: 1
+      description: Идентификатор состояния
+    limit:
+      name: limit
+      in: query
+      required: true
+      schema:
+        type: number
+        maximum: 100
+        format: double
+        example: 30
+      description: 'Используется для отсечения части результатов выдачи: вернуть указанное число записей. Записи возвращаются от начала или от значения, переданного в параметр offset'
+    offset:
+      name: offset
+      in: query
+      required: true
+      schema:
+        type: number
+        format: double
+        minimum: 0
+        example: 10
+      description: 'Используется для отсечения части результатов выдачи: пропустить указанное число записей'
+    employeeId:
+      name: employeeId
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Сотрудник_ID
+    externalWorksNum:
+      name: externalWorksNum
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Номер завода SAP
+    externalStockNum:
+      name: externalStockNum
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Номер склада SAP
+    frpStockId:
+      name: frpStockId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Склад МОЛа_ID
+    dateFrom:
+      name: dateFrom
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date
+      description: 'Минимальная временная отметка создания или изменения запроса. В результирующим списке будут находиться запросы, у которых дата создания или изменения больше или равна значению этого параметра.'
+    employeeInteractionId:
+      name: employeeInteractionId
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Взаимодействие_ID
+    materialFrpReqId:
+      name: materialFrpReqId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Запрос на получение материалов у МОЛа или возврат материалов МОЛу_ID
+    materialSpecificationId:
+      name: materialSpecificationId
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Спецификация материала_ID
+    materialFrpReqItemId:
+      name: materialFrpReqItemId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Позиция запроса на получение материалов у МОЛа или возврат материалов МОЛу_ID
+    requesterFrpStockId:
+      name: requesterFrpStockId
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Склад МОЛа заявителя_ID
+    senderFrpStockId:
+      name: senderFrpStockId
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Склад МОЛа отправителя_ID
+    materialEmpReqId:
+      name: materialEmpReqId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Запрос на получение материалов у сотрудника_ID
+    materialEmpReqItemId:
+      name: materialEmpReqItemId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Позиция запроса на получение материалов у сотрудника_ID
+    material2frpReqId:
+      name: material2frpReqId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Заявка на перемещение материала между складами МОЛов_ID
+    requesterEmployeeId:
+      name: requesterEmployeeId
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Сотрудник заявитель_ID
+    senderEmployeeId:
+      name: senderEmployeeId
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Сотрудник отправитель_ID
+  examples: {}
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Access Token Keycloak
+tags:
+  - name: Склад МОЛа
+  - name: Склад сотрудника
+  - name: Материал на складе МОЛа
+  - name: Материала на складе сотрудника
+  - name: Запрос на получение материала у МОЛ
+  - name: Позиция запроса на получение материала у МОЛ
+  - name: Запрос на получение материала у сотрудника
+  - name: Позиция запроса на получение материала у сотрудника
+  - name: Заявка на перемещение материала между складами МОЛ
+security:
+  - auth: []

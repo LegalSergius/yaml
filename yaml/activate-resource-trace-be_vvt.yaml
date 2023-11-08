@@ -1,0 +1,698 @@
+openapi: 3.0.0
+x-stoplight:
+  id: v4tp8rt6vpka9
+info:
+  title: activate-resource-trace-be
+  version: '1.0'
+  description: Микросервис Трассировка активации ресурса
+  contact:
+    name: Shakhmurat Japparov
+    email: japparov.s@telecom.kz
+servers:
+  - url: 'http://10.8.27.97:6022/api/activate-resource-trace-be/v1.0'
+paths:
+  /activate-resource-trace-gpon:
+    get:
+      summary: Получить трассировку активации ресурса GPON по параметрам
+      tags:
+        - Трассировка активации ресурса GPON
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/artGponArray'
+          headers:
+            header-0:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '408':
+          description: Request Timeout
+        '500':
+          description: Internal Server Error
+      operationId: get-activate-resource-trace-gpon
+      description: Получить трассировку активации ресурса GPON по параметрам
+      parameters:
+        - $ref: '#/components/parameters/AUTHORIZATION'
+        - $ref: '#/components/parameters/entitySpecId'
+        - $ref: '#/components/parameters/entityId'
+    parameters: []
+    post:
+      summary: Создать трассировку активации ресурса GPON
+      operationId: post-activate-resource-trace-gpon
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/artGponResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+        '408':
+          description: Request Timeout
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+      description: Создать трассировку активации ресурса GPON
+      parameters:
+        - $ref: '#/components/parameters/AUTHORIZATION'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/artGponRequest'
+      tags:
+        - Трассировка активации ресурса GPON
+  '/activate-resource-trace-gpon/{id}/activate-resource-trace-gpon-product':
+    parameters:
+      - schema:
+          type: number
+        name: id
+        in: path
+        required: true
+        description: Идентификатор трассировки активации ресурса GPON
+    post:
+      summary: Создать продукт в заказе на активацию ресурса GPON
+      operationId: post-activate-resource-trace-gpon-id-activate-resource-trace-gpon-product
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/artGponProductResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+        '408':
+          description: Request Timeout
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+      tags:
+        - Трассировка активации ресурса GPON
+      description: Создать продукт в заказе на активацию ресурса GPON
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/artGponProductRequest'
+      parameters:
+        - $ref: '#/components/parameters/AUTHORIZATION'
+  '/activate-resource-trace-gpon-product/{id}/activate-resource-trace-gpon-product-extension':
+    parameters:
+      - schema:
+          type: number
+        name: id
+        in: path
+        required: true
+        description: Идентификатор продукта в заказе на активацию ресурса GPON
+    post:
+      summary: Создать расширение продукта в заказе на активацию ресурса GPON
+      operationId: post-activate-resource-trace-gpon-product-id-activate-resource-trace-gpon-product-extension
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/artGponProductExtensionResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+        '408':
+          description: Request Timeout
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+      description: Создать расширение продукта в заказе на активацию ресурса GPON
+      parameters:
+        - $ref: '#/components/parameters/AUTHORIZATION'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/artGponProductExtensionRequest'
+      tags:
+        - Трассировка активации ресурса GPON
+  /get-activate-resource-trace-modify/:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      operationId: get-activate-resource-trace-modify
+      description: Получить трассировку активации ресурса GPON по параметрам и диапазону ошибок c 700 по 800 включительно
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: startDate
+          description: Дата с
+        - schema:
+            type: string
+          in: query
+          name: endDate
+          description: Дата по
+        - schema:
+            type: number
+          in: query
+          name: fromErrCode
+          description: с кода ошибки
+        - schema:
+            type: number
+          in: query
+          name: endErrCode
+          description: до кода ошибки
+        - $ref: '#/components/parameters/AUTHORIZATION'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/artGponModifyArray'
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+    parameters: []
+components:
+  schemas:
+    response:
+      description: ''
+      type: object
+      x-examples: {}
+      properties:
+        errCode:
+          type: number
+          description: Код ошибки
+        errMsg:
+          type: string
+          description: Текст ошибки
+      required:
+        - errCode
+    artGponResponse:
+      description: ''
+      type: object
+      x-examples: {}
+      properties:
+        errCode:
+          type: number
+          description: Код ошибки
+        errMsg:
+          type: string
+          description: Текст ошибки
+        data:
+          description: Данные ответа
+          allOf:
+            - $ref: '#/components/schemas/artGponResponseData'
+      required:
+        - errCode
+        - data
+    artGponProductResponse:
+      description: ''
+      type: object
+      x-examples: {}
+      properties:
+        errCode:
+          type: number
+          description: Код ошибки
+        errMsg:
+          type: string
+          description: Текст ошибки
+        data:
+          description: Данные ответа
+          allOf:
+            - $ref: '#/components/schemas/artGponProductResponseData'
+      required:
+        - errCode
+        - data
+    artGponProductExtensionResponse:
+      description: ''
+      type: object
+      x-examples: {}
+      properties:
+        errCode:
+          type: number
+          description: Код ошибки
+        errMsg:
+          type: string
+          description: Текст ошибки
+        data:
+          description: Данные ответа
+          allOf:
+            - $ref: '#/components/schemas/artGponProductExtensionResponseData'
+      required:
+        - errCode
+        - data
+    artGponResponseData:
+      description: ''
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: number
+          description: Идентификатор трассировки активации ресурса GPON
+      required:
+        - id
+    artGponProductResponseData:
+      description: ''
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: number
+          description: Идентификатор продукта в заказе на активацию ресурса GPON
+      required:
+        - id
+    artGponProductExtensionResponseData:
+      description: ''
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: number
+          description: Идентификатор расширения продукта в заказе на активацию ресурса GPON
+      required:
+        - id
+    olt:
+      description: Данные OLT
+      type: object
+      x-examples: {}
+      properties:
+        vendorId:
+          type: number
+          description: Идентификатор производителя
+        townCode:
+          type: string
+          description: Код города
+        stationNum:
+          type: string
+          description: Номер станции
+        inventoryCode:
+          type: string
+          description: Код в системе инвентаризации
+        slotNumber:
+          type: number
+          description: Номер слота
+        portNumber:
+          type: number
+          description: Номер порта
+      required:
+        - vendorId
+        - townCode
+        - stationNum
+        - inventoryCode
+        - slotNumber
+        - portNumber
+    cpe:
+      description: Данные CPE
+      type: object
+      x-examples: {}
+      properties:
+        vendorId:
+          type: number
+          description: Идентификатор производителя
+        vendorModelId:
+          type: number
+          description: Идентификатор модели
+        serialNum:
+          type: string
+          description: Серийный номер
+    physicalResourceLineData:
+      title: physicalResourceLineData
+      type: object
+      description: Данные физического ресурса ЛД
+      properties:
+        physicalResourceNum:
+          type: string
+          description: Десятизначный номер физического ресурса ЛД
+        localResourceNum:
+          type: string
+          description: Семизначный номер физического ресурса ЛД
+      required:
+        - physicalResourceNum
+        - localResourceNum
+    artGponProduct:
+      title: artGponProduct
+      type: object
+      description: Продукт в заказе на активацию ресурса GPON
+      properties:
+        id:
+          type: number
+          description: Идентификатор продукта в заказе на активацию ресурса GPON
+        activateResourceTraceGponId:
+          type: number
+          description: Идентификатор трассировки активации ресурса GPON
+        productId:
+          type: number
+          description: Идентификатор продукта
+        action:
+          allOf:
+            - $ref: '#/components/schemas/action'
+          description: Тип действия над продуктом
+        activateResourceTraceGponProductExtensions:
+          type: array
+          description: Расширения продукта в заказе
+          items:
+            $ref: '#/components/schemas/artGponProductExtension'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+      required:
+        - id
+        - activateResourceTraceGponId
+        - productId
+        - action
+        - createDate
+        - createApp
+    artGponProductRequest:
+      title: artGponProductRequest
+      type: object
+      description: Продукт в заказе на активацию ресурса GPON
+      properties:
+        productId:
+          type: number
+          description: Идентификатор продукта
+        action:
+          allOf:
+            - $ref: '#/components/schemas/action'
+          description: Тип действия над продуктом
+      required:
+        - productId
+        - action
+    action:
+      title: action
+      enum:
+        - install
+        - delete
+      description: Тип действия над продуктом
+    operationType:
+      title: operationType
+      enum:
+        - install
+        - update
+        - delete
+      description: Тип операции
+    activateResourceType:
+      title: activateResourceType
+      enum:
+        - gpon
+        - telephone
+      description: Тип активации ресурса
+    createDate:
+      type: string
+      title: createDate
+      format: date-time
+      description: Дата создания
+    createApp:
+      title: createApp
+      type: string
+      description: Приложение-создатель
+    artGpon:
+      title: artGpon
+      type: object
+      description: Данные трассировки активации ресурса GPON
+      properties:
+        id:
+          type: number
+          description: Идентификатор трассировки активации ресурса GPON
+        activateResourceType:
+          $ref: '#/components/schemas/activateResourceType'
+        operationType:
+          $ref: '#/components/schemas/operationType'
+        entitySpecId:
+          type: number
+          description: Идентификатор спецификации сущности
+        entityId:
+          type: number
+          description: Идентификатор сущности
+        errCode:
+          type: number
+          description: Код ошибки
+        errMsg:
+          type: string
+          description: Текст ошибки
+        olt:
+          allOf:
+            - $ref: '#/components/schemas/olt'
+        cpe:
+          allOf:
+            - $ref: '#/components/schemas/cpe'
+        physicalResourceLineData:
+          allOf:
+            - $ref: '#/components/schemas/physicalResourceLineData'
+        products:
+          type: array
+          description: Продукты в заказе
+          items:
+            $ref: '#/components/schemas/artGponProduct'
+        report:
+          allOf:
+            - $ref: '#/components/schemas/artGponReport'
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+      required:
+        - id
+        - activateResourceType
+        - operationType
+        - entitySpecId
+        - entityId
+        - errCode
+        - olt
+        - cpe
+        - physicalResourceLineData
+        - report
+        - createDate
+        - createApp
+    artGponRequest:
+      title: artGponRequest
+      type: object
+      description: Тело запроса на создание трассировки активации ресурса GPON
+      properties:
+        activateResourceType:
+          $ref: '#/components/schemas/activateResourceType'
+        operationType:
+          $ref: '#/components/schemas/operationType'
+        entitySpecId:
+          type: number
+          description: Идентификатор спецификации сущности
+        entityId:
+          type: number
+          description: Идентификатор сущности
+        errCode:
+          type: number
+          description: Код ошибки
+        errMsg:
+          type: string
+          description: Текст ошибки
+        olt:
+          allOf:
+            - $ref: '#/components/schemas/olt'
+        cpe:
+          allOf:
+            - $ref: '#/components/schemas/cpe'
+        physicalResourceLineData:
+          allOf:
+            - $ref: '#/components/schemas/physicalResourceLineData'
+        report:
+          allOf:
+            - $ref: '#/components/schemas/artGponReport'
+      required:
+        - activateResourceType
+        - operationType
+        - entitySpecId
+        - entityId
+        - errCode
+        - olt
+        - cpe
+        - physicalResourceLineData
+        - report
+    artGponProductExtension:
+      title: artGponProductExtension
+      type: object
+      description: Расширение продукта в заказе на активацию ресурса GPON
+      properties:
+        id:
+          type: number
+          description: Идентификатор расширения продукта в заказе на активацию ресурса GPON
+        activateResourceTraceGponProductId:
+          type: number
+          description: Идентификатор продукта в заказе на активацию ресурса GPON
+        key:
+          type: string
+          description: Ключ
+        value:
+          type: string
+          description: Значение
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+      required:
+        - id
+        - activateResourceTraceGponProductId
+        - key
+        - value
+        - createDate
+        - createApp
+    artGponProductExtensionRequest:
+      title: artGponProductExtensionRequest
+      type: object
+      description: Расширение продукта в заказе на активацию ресурса GPON
+      properties:
+        key:
+          type: string
+          description: Ключ
+        value:
+          type: string
+          description: Значение
+      required:
+        - key
+        - value
+    artGponReport:
+      title: artGponReport
+      type: object
+      description: Репортаж активации ресурса GPON
+      properties:
+        reportBPM:
+          type: string
+          description: Репортаж BPM
+        reportNMS:
+          type: string
+          description: Репортаж NMS
+      required:
+        - reportBPM
+    artGponArray:
+      title: artGponArray
+      type: object
+      properties:
+        activateResourceGponTraces:
+          type: array
+          description: Список трассировок активации ресурса GPON
+          items:
+            $ref: '#/components/schemas/artGpon'
+      required:
+        - activateResourceGponTraces
+      description: Список трассировок активации ресурса GPON
+    artGponModifyArray:
+      title: artGponModifyArray
+      x-stoplight:
+        id: 98xretix7i0ek
+      type: object
+      properties:
+        activateResourceGponModifyTraces:
+          type: array
+          items:
+            $ref: '#/components/schemas/artModifyGpon'
+    artModifyGpon:
+      title: artModifyGpon
+      x-stoplight:
+        id: sveyoxu1xxpnx
+      type: object
+      properties:
+        entitySpecId:
+          type: string
+        entityId:
+          type: string
+        createDate:
+          type: string
+  parameters:
+    AUTHORIZATION:
+      name: AUTHORIZATION
+      in: header
+      required: true
+      schema:
+        type: string
+      description: API KEY
+    entitySpecId:
+      name: entitySpecId
+      in: query
+      required: false
+      schema:
+        type: number
+      description: Идентификатор спецификации сущности
+    entityId:
+      name: entityId
+      in: query
+      required: false
+      schema:
+        type: number
+      description: Идентификатор сущности
+  requestBodies: {}
+  responses: {}
+tags:
+  - name: Трассировка активации ресурса GPON

@@ -1,0 +1,6 @@
+from enum import Enum
+
+class {{ class_name }}(Enum):
+    {% for value in info.enum %}
+    VALUE_{{ value }} = {{ value }}
+    {% endfor %}

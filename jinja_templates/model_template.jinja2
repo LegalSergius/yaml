@@ -1,0 +1,11 @@
+
+
+class {{ class_name }}(BaseModel):
+    {% if description %}
+    """
+    {{ description }}
+    """
+    {% endif %}
+{% for property, property_value in properties.items() %}
+    {{ property }}: {{ property_value }}
+{% endfor %}

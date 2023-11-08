@@ -1,0 +1,3289 @@
+openapi: 3.1.0
+info:
+  version: '1.0'
+  title: phone-activate-be
+  summary: 'MODE=TEST, TAG=0.0, PIPELINE_ID=0000'
+  description: Микросервис активации Телефонии на ЦАТС/SWW в ручном или автоматическом режиме.
+  termsOfService: 'http://example.com/terms'
+  contact:
+    name: VVT Group LLP
+    url: 'http://www.kt.kz/'
+    email: info@vvt.kz
+  license:
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+    name: Apache 2.0
+paths:
+  /api/phone-activate-be/v1.0/request-set-done:
+    post:
+      tags:
+        - BPM activate-phone
+      summary: Do Phone Activation Request Set Done
+      description: Метод для BPM Активации Телефонии. Активация/Деактивация выполнена автоматически.
+      operationId: do_phone_activation_request_set_done_api_phone_activate_be_v1_0_request_set_done_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/phoneAutomatiSetDoneRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+  /api/phone-activate-be/v1.0/request-set-fallout:
+    post:
+      tags:
+        - BPM activate-phone
+      summary: Do Phone Activation Request Set Fallout
+      description: Метод для BPM Активации Телефонии. Перевод на ручное исполнение.
+      operationId: do_phone_activation_request_set_fallout_api_phone_activate_be_v1_0_request_set_fallout_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/phoneAutomatiSetFalloutRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+  /api/phone-activate-be/v1.0/get-new-requests-on-exchange-list:
+    get:
+      tags:
+        - BPM activate-phone
+      summary: Get New Requests On Exchange List
+      description: Метод для BPM Активации Телефонии. Получение станций по которым есть заявки на автоматическу активацию.
+      operationId: get_new_requests_on_exchange_list_api_phone_activate_be_v1_0_get_new_requests_on_exchange_list_get
+      parameters:
+        - name: limit
+          in: query
+          description: Максимальное станций в запросе.
+          required: true
+          schema:
+            type: integer
+            title: limit
+            description: Максимальное станций в запросе.
+            minimum: 1
+            examples:
+              - 10
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/refExchangeListResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+  /api/phone-activate-be/v1.0/get-new-requests-by-exchange-id-list:
+    get:
+      tags:
+        - BPM activate-phone
+      summary: Get New Requests By Exchange Id List
+      description: Метод для BPM Активации Телефонии. Получение заявок для автоматической активацию через ID станции
+      operationId: get_new_requests_by_exchange_id_list_api_phone_activate_be_v1_0_get_new_requests_by_exchange_id_list_get
+      parameters:
+        - name: limit
+          in: query
+          description: Максимальное кол-во записей
+          required: true
+          schema:
+            type: integer
+            title: limit
+            description: Максимальное кол-во записей
+            minimum: 1
+            examples:
+              - 10
+        - name: exchangeId
+          in: query
+          description: Ид станции
+          required: true
+          schema:
+            type: integer
+            title: limit
+            description: Ид станции
+            minimum: 0
+            examples:
+              - 10
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/autoActivateListResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+  /api/phone-activate-be/v1.0/create-request:
+    post:
+      tags:
+        - BPM OSM/WFM
+      summary: Do Create Phone Activation Request
+      description: Новый запрос на активацию
+      operationId: do_create_phone_activation_request_api_phone_activate_be_v1_0_create_request_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/phoneActivateListRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+  /api/phone-activate-be/v1.0/assign-request:
+    post:
+      tags:
+        - GUI Flow
+      summary: Do Assign Phone Activation Request
+      description: 'Назначить заявку, или взять в работу'
+      operationId: do_assign_phone_activation_request_api_phone_activate_be_v1_0_assign_request_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/phoneAssignRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+  /api/phone-activate-be/v1.0/change-fxs-data:
+    post:
+      tags:
+        - GUI Flow
+      summary: Do Change Phone Activation Fxs Data
+      description: Ввод FXS/FXS login
+      operationId: do_change_phone_activation_fxs_data_api_phone_activate_be_v1_0_change_fxs_data_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/phoneChangeFxsLoginPwd'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+  /api/phone-activate-be/v1.0/manual-execute:
+    post:
+      tags:
+        - GUI Flow
+      summary: Do Manual Phone Activation Execute
+      description: Ручное исполнение заявки
+      operationId: do_manual_phone_activation_execute_api_phone_activate_be_v1_0_manual_execute_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/phoneManualExecuteRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+  /api/phone-activate-be/v1.0/repeat-auto-activation:
+    post:
+      tags:
+        - GUI Flow
+      summary: Do Auto Repeat Phone Activation Execute
+      description: 'Перевод заявки с ручного режима, на потворную активацию.'
+      operationId: do_auto_repeat_phone_activation_execute_api_phone_activate_be_v1_0_repeat_auto_activation_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/phoneRepeatAutoRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+  /api/phone-activate-be/v1.0/get-request:
+    get:
+      tags:
+        - GUI Flow
+      summary: Get Phone Activation Request
+      description: 'Получение одной записи, для формы детали по заказу'
+      operationId: get_phone_activation_request_api_phone_activate_be_v1_0_get_request_get
+      parameters:
+        - name: phoneActivateId
+          in: query
+          description: 'Ид заявки на активацию  '
+          required: true
+          schema:
+            type: integer
+            title: limit
+            description: 'Ид заявки на активацию  '
+            minimum: 0
+            examples:
+              - 10
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/phoneActivateFullResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+  /api/phone-activate-be/v1.0/get-request-list:
+    get:
+      tags:
+        - GUI Flow
+      summary: Get Phone Activation Request List
+      description: Метод для поиска в GUI
+      operationId: get_phone_activation_request_list_api_phone_activate_be_v1_0_get_request_list_get
+      parameters:
+        - name: limit
+          in: query
+          description: Максимальное кол-во записей в поиске
+          required: true
+          schema:
+            type: integer
+            title: limit
+            description: Максимальное кол-во записей в поиске
+            minimum: 1
+            examples:
+              - 10
+        - name: startRow
+          in: query
+          description: Записи с.
+          required: true
+          schema:
+            type: integer
+            title: startRow
+            description: Записи с.
+            minimum: 1
+            examples:
+              - 1
+        - name: filialId
+          in: query
+          description: Ид филиала
+          required: false
+          schema:
+            type: integer
+            title: filialId
+            description: Ид филиала
+            examples:
+              - 5
+        - name: entityId
+          in: query
+          description: Ид сущности
+          required: false
+          schema:
+            type: integer
+            title: entityId
+            description: Ид сущности
+            examples:
+              - 22
+        - name: entitySpecId
+          in: query
+          description: Ид спец сущности entitySpecId
+          required: false
+          schema:
+            type: integer
+            title: entitySpecId
+            description: Ид спец сущности entitySpecId
+            examples:
+              - 10222221
+        - name: customerAccountId
+          in: query
+          description: Ид лицевого счета
+          required: false
+          schema:
+            type: integer
+            title: entitySpecId
+            description: Ид лицевого счета
+            examples:
+              - 1022222
+        - name: shortNumber
+          in: query
+          description: Короткий номер Телефона
+          required: false
+          schema:
+            type: string
+            title: shortNumber
+            description: Короткий номер Телефона
+            maxLength: 50
+            examples:
+              - '22654'
+        - name: insertDateFrom
+          in: query
+          description: Дата создания активации с
+          required: false
+          schema:
+            type: string
+            title: insertDateFrom
+            description: Дата создания активации с
+            format: date-time
+        - name: insertDateTo
+          in: query
+          description: Дата создания активации по
+          required: false
+          schema:
+            type: string
+            title: insertDateTo
+            description: Дата создания активации по
+            format: date-time
+        - name: stateId
+          in: query
+          description: Ид stateId
+          required: false
+          schema:
+            type: integer
+            title: stateId
+            description: Ид stateId
+            examples:
+              - 1
+        - name: userLogin
+          in: query
+          description: Логин пользователя
+          required: false
+          schema:
+            type: string
+            title: userLogin
+            description: Логин пользователя
+            examples:
+              - alma-tech
+        - name: isFallout
+          in: query
+          description: '1 - Показать ручные, 0- автоматические, Пусто все'
+          required: false
+          schema:
+            title: isFallout
+            description: '1 - Показать ручные, 0- автоматические, Пусто все'
+            examples:
+              - '0,1'
+            allOf:
+              - $ref: '#/components/schemas/isFalloutType'
+        - name: refExchangeIdList
+          in: query
+          description: refExchangeIdList список станций
+          required: false
+          schema:
+            type: string
+            title: refExchangeIdList
+            description: refExchangeIdList список станций
+            examples:
+              - '1,2,33,44'
+        - name: refTownStateId
+          in: query
+          description: Id Населенного пункта
+          required: false
+          schema:
+            type: integer
+            title: refTownStateId
+            description: Id Населенного пункта
+            examples:
+              - 1
+        - name: refVendorModelId
+          in: query
+          description: Ид модели ЦАТС/SWW
+          required: false
+          schema:
+            type: integer
+            title: refVendorModelId
+            description: Ид модели ЦАТС/SWW
+            examples:
+              - 1
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/phoneActivateSearchListResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+  /api/phone-activate-be/v1.0/get-request-list-cnt:
+    get:
+      tags:
+        - GUI Flow
+      summary: Get Phone Activation Request List Cnt
+      description: 'Метод для поиска в GUI, Организации постраничности'
+      operationId: get_phone_activation_request_list_cnt_api_phone_activate_be_v1_0_get_request_list_cnt_get
+      parameters:
+        - name: filialId
+          in: query
+          description: Ид филиала
+          required: false
+          schema:
+            type: integer
+            title: filialId
+            description: Ид филиала
+            examples:
+              - 5
+        - name: entityId
+          in: query
+          description: Ид сущности
+          required: false
+          schema:
+            type: integer
+            title: entityId
+            description: Ид сущности
+            examples:
+              - 22
+        - name: entitySpecId
+          in: query
+          description: Ид спец сущности entitySpecId
+          required: false
+          schema:
+            type: integer
+            title: entitySpecId
+            description: Ид спец сущности entitySpecId
+            examples:
+              - 10222221
+        - name: customerAccountId
+          in: query
+          description: Ид лицевого счета
+          required: false
+          schema:
+            type: integer
+            title: entitySpecId
+            description: Ид лицевого счета
+            examples:
+              - 1022222
+        - name: shortNumber
+          in: query
+          description: Короткий номер Телефона
+          required: false
+          schema:
+            type: string
+            title: shortNumber
+            description: Короткий номер Телефона
+            maxLength: 50
+            examples:
+              - '22654'
+        - name: insertDateFrom
+          in: query
+          description: Дата создания активации с
+          required: false
+          schema:
+            type: string
+            title: insertDateFrom
+            description: Дата создания активации с
+            format: date-time
+        - name: insertDateTo
+          in: query
+          description: Дата создания активации по
+          required: false
+          schema:
+            type: string
+            title: insertDateTo
+            description: Дата создания активации по
+            format: date-time
+        - name: stateId
+          in: query
+          description: Ид stateId
+          required: false
+          schema:
+            type: integer
+            title: stateId
+            description: Ид stateId
+            examples:
+              - 1
+        - name: userLogin
+          in: query
+          description: Логин пользователя
+          required: false
+          schema:
+            type: string
+            title: userLogin
+            description: Логин пользователя
+            examples:
+              - alma-tech
+        - name: isFallout
+          in: query
+          description: '1 - Показать ручные, 0- автоматические, Пусто/null все записи'
+          required: false
+          schema:
+            title: isFallout
+            description: '1 - Показать ручные, 0- автоматические, Пусто/null все записи'
+            examples:
+              - '0,1'
+            allOf:
+              - $ref: '#/components/schemas/isFalloutType'
+        - name: refExchangeIdList
+          in: query
+          description: refExchangeIdList список станций
+          required: false
+          schema:
+            type: string
+            title: refExchangeIdList
+            description: refExchangeIdList список станций
+            examples:
+              - '1,2,33,44'
+        - name: refTownStateId
+          in: query
+          description: Id Населенного пункта
+          required: false
+          schema:
+            type: integer
+            title: refTownStateId
+            description: Id Населенного пункта
+            examples:
+              - 1
+        - name: refVendorModelId
+          in: query
+          description: Ид модели ЦАТС/SWW
+          required: false
+          schema:
+            type: integer
+            title: refVendorModelId
+            description: Ид модели ЦАТС/SWW
+            examples:
+              - 1
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/countModel'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+  /api/phone-activate-be/v1.0/get-history:
+    get:
+      tags:
+        - GUI Flow
+      summary: Get Phone Activation History
+      description: Метод для поиска в GUI. Вкладка история изменений
+      operationId: get_phone_activation_history_api_phone_activate_be_v1_0_get_history_get
+      parameters:
+        - name: phoneActivateId
+          in: query
+          description: Ид заявки на активацию
+          required: true
+          schema:
+            type: integer
+            title: phoneActivateId
+            description: Ид заявки на активацию
+            minimum: 0
+            examples:
+              - 10
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/phoneActivateHistoryListResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+  /api/phone-activate-be/v1.0/get-reject-reason:
+    get:
+      tags:
+        - GUI Flow
+      summary: Get Reject Reason
+      description: Метод для выбора актуальных причин отказа
+      operationId: get_reject_reason_api_phone_activate_be_v1_0_get_reject_reason_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rejectReasonList'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+  /api/phone-activate-be/v1.0/get-ref-town-state-list:
+    get:
+      tags:
+        - GUI Flow
+      summary: Get Ref Town State List
+      description: Метод  для фильтра в GUI. Список нас. пунктов
+      operationId: get_ref_town_state_list_api_phone_activate_be_v1_0_get_ref_town_state_list_get
+      parameters:
+        - name: filialId
+          in: query
+          description: Ид филиала
+          required: true
+          schema:
+            type: integer
+            title: filialId
+            description: Ид филиала
+            examples:
+              - 5
+        - name: insertDateFrom
+          in: query
+          description: Дата создания активации с. Подаем с формы вместо is_archive
+          required: false
+          schema:
+            type: string
+            title: insertDateFrom
+            description: Дата создания активации с. Подаем с формы вместо is_archive
+            format: date-time
+        - name: insertDateTo
+          in: query
+          description: Дата создания активации по Подаем с формы вместо is_archive
+          required: false
+          schema:
+            type: string
+            title: insertDateTo
+            description: Дата создания активации по Подаем с формы вместо is_archive
+            format: date-time
+        - name: refExchangeIdList
+          in: query
+          description: refExchangeIdList список станций
+          required: false
+          schema:
+            type: string
+            title: refExchangeIdList
+            description: refExchangeIdList список станций
+            examples:
+              - '1,2,33,44'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/refTownStateList'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+  /api/phone-activate-be/v1.0/get-ref-vendor-model-list:
+    get:
+      tags:
+        - GUI Flow
+      summary: Get Ref Vendor Model List
+      description: Метод  для фильтра в GUI. Список вендор-модели
+      operationId: get_ref_vendor_model_list_api_phone_activate_be_v1_0_get_ref_vendor_model_list_get
+      parameters:
+        - name: filialId
+          in: query
+          description: Ид филиала
+          required: true
+          schema:
+            type: integer
+            title: filialId
+            description: Ид филиала
+            examples:
+              - 5
+        - name: insertDateFrom
+          in: query
+          description: Дата создания активации с. Подаем с формы вместо is_archive
+          required: false
+          schema:
+            type: string
+            title: insertDateFrom
+            description: Дата создания активации с. Подаем с формы вместо is_archive
+            format: date-time
+        - name: insertDateTo
+          in: query
+          description: Дата создания активации по Подаем с формы вместо is_archive
+          required: false
+          schema:
+            type: string
+            title: insertDateTo
+            description: Дата создания активации по Подаем с формы вместо is_archive
+            format: date-time
+        - name: refTownStateId
+          in: query
+          description: Id Населенного пункта
+          required: false
+          schema:
+            type: integer
+            title: refTownStateId
+            description: Id Населенного пункта
+            examples:
+              - '61'
+        - name: refExchangeIdList
+          in: query
+          description: refExchangeIdList список станций
+          required: false
+          schema:
+            type: string
+            title: refExchangeIdList
+            description: refExchangeIdList список станций
+            examples:
+              - '1,2,33,44'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/refVendorModelList'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+  /api/phone-activate-be/v1.0/get-ref-exchange-list:
+    get:
+      tags:
+        - GUI Flow
+      summary: Get Ref Exchange List
+      description: Метод для фильтра в GUI. Список станций
+      operationId: get_ref_exchange_list_api_phone_activate_be_v1_0_get_ref_exchange_list_get
+      parameters:
+        - name: filialId
+          in: query
+          description: Ид филиала
+          required: true
+          schema:
+            type: integer
+            title: filialId
+            description: Ид филиала
+            examples:
+              - 5
+        - name: insertDateFrom
+          in: query
+          description: Дата создания активации с. Подаем с формы вместо is_archive
+          required: false
+          schema:
+            type: string
+            title: insertDateFrom
+            description: Дата создания активации с. Подаем с формы вместо is_archive
+            format: date-time
+        - name: insertDateTo
+          in: query
+          description: Дата создания активации по Подаем с формы вместо is_archive
+          required: false
+          schema:
+            type: string
+            title: insertDateTo
+            description: Дата создания активации по Подаем с формы вместо is_archive
+            format: date-time
+        - name: refTownStateId
+          in: query
+          description: Id Населенного пункта
+          required: false
+          schema:
+            type: integer
+            title: refTownStateId
+            description: Id Населенного пункта
+            examples:
+              - '1,'
+        - name: refVendorModelId
+          in: query
+          description: Ид модели ЦАТС/SWW
+          required: false
+          schema:
+            type: integer
+            title: refVendorModelId
+            description: Ид модели ЦАТС/SWW
+            examples:
+              - '61'
+        - name: refExchangeIdList
+          in: query
+          description: refExchangeIdList список станций
+          required: false
+          schema:
+            type: string
+            title: refExchangeIdList
+            description: refExchangeIdList список станций
+            examples:
+              - '1,2,33,44'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/refExchangeListResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+tags:
+  - name: BPM activate-phone
+    description: 'Операции для BPM/Оркестратора '
+  - name: BPM OSM/WFM
+    description: 'Операции для BPM OSM 2.0/ProductOrder '
+  - name: GUI Flow
+    description: Операции для просмотра запроса на активацию в Fallout. Обработка в ручном режиме. Просмотр запросов.
+components:
+  schemas:
+    phoneAutomatiSetDoneRequest:
+      type: object
+      title: phoneAutomatiSetDoneRequest
+      properties:
+        phoneActivateId:
+          type: integer
+          title: phoneActivateId
+          description: 'Ид заявки на активацию '
+          examples:
+            - 101
+        fxsLogin:
+          title: fxsLogin
+          description: 'Логин FXS '
+          examples:
+            - '7278900108'
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        fxsPwd:
+          title: fxsPwd
+          description: 'Пароль FXS '
+          examples:
+            - '!@312421412'
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        paSwwCatsAddCfsItems:
+          type: array
+          title: Paswwcatsaddcfsitems
+          description: Точный набор ДВО на оборудовании
+          items:
+            $ref: '#/components/schemas/paSwwCatsAddCfs'
+        message:
+          type: string
+          title: message
+          description: Примечание от BPM Активации телефонии
+          maxLength: 4000
+          examples:
+            - Примечание от BPM Активации телефонии
+      required:
+        - phoneActivateId
+    paSwwCatsAddCfs:
+      type: object
+      title: paSwwCatsAddCfs
+      properties:
+        addCfsSpecName:
+          type: string
+          title: addCfsSpecName
+          description: 'Наименование ДВО или Абон. платы, получаем от адаптера'
+          maxLength: 100
+          examples:
+            - Услуги междугородной и международной связи
+        addCfsSpecId:
+          type: integer
+          title: addCfsSpecId
+          description: 'Действие над ДВО, получаем от адаптера'
+          examples:
+            - 141
+            - 142
+            - 140
+        serviceTypeId:
+          type: integer
+          title: serviceTypeId
+          description: 'Ид типа сервиса, получаем от адаптера'
+          default: 0
+          examples:
+            - 1
+        updateDate:
+          title: dateFrom
+          description: Дата вызова SWW/CATS
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+      required:
+        - addCfsSpecName
+        - addCfsSpecId
+    BaseResponse:
+      type: object
+      title: BaseResponse
+      properties:
+        errCode:
+          type: integer
+          title: Errcode
+          description: Код ошибки
+          default: 0
+        errMsg:
+          title: Errmsg
+          description: Текст ошибки
+          anyOf:
+            - type: string
+            - type: 'null'
+    phoneAutomatiSetFalloutRequest:
+      type: object
+      title: phoneAutomatiSetFalloutRequest
+      properties:
+        phoneActivateId:
+          type: integer
+          title: phoneActivateId
+          description: 'Ид заявки на активацию '
+          examples:
+            - 101
+        fxsLogin:
+          title: fxsLogin
+          description: 'Логин FXS, в этом методе не обязательный '
+          examples:
+            - '7278900108'
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        fxsPwd:
+          title: fxsPwd
+          description: 'Пароль FXS '
+          examples:
+            - '!@312421412'
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        paSwwCatsAddCfsItems:
+          type: array
+          title: Paswwcatsaddcfsitems
+          description: Точный набор ДВО на оборудовании
+          items:
+            $ref: '#/components/schemas/paSwwCatsAddCfs'
+        isCanBeReactivated:
+          title: isCanBeReactivated
+          description: 'Если 1, дает возможность повторной активации'
+          examples:
+            - 0
+            - 1
+          allOf:
+            - $ref: '#/components/schemas/isCanBeReactivatedType'
+        message:
+          type: string
+          title: message
+          description: Текст ошибки от BPM Активации телефонии
+          maxLength: 4000
+          examples:
+            - Текст ошибки от BPM Активации телефонии
+      required:
+        - phoneActivateId
+        - isCanBeReactivated
+    isCanBeReactivatedType:
+      enum:
+        - 1
+        - 0
+      title: isCanBeReactivatedType
+    refExchangeListResponse:
+      type: object
+      title: refExchangeListResponse
+      properties:
+        refExchangeList:
+          type: array
+          title: Refexchangelist
+          description: Список станций
+          items:
+            $ref: '#/components/schemas/refExchange'
+    refExchange:
+      type: object
+      title: refExchange
+      properties:
+        id:
+          type: integer
+          title: phoneActivateId
+          description: Ид станции
+          examples:
+            - 101
+        name:
+          type: string
+          title: name
+          description: Наименование станции
+          maxLength: 255
+          examples:
+            - Pavlodar Huawei
+      required:
+        - id
+        - name
+    autoActivateListResponse:
+      type: object
+      title: autoActivateListResponse
+      properties:
+        autoActivatetListResponse:
+          type: array
+          title: Autoactivatetlistresponse
+          description: Список заявок для обработки BPM
+          items:
+            $ref: '#/components/schemas/autoActivate'
+      required:
+        - autoActivatetListResponse
+    autoActivate:
+      type: object
+      title: autoActivate
+      properties:
+        phoneActivateId:
+          type: integer
+          title: phoneActivateId
+          description: 'Ид заявки на активацию '
+          minimum: 0
+          examples:
+            - 101
+        fullNumber:
+          type: string
+          title: fullNumber
+          description: Полный номер Телефона из VCIP
+          maxLength: 50
+          examples:
+            - '7277422653'
+        exchangeId:
+          type: integer
+          title: exchangeId
+          description: Ид ЦАТС/SWW
+          examples:
+            - 5
+        refVendorModelId:
+          type: integer
+          title: refVendorModelId
+          description: Ид модели ЦАТС/SWW
+          examples:
+            - 100
+        adapterUrl:
+          type: string
+          title: adapterUrl
+          description: adapterUrl - Ссылка для команд на станцию. REST API
+          maxLength: 512
+          examples:
+            - 'http://10.8.26.66:7733/api/activate-resource-phone-adapter-be/v0.1/order'
+        entityId:
+          type: integer
+          title: entityId
+          description: Идентификатор сущности
+          minimum: 0
+          examples:
+            - 6000021
+        entitySpecId:
+          type: integer
+          title: entitySpecId
+          description: Идентификатор типа сущности
+          examples:
+            - 1
+            - 22
+        baseCfsActionSpecId:
+          title: baseCfsActionSpecId
+          description: 'Действие над базовым ресурсом, 1-Установка, 2-Изменение, 3-Снятие'
+          examples:
+            - 1
+            - 2
+            - 3
+          allOf:
+            - $ref: '#/components/schemas/baseCfsActionSpecIdTypeId'
+        paOrderAddCfsItems:
+          type: array
+          title: Paorderaddcfsitems
+          description: Массив команд на оборудовании. ДВО
+          items:
+            $ref: '#/components/schemas/paOrderAdd_fs'
+      required:
+        - phoneActivateId
+        - fullNumber
+        - exchangeId
+        - refVendorModelId
+        - adapterUrl
+        - entityId
+        - entitySpecId
+        - baseCfsActionSpecId
+    baseCfsActionSpecIdTypeId:
+      enum:
+        - 1
+        - 2
+        - 3
+      title: baseCfsActionSpecIdTypeId
+    paOrderAdd_fs:
+      type: object
+      title: paOrderAddСfs
+      properties:
+        poElementId:
+          type: integer
+          title: poElementId
+          description: Идентификатор элемента
+          examples:
+            - 1534886
+        poElementName:
+          type: string
+          title: callBackUrl
+          description: Наименование элемента
+          maxLength: 255
+          examples:
+            - Услуги междугородной и международной связи
+        addCfsActionSpecId:
+          title: addCfsActionSpecId
+          description: 'Идентификатор действия над позицией 1 - Установка,3 - Снятие'
+          examples:
+            - 1
+            - 3
+          allOf:
+            - $ref: '#/components/schemas/addCfsActionSpecTypeId'
+        addCfsSpecName:
+          type: string
+          title: addCfsSpecName
+          description: Наименование ДВО или Абон. платы
+          maxLength: 100
+          examples:
+            - Услуги междугородной и международной связи
+        refCfsSpecId:
+          type: integer
+          title: refCfsSpecId
+          description: Идентификатор ДВО
+          examples:
+            - 141
+            - 142
+            - 140
+        isAuto:
+          title: isAuto
+          description: 'Признак автоматической активации, определется через конфигуратор'
+          examples:
+            - 1
+            - 0
+          allOf:
+            - $ref: '#/components/schemas/isAutoType'
+        serviceCount:
+          type: integer
+          title: serviceCount
+          description: Кол-во элементов
+          examples:
+            - 1
+        dateFrom:
+          title: dateFrom
+          description: Дата начала действия услуги
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+      required:
+        - poElementId
+        - poElementName
+        - addCfsActionSpecId
+        - addCfsSpecName
+        - refCfsSpecId
+        - isAuto
+        - serviceCount
+    addCfsActionSpecTypeId:
+      enum:
+        - 1
+        - 3
+      title: addCfsActionSpecTypeId
+    isAutoType:
+      enum:
+        - 1
+        - 0
+      title: isAutoType
+    phoneActivateListRequest:
+      type: object
+      title: phoneActivateListRequest
+      properties:
+        phoneActivateList:
+          type: array
+          title: Phoneactivatelist
+          description: Массив данных Ключ/Значение
+          minItems: 1
+          maxItems: 2
+          items:
+            $ref: '#/components/schemas/phoneActivateRequest'
+      required:
+        - phoneActivateList
+    phoneActivateRequest:
+      type: object
+      title: phoneActivateRequest
+      properties:
+        entityId:
+          type: integer
+          title: entityId
+          description: Идентификатор сущности
+          minimum: 0
+          examples:
+            - 6000021
+        entitySpecId:
+          type: integer
+          title: entitySpecId
+          description: Идентификатор типа сущности
+          examples:
+            - 1
+            - 22
+        processTypeId:
+          title: processTypeId
+          description: Тип процесса. 1 - Актвиация телефонии и ДВО/Деактивация телефонии и ДВО . 2-Откат актвиация телефонии и ДВО/Откат деактивация телефонии и ДВО
+          default: 1
+          examples:
+            - 1
+            - 2
+          allOf:
+            - $ref: '#/components/schemas/activatePhoneProcessTypeId'
+        callBackUrl:
+          type: string
+          title: callBackUrl
+          description: 'Ссылка на URL, ответа'
+          maxLength: 255
+          examples:
+            - 'http://osm'
+        createApplicationName:
+          type: string
+          title: createApplicationName
+          description: 'Приложение создатель '
+          maxLength: 255
+          examples:
+            - OSM
+        physicalResource:
+          type: string
+          title: physicalResource
+          description: 'Номер базового ресурса. FTTh,ETTh. Транспорт.'
+          maxLength: 50
+          examples:
+            - '8034041'
+        shortNumber:
+          type: string
+          title: shortNumber
+          description: Короткий номер Телефона
+          maxLength: 50
+          examples:
+            - '22653'
+        oldFullNumber:
+          type: string
+          title: shortNumber
+          description: Полный номер Телефона из VCIP
+          maxLength: 50
+          examples:
+            - '7277422652'
+        fullNumber:
+          type: string
+          title: fullNumber
+          description: Полный номер Телефона из VCIP
+          maxLength: 50
+          examples:
+            - '7277422653'
+        baseCfsActionSpecId:
+          title: baseCfsActionSpecId
+          description: 'Действие над базовым ресурсом, 1-Установка, 2-Изменение, 3-Снятие'
+          examples:
+            - 1
+            - 2
+            - 3
+          allOf:
+            - $ref: '#/components/schemas/baseCfsActionSpecIdTypeId'
+        baseCfsActionSpecName:
+          type: string
+          title: baseCfsActionSpecName
+          description: Наименование действия над базовым ресурсом
+          maxLength: 255
+          examples:
+            - Установка
+        addressLine:
+          type: string
+          title: addressLine
+          description: Строка адреса
+          maxLength: 255
+          examples:
+            - г.Шымкент ул. ТУРКЕСТАНСКАЯ дом 11 кв. 0
+        customerAccountId:
+          type: integer
+          title: customerAccountId
+          description: Ид лицевого счета
+          examples:
+            - 1098881
+        customerAccountName:
+          type: string
+          title: customerAccountName
+          description: Наименование лицевого счета
+          maxLength: 255
+          examples:
+            - РГП НА ПХВ"ИНЖЕНЕРНО-ТЕХНИЧЕСКИЙ ЦЕНТР ЦЕНТРАЛЬНОЙ...
+        customerAccountNameKZ:
+          title: customerAccountNameKZ
+          description: Наименование лицевого счета КЗ
+          examples:
+            - РГП НА ПХВ"ИНЖЕНЕРНО-ТЕХНИЧЕСКИЙ ЦЕНТР ЦЕНТРАЛЬНОЙ...
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        filialId:
+          type: integer
+          title: filialId
+          description: Ид филиала
+          examples:
+            - 5
+        filialName:
+          type: string
+          title: filialName
+          description: Наименование филиала
+          maxLength: 100
+          examples:
+            - Ю-К ОДТ
+        paOrderAddСfsItems:
+          type: array
+          title: Paorderaddсfsitems
+          description: Массив команд для оборудования
+          items:
+            $ref: '#/components/schemas/paOrderAdd_fs'
+        paSubscriptionServiceItemsOld:
+          type: array
+          title: Pasubscriptionserviceitemsold
+          description: Текущий состав подписки. ДВО и Абон платы. При новом заказе пусто
+          items:
+            $ref: '#/components/schemas/paSubscriptionService'
+        paSubscriptionServiceItemsNew:
+          type: array
+          title: Pasubscriptionserviceitemsnew
+          description: 'Новый состав подписки. ДВО и Абон платы. При снятие пусто '
+          items:
+            $ref: '#/components/schemas/paSubscriptionService'
+        subscriptionServiceCharList:
+          type: array
+          title: subscriptionServiceCharList
+          description: Список хар-тик
+          items:
+            $ref: '#/components/schemas/subscriptionServiceChar'
+        priorityName:
+          type: string
+          title: priorityName
+          description: 'Наименование приоритета из заказа, категория абонента'
+          maxLength: 100
+          examples:
+            - Обычный
+        refTownStateId:
+          title: refTownStateId
+          description: Id Населенного пункта
+          default: -1
+          examples:
+            - 5
+          anyOf:
+            - type: integer
+            - type: 'null'
+        refTownStateName:
+          title: refTownStateName
+          description: Нас. пункт наименование
+          default: Не определено
+          examples:
+            - ' г.Шымкент '
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        exchangeId:
+          title: exchangeId
+          description: Ид ЦАТС/SWW
+          default: -1
+          examples:
+            - 5
+          anyOf:
+            - type: integer
+            - type: 'null'
+        exchangeName:
+          title: exchangeName
+          description: Наименование станции
+          default: Не определено
+          examples:
+            - Astana_GTS_SSW_CS2000
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        refVendorModelId:
+          title: refVendorModelId
+          description: Id модели ЦАТС/SWW
+          default: -1
+          examples:
+            - 100
+          anyOf:
+            - type: integer
+            - type: 'null'
+        refVendorModelName:
+          title: refVendorModelName
+          description: Наименование модели ЦАТС/SWW
+          default: Не определено
+          examples:
+            - Genband CS2000C
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        adapterUrl:
+          type: string
+          title: adapterUrl
+          description: adapterUrl - Ссылка для команд на станцию. REST API
+          maxLength: 512
+          examples:
+            - 'http://10.8.26.66:7733/api/activate-resource-phone-adapter-be/v0.1/order'
+        isFallout:
+          title: isFallout
+          description: 'Если 1, то сразу на ручную работу заказ SWW/ЦАТС'
+          examples:
+            - 0
+            - 1
+          allOf:
+            - $ref: '#/components/schemas/isFalloutType'
+        isCanBeReactivated:
+          title: isCanBeReactivated
+          description: 'Если 1, дает возможность повторной активации'
+          default: 0
+          examples:
+            - 0
+            - 1
+          allOf:
+            - $ref: '#/components/schemas/isCanBeReactivatedType'
+        message:
+          title: message
+          description: 'Примечание, если есть ошибка '
+          examples:
+            - Не указаны cramer_switch_container_id/ssw_cust_group_id для global_number=7184090512 error_message=None local_number=90512 ssw_cust_group_id=None cramer_switch_container_id=None pool_id=140749 pool_name=90512-90512 service_type_id=18 base_resource_spec_id=1005005 ref_town_state_id=10608 status=used в ответе сервиса VCIP.
+          anyOf:
+            - type: string
+              maxLength: 4000
+            - type: 'null'
+        positionId:
+          title: positionId
+          description: Идентификатор позиции
+          examples:
+            - 1808077001
+          anyOf:
+            - type: string
+            - type: 'null'
+      required:
+        - entityId
+        - entitySpecId
+        - callBackUrl
+        - createApplicationName
+        - physicalResource
+        - shortNumber
+        - fullNumber
+        - baseCfsActionSpecId
+        - baseCfsActionSpecName
+        - addressLine
+        - customerAccountId
+        - customerAccountName
+        - filialId
+        - filialName
+        - priorityName
+        - isFallout
+        - positionId
+    activatePhoneProcessTypeId:
+      enum:
+        - 1
+        - 2
+      title: activatePhoneProcessTypeId
+    paSubscriptionService:
+      type: object
+      title: paSubscriptionService
+      properties:
+        poElementId:
+          type: integer
+          title: poElementId
+          description: Идентификатор элемента
+          examples:
+            - 103444
+        poElementName:
+          type: string
+          title: poElementName
+          description: Наименование элемента
+          maxLength: 255
+          examples:
+            - Услуги междугородной и международной связи
+        refCfsSpecId:
+          type: integer
+          title: refCfsSpecId
+          description: 'Идентификатор действия над позицией 1 - Установка,3 - Снятие'
+          examples:
+            - 1
+            - 3
+        isAuto:
+          title: isAuto
+          description: 'Признак автоматической активации, определется через конфигуратор'
+          examples:
+            - 1
+            - 0
+          allOf:
+            - $ref: '#/components/schemas/isAutoType'
+        serviceCount:
+          type: integer
+          title: serviceCount
+          description: Кол-во элементов
+          examples:
+            - 1
+      required:
+        - poElementId
+        - poElementName
+        - refCfsSpecId
+        - isAuto
+        - serviceCount
+    subscriptionServiceChar:
+      type: object
+      title: subscriptionServiceChar
+      properties:
+        charName:
+          type: string
+          title: charName
+          description: Имя хар-ки
+          maxLength: 255
+          examples:
+            - Номер для переадресации (с маской в формате телефонного номера)
+        charValue:
+          type: string
+          title: charValue
+          description: Значение хар-ки
+          maxLength: 4000
+          examples:
+            - '3'
+      required:
+        - charName
+        - charValue
+    isFalloutType:
+      enum:
+        - 1
+        - 0
+      title: isFalloutType
+    phoneAssignRequest:
+      type: object
+      title: phoneAssignRequest
+      properties:
+        phoneActivateId:
+          type: integer
+          title: phoneActivateId
+          description: 'Ид заявки на активацию '
+          minimum: 0
+          examples:
+            - 101
+        userLogin:
+          type: string
+          title: userLogin
+          description: 'Пользователь который назначает '
+          maxLength: 255
+          examples:
+            - alm-tech
+        userAssignLogin:
+          type: string
+          title: userAssignLogin
+          description: 'Пользователь кому назначена заявка '
+          maxLength: 255
+          examples:
+            - alm-tech
+        controlDate:
+          type: string
+          title: controlDate
+          description: Дата контрольного срока
+          format: date-time
+        message:
+          type: string
+          title: message
+          description: 'Примечание, если есть ошибка '
+          maxLength: 4000
+          examples:
+            - Комментарий
+      required:
+        - phoneActivateId
+        - userLogin
+        - userAssignLogin
+    phoneChangeFxsLoginPwd:
+      type: object
+      title: phoneChangeFxsLoginPwd
+      properties:
+        phoneActivateId:
+          type: integer
+          title: phoneActivateId
+          description: 'Ид заявки на активацию '
+          minimum: 0
+          examples:
+            - 101
+        userLogin:
+          type: string
+          title: userLogin
+          description: 'Пользователь который назначает '
+          maxLength: 255
+          examples:
+            - alm-tech
+        fxsLogin:
+          type: string
+          title: fxsLogin
+          description: 'Логин FXS, в этом методе не обязательный '
+          minLength: 1
+          maxLength: 255
+          examples:
+            - '7278900108'
+        fxsPwd:
+          type: string
+          title: fxsPwd
+          description: 'Пароль FXS '
+          minLength: 1
+          maxLength: 255
+          examples:
+            - '!@312421412'
+      required:
+        - phoneActivateId
+        - userLogin
+        - fxsLogin
+        - fxsPwd
+    phoneManualExecuteRequest:
+      type: object
+      title: phoneManualExecuteRequest
+      properties:
+        phoneActivateId:
+          type: integer
+          title: phoneActivateId
+          description: 'Ид заявки на активацию '
+          minimum: 0
+          examples:
+            - 101
+        feRejectReasonId:
+          title: feRejectReasonId
+          description: Идентификатор причины отказа
+          examples:
+            - 0
+          anyOf:
+            - type: integer
+            - type: 'null'
+        resultId:
+          type: integer
+          title: resultId
+          description: Идентификатор результата
+          examples:
+            - 0
+        userLogin:
+          type: string
+          title: userLogin
+          description: 'Пользователь который назначает '
+          maxLength: 255
+          examples:
+            - alm-tech
+        fxsLogin:
+          type: string
+          title: fxsLogin
+          description: 'Логин FXS '
+          maxLength: 255
+          examples:
+            - '7278900108'
+        fxsPwd:
+          type: string
+          title: fxsPwd
+          description: 'Пароль FXS '
+          maxLength: 255
+          examples:
+            - '!@312421412'
+        message:
+          type: string
+          title: message
+          description: 'Примечание, если есть ошибка '
+          maxLength: 4000
+          examples:
+            - Комментарий
+      required:
+        - phoneActivateId
+        - feRejectReasonId
+        - resultId
+        - userLogin
+    phoneRepeatAutoRequest:
+      type: object
+      title: phoneRepeatAutoRequest
+      properties:
+        phoneActivateId:
+          type: integer
+          title: phoneActivateId
+          description: 'Ид заявки на активацию '
+          minimum: 0
+          examples:
+            - 101
+        message:
+          type: string
+          title: message
+          description: 'Примечание, если есть ошибка '
+          maxLength: 4000
+          examples:
+            - Комментарий
+      required:
+        - phoneActivateId
+    phoneActivateFullResponse:
+      type: object
+      title: phoneActivateFullResponse
+      properties:
+        phoneActivateId:
+          type: integer
+          title: phoneActivateId
+          description: 'Ид заявки на активацию '
+          minimum: 0
+          examples:
+            - 101
+        entityId:
+          type: integer
+          title: entityId
+          description: Идентификатор сущности
+          minimum: 0
+          examples:
+            - 6000021
+        entitySpecId:
+          type: integer
+          title: entitySpecId
+          description: Идентификатор типа сущности
+          examples:
+            - 1
+            - 22
+        processTypeId:
+          title: processTypeId
+          description: Тип процесса. 1 - Актвиация телефонии и ДВО/Деактивация телефонии и ДВО . 2-Откат актвиация телефонии и ДВО/Откат деактивация телефонии и ДВО
+          default: 1
+          examples:
+            - 1
+            - 2
+          allOf:
+            - $ref: '#/components/schemas/activatePhoneProcessTypeId'
+        stateId:
+          type: integer
+          title: stateId
+          description: Идентификатор статуса
+          examples:
+            - 0
+        stateName:
+          type: string
+          title: stateName
+          description: Наименование статуса
+          maxLength: 100
+          examples:
+            - Новый
+        callBackUrl:
+          type: string
+          title: callBackUrl
+          description: 'Ссылка на URL, ответа'
+          maxLength: 512
+          examples:
+            - 'http://osm'
+        createApplicationName:
+          type: string
+          title: createApplicationName
+          description: 'Приложение создатель '
+          maxLength: 255
+          examples:
+            - OSM
+        updateApplicationName:
+          type: string
+          title: updateApplicationName
+          description: Приложение через которое обновляли запрос
+          maxLength: 255
+          examples:
+            - FE-PHONE
+        insertDate:
+          title: insertDate
+          description: Дата создания
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+        updateDate:
+          title: updateDate
+          description: Дата обновления
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+        controlDate:
+          title: controlDate
+          description: Контрольный срок. Не используется
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+        assignDate:
+          title: assignDate
+          description: Дата назначения
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+        userLogin:
+          type: string
+          title: userLogin
+          description: 'Пользователь кому назначена заявка '
+          maxLength: 255
+          examples:
+            - alm-tech
+        resultId:
+          type: integer
+          title: resultId
+          description: Идентификатор результата
+          examples:
+            - 0
+        physicalResource:
+          type: string
+          title: physicalResource
+          description: 'Номер базового ресурса. FTTh,ETTh. Транспорт.'
+          maxLength: 50
+          examples:
+            - '8034041'
+        shortNumber:
+          type: string
+          title: shortNumber
+          description: Короткий номер Телефона
+          maxLength: 50
+          examples:
+            - '22653'
+        oldFullNumber:
+          title: shortNumber
+          description: Полный номер Телефона из VCIP
+          examples:
+            - '7277422652'
+          anyOf:
+            - type: string
+              maxLength: 50
+            - type: 'null'
+        fullNumber:
+          type: string
+          title: fullNumber
+          description: Полный номер Телефона из VCIP
+          maxLength: 50
+          examples:
+            - '7277422653'
+        baseCfsActionSpecId:
+          title: baseCfsActionSpecId
+          description: 'Действие над базовым ресурсом, 1-Установка, 2-Изменение, 3-Снятие'
+          examples:
+            - 1
+            - 2
+            - 3
+          allOf:
+            - $ref: '#/components/schemas/baseCfsActionSpecIdTypeId'
+        baseCfsActionSpecName:
+          type: string
+          title: baseCfsActionSpecName
+          description: Наименование действия над базовым ресурсом
+          maxLength: 255
+          examples:
+            - Установка
+        addressLine:
+          type: string
+          title: addressLine
+          description: Строка адреса
+          maxLength: 255
+          examples:
+            - г.Шымкент ул. ТУРКЕСТАНСКАЯ дом 11 кв. 0
+        customerAccountId:
+          type: integer
+          title: customerAccountId
+          description: Ид лицевого счета
+          examples:
+            - 1098881
+        customerAccountName:
+          type: string
+          title: customerAccountName
+          description: Наименование лицевого счета
+          maxLength: 255
+          examples:
+            - РГП НА ПХВ"ИНЖЕНЕРНО-ТЕХНИЧЕСКИЙ ЦЕНТР ЦЕНТРАЛЬНОЙ...
+        customerAccountNameKZ:
+          type: string
+          title: customerAccountNameKZ
+          description: Наименование лицевого счета КЗ
+          maxLength: 255
+          examples:
+            - РГП НА ПХВ"ИНЖЕНЕРНО-ТЕХНИЧЕСКИЙ ЦЕНТР ЦЕНТРАЛЬНОЙ...
+        filialId:
+          type: integer
+          title: filialId
+          description: Ид филиала
+          examples:
+            - 5
+        filialName:
+          type: string
+          title: filialName
+          description: Наименование филиала
+          maxLength: 100
+          examples:
+            - Ю-К ОДТ
+        paOrderAddCfsItems:
+          type: array
+          title: Paorderaddcfsitems
+          description: Массив команд для оборудования
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/paOrderAdd_fs'
+        paSubscriptionServiceItemsOld:
+          type: array
+          title: Pasubscriptionserviceitemsold
+          description: Текущий состав подписки. ДВО и Абон платы. При новом заказе пусто
+          items:
+            $ref: '#/components/schemas/paSubscriptionService'
+        paSubscriptionServiceItemsNew:
+          type: array
+          title: Pasubscriptionserviceitemsnew
+          description: 'Новый состав подписки. ДВО и Абон платы. При снятие пусто '
+          items:
+            $ref: '#/components/schemas/paSubscriptionService'
+        paSwwCatsAddCfsItems:
+          type: array
+          title: Paswwcatsaddcfsitems
+          description: Точный набор ДВО на оборудовании
+          items:
+            $ref: '#/components/schemas/paSwwCatsAddCfs'
+        priorityName:
+          type: string
+          title: priorityName
+          description: 'Наименование приоритета из заказа, категория абонента'
+          maxLength: 100
+          examples:
+            - Обычный
+        refTownStateId:
+          title: refTownStateId
+          description: Id Населенного пункта
+          examples:
+            - 5
+          anyOf:
+            - type: integer
+            - type: 'null'
+        refTownStateName:
+          title: refTownStateName
+          description: Нас. пункт наименование
+          examples:
+            - ' г.Шымкент '
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        exchangeId:
+          title: exchangeId
+          description: Ид ЦАТС/SWW
+          examples:
+            - 5
+          anyOf:
+            - type: integer
+            - type: 'null'
+        exchangeName:
+          title: exchangeName
+          description: Наименование станции
+          examples:
+            - Astana_GTS_SSW_CS2000
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        refVendorModelId:
+          title: refVendorModelId
+          description: Ид модели ЦАТС/SWW
+          examples:
+            - 100
+          anyOf:
+            - type: integer
+            - type: 'null'
+        refVendorModelName:
+          title: refVendorModelName
+          description: Наименование модели ЦАТС/SWW
+          examples:
+            - Genband CS2000C
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        adapterUrl:
+          title: adapterUrl
+          description: adapterUrl - Ссылка для команд на станцию. REST API
+          examples:
+            - 'http://10.8.26.66:7733/api/activate-resource-phone-adapter-be/v0.1/order'
+          anyOf:
+            - type: string
+              maxLength: 512
+            - type: 'null'
+        isFallout:
+          title: isFallout
+          description: 'Если 1, то сразу на ручную работу заказ SWW/ЦАТС'
+          examples:
+            - 0
+            - 1
+          allOf:
+            - $ref: '#/components/schemas/isFalloutType'
+        feRejectReasonId:
+          title: feRejectReasonId
+          description: Идентификатор причины отказа
+          examples:
+            - 0
+          anyOf:
+            - type: integer
+            - type: 'null'
+        feRejectReasonName:
+          title: feRejectReasonName
+          description: 'Наименование причины отказа '
+          examples:
+            - Нет
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        message:
+          title: message
+          description: 'Примечание, если есть ошибка '
+          examples:
+            - Не указаны cramer_switch_container_id/ssw_cust_group_id для global_number=7184090512 error_message=None local_number=90512 ssw_cust_group_id=None cramer_switch_container_id=None pool_id=140749 pool_name=90512-90512 service_type_id=18 base_resource_spec_id=1005005 ref_town_state_id=10608 status=used в ответе сервиса VCIP.
+          anyOf:
+            - type: string
+              maxLength: 4000
+            - type: 'null'
+        fxsLogin:
+          title: fxsLogin
+          description: 'Логин FXS, в этом методе не обязательный '
+          examples:
+            - '7278900108'
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        fxsPwd:
+          title: fxsPwd
+          description: 'Пароль FXS '
+          examples:
+            - '!@312421412'
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        isCanBeReactivated:
+          title: isCanBeReactivated
+          description: 'Если 1, дает возможность повторной активации'
+          examples:
+            - 0
+            - 1
+          anyOf:
+            - $ref: '#/components/schemas/isCanBeReactivatedType'
+            - type: 'null'
+      required:
+        - phoneActivateId
+        - entityId
+        - entitySpecId
+        - stateId
+        - stateName
+        - callBackUrl
+        - createApplicationName
+        - resultId
+        - physicalResource
+        - shortNumber
+        - fullNumber
+        - baseCfsActionSpecId
+        - baseCfsActionSpecName
+        - addressLine
+        - customerAccountId
+        - customerAccountName
+        - filialId
+        - filialName
+        - priorityName
+        - isFallout
+    phoneActivateSearchListResponse:
+      type: object
+      title: phoneActivateSearchListResponse
+      properties:
+        phoneActivateSearchListResponse:
+          type: array
+          title: Phoneactivatesearchlistresponse
+          description: Ответ для формы поиска
+          items:
+            $ref: '#/components/schemas/phoneActivateSearch'
+      required:
+        - phoneActivateSearchListResponse
+    phoneActivateSearch:
+      type: object
+      title: phoneActivateSearch
+      properties:
+        phoneActivateId:
+          type: integer
+          title: phoneActivateId
+          description: 'Ид заявки на активацию '
+          minimum: 0
+          examples:
+            - 101
+        entityId:
+          type: integer
+          title: entityId
+          description: Идентификатор сущности
+          minimum: 0
+          examples:
+            - 6000021
+        entitySpecId:
+          type: integer
+          title: entitySpecId
+          description: Идентификатор типа сущности
+          examples:
+            - 1
+            - 22
+        processTypeId:
+          title: processTypeId
+          description: Тип процесса. 1 - Актвиация телефонии и ДВО/Деактивация телефонии и ДВО . 2-Откат актвиация телефонии и ДВО/Откат деактивация телефонии и ДВО
+          default: 1
+          examples:
+            - 1
+            - 2
+          allOf:
+            - $ref: '#/components/schemas/activatePhoneProcessTypeId'
+        stateId:
+          type: integer
+          title: stateId
+          description: Идентификатор статуса
+          examples:
+            - 0
+        stateName:
+          type: string
+          title: stateName
+          description: Наименование статуса
+          maxLength: 100
+          examples:
+            - Новый
+        callBackUrl:
+          type: string
+          title: callBackUrl
+          description: 'Ссылка на URL, ответа'
+          maxLength: 512
+          examples:
+            - 'http://osm'
+        createApplicationName:
+          type: string
+          title: createApplicationName
+          description: 'Приложение создатель '
+          maxLength: 255
+          examples:
+            - OSM
+        updateApplicationName:
+          title: updateApplicationName
+          description: Приложение через которое обновили запрос
+          default: ''
+          examples:
+            - FE-PHONE
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        insertDate:
+          title: insertDate
+          description: Дата создания
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+        updateDate:
+          title: updateDate
+          description: Дата обновления
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+        controlDate:
+          title: controlDate
+          description: Контрольный срок. Не используется
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+        assignDate:
+          title: assignDate
+          description: Дата назначения
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+        userLogin:
+          title: userLogin
+          description: 'Пользователь кому назначена заявка '
+          default: ''
+          examples:
+            - alm-tech
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        resultId:
+          title: resultId
+          description: Идентификатор результата
+          default: ''
+          examples:
+            - 0
+          anyOf:
+            - type: integer
+            - type: 'null'
+        physicalResource:
+          type: string
+          title: physicalResource
+          description: 'Номер базового ресурса. FTTh,ETTh. Транспорт.'
+          maxLength: 50
+          examples:
+            - '8034041'
+        shortNumber:
+          type: string
+          title: shortNumber
+          description: Короткий номер Телефона
+          maxLength: 50
+          examples:
+            - '22653'
+        oldFullNumber:
+          title: shortNumber
+          description: Полный номер Телефона из VCIP
+          examples:
+            - '7277422652'
+          anyOf:
+            - type: string
+              maxLength: 50
+            - type: 'null'
+        fullNumber:
+          type: string
+          title: fullNumber
+          description: Полный номер Телефона из VCIP
+          maxLength: 50
+          examples:
+            - '7277422653'
+        baseCfsActionSpecId:
+          title: baseCfsActionSpecId
+          description: 'Действие над базовым ресурсом, 1-Установка, 2-Изменение, 3-Снятие'
+          examples:
+            - 1
+            - 2
+            - 3
+          allOf:
+            - $ref: '#/components/schemas/baseCfsActionSpecIdTypeId'
+        baseCfsActionSpecName:
+          type: string
+          title: baseCfsActionSpecName
+          description: Наименование действия над базовым ресурсом
+          maxLength: 255
+          examples:
+            - Установка
+        addressLine:
+          type: string
+          title: addressLine
+          description: Строка адреса
+          maxLength: 255
+          examples:
+            - г.Шымкент ул. ТУРКЕСТАНСКАЯ дом 11 кв. 0
+        customerAccountId:
+          type: integer
+          title: customerAccountId
+          description: Ид лицевого счета
+          examples:
+            - 1098881
+        customerAccountName:
+          type: string
+          title: customerAccountName
+          description: Наименование лицевого счета
+          maxLength: 255
+          examples:
+            - РГП НА ПХВ"ИНЖЕНЕРНО-ТЕХНИЧЕСКИЙ ЦЕНТР ЦЕНТРАЛЬНОЙ...
+        customerAccountNameKZ:
+          title: customerAccountNameKZ
+          description: Наименование лицевого счета КЗ
+          examples:
+            - РГП НА ПХВ"ИНЖЕНЕРНО-ТЕХНИЧЕСКИЙ ЦЕНТР ЦЕНТРАЛЬНОЙ...
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        filialId:
+          type: integer
+          title: filialId
+          description: Ид филиала
+          examples:
+            - 5
+        filialName:
+          type: string
+          title: filialName
+          description: Наименование филиала
+          maxLength: 100
+          examples:
+            - Ю-К ОДТ
+        priorityName:
+          type: string
+          title: priorityName
+          description: 'Наименование приоритета из заказа, категория абонента'
+          maxLength: 100
+          examples:
+            - Обычный
+        refTownStateId:
+          title: refTownStateId
+          description: Id Населенного пункта
+          default: -1
+          examples:
+            - 5
+          anyOf:
+            - type: integer
+            - type: 'null'
+        refTownStateName:
+          title: refTownStateName
+          description: Нас. пункт наименование
+          default: Не определено
+          examples:
+            - ' г.Шымкент '
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        exchangeId:
+          title: exchangeId
+          description: Ид ЦАТС/SWW
+          default: -1
+          examples:
+            - 5
+          anyOf:
+            - type: integer
+            - type: 'null'
+        exchangeName:
+          title: exchangeName
+          description: Наименование станции
+          default: Не определено
+          examples:
+            - Astana_GTS_SSW_CS2000
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        refVendorModelId:
+          title: refVendorModelId
+          description: Ид модели ЦАТС/SWW
+          default: -1
+          examples:
+            - 100
+          anyOf:
+            - type: integer
+            - type: 'null'
+        refVendorModelName:
+          title: refVendorModelName
+          description: Наименование модели ЦАТС/SWW
+          default: Не определено
+          examples:
+            - Genband CS2000C
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        adapterUrl:
+          title: adapterUrl
+          description: adapterUrl - Ссылка для команд на станцию. REST API
+          default: Не определено
+          examples:
+            - 'http://10.8.26.66:7733/api/activate-resource-phone-adapter-be/v0.1/order'
+          anyOf:
+            - type: string
+              maxLength: 512
+            - type: 'null'
+        isFallout:
+          title: isFallout
+          description: 'Если 1, то сразу на ручную работу заказ SWW/ЦАТС'
+          default: 0
+          examples:
+            - 0
+            - 1
+          allOf:
+            - $ref: '#/components/schemas/isFalloutType'
+        feRejectReasonId:
+          title: feRejectReasonId
+          description: Идентификатор причины отказа
+          examples:
+            - 0
+          anyOf:
+            - type: integer
+            - type: 'null'
+        feRejectReasonName:
+          title: feRejectReasonName
+          description: 'Наименование причины отказа '
+          examples:
+            - Нет
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        message:
+          title: message
+          description: 'Примечание, если есть ошибка '
+          examples:
+            - Не указаны cramer_switch_container_id/ssw_cust_group_id для global_number=7184090512 error_message=None local_number=90512 ssw_cust_group_id=None cramer_switch_container_id=None pool_id=140749 pool_name=90512-90512 service_type_id=18 base_resource_spec_id=1005005 ref_town_state_id=10608 status=used в ответе сервиса VCIP.
+          anyOf:
+            - type: string
+              maxLength: 4000
+            - type: 'null'
+        fxsLogin:
+          title: fxsLogin
+          description: 'Логин FXS, в этом методе не обязательный '
+          examples:
+            - '7278900108'
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        fxsPwd:
+          title: fxsPwd
+          description: 'Пароль FXS '
+          examples:
+            - '!@312421412'
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+      required:
+        - phoneActivateId
+        - entityId
+        - entitySpecId
+        - stateId
+        - stateName
+        - callBackUrl
+        - createApplicationName
+        - physicalResource
+        - shortNumber
+        - fullNumber
+        - baseCfsActionSpecId
+        - baseCfsActionSpecName
+        - customerAccountId
+        - customerAccountName
+        - filialId
+        - filialName
+        - priorityName
+        - feRejectReasonId
+    countModel:
+      type: object
+      title: countModel
+      properties:
+        count:
+          type: integer
+          title: count
+          description: Кол-во записей
+          examples:
+            - 0
+      required:
+        - count
+    phoneActivateHistoryListResponse:
+      type: object
+      title: phoneActivateHistoryListResponse
+      properties:
+        phoneActivateHistoryResponseList:
+          type: array
+          title: Phoneactivatehistoryresponselist
+          description: Ответ для формы поиска
+          items:
+            $ref: '#/components/schemas/phoneActivateHistory'
+      required:
+        - phoneActivateHistoryResponseList
+    phoneActivateHistory:
+      type: object
+      title: phoneActivateHistory
+      properties:
+        phoneActivateId:
+          type: integer
+          title: phoneActivateId
+          description: 'Ид заявки на активацию  '
+          minimum: 0
+          examples:
+            - 101
+        userLogin:
+          type: string
+          title: userLogin
+          description: 'Пользователь кому назначена заявка '
+          maxLength: 255
+          examples:
+            - alm-tech
+        stateId:
+          type: integer
+          title: stateId
+          description: Идентификатор статуса
+          examples:
+            - 0
+        stateName:
+          type: string
+          title: stateName
+          description: Наименование статуса
+          maxLength: 255
+          examples:
+            - Новый
+        insertDate:
+          title: insertDate
+          description: Дата создания
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
+        comment:
+          title: comment
+          description: 'Примечание пользователя '
+          examples:
+            - Выполнено вручную
+          anyOf:
+            - type: string
+              maxLength: 4000
+            - type: 'null'
+      required:
+        - phoneActivateId
+        - stateId
+        - stateName
+        - comment
+    rejectReasonList:
+      type: object
+      title: rejectReasonList
+      properties:
+        rejectReasonList:
+          type: array
+          title: Rejectreasonlist
+          description: Список причин отказа
+          items:
+            $ref: '#/components/schemas/rejectReason'
+    rejectReason:
+      type: object
+      title: rejectReason
+      properties:
+        id:
+          type: integer
+          title: rejectReasonId
+          description: 'Ид причины отказа '
+          examples:
+            - 101
+        name:
+          type: string
+          title: userLogin
+          description: Наименование причины отказа
+          maxLength: 255
+          examples:
+            - alm-tech
+        nameKz:
+          type: string
+          title: userAssignLogin
+          description: Наименование причины отказа. На казахском языке
+          maxLength: 255
+          examples:
+            - alm-tech
+      required:
+        - id
+        - name
+        - nameKz
+    refTownStateList:
+      type: object
+      title: refTownStateList
+      properties:
+        refTownStateList:
+          type: array
+          title: Reftownstatelist
+          description: Список причин отказа
+          items:
+            $ref: '#/components/schemas/refTownState'
+    refTownState:
+      type: object
+      title: refTownState
+      properties:
+        id:
+          type: integer
+          title: refTownStateId
+          description: 'Ид населенного пункта '
+          examples:
+            - 101
+        name:
+          type: string
+          title: name
+          description: 'Наименование населенного пункта  '
+          maxLength: 255
+          examples:
+            - alm-tech
+      required:
+        - id
+        - name
+    refVendorModelList:
+      type: object
+      title: refVendorModelList
+      properties:
+        refVendorModelList:
+          type: array
+          title: Refvendormodellist
+          description: Список моделий ЦАТС/SWW
+          items:
+            $ref: '#/components/schemas/refVendorModel'
+    refVendorModel:
+      type: object
+      title: refVendorModel
+      properties:
+        id:
+          type: integer
+          title: refVendorModelId
+          description: Ид модели ЦАТС/SWW
+          examples:
+            - 101
+        name:
+          type: string
+          title: name
+          description: 'Наименование модели ЦАТС/SWW '
+          maxLength: 255
+          examples:
+            - alm-tech
+      required:
+        - id
+        - name

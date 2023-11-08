@@ -1,0 +1,1870 @@
+openapi: 3.0.0
+info:
+  title: atomic-physical-resource-specification-be
+  version: '1.0'
+  description: Микросервис "Спецификация атомарного физического ресурса"
+  contact:
+    name: Shakhmurat Japparov
+    email: japparov.s@telecom.kz
+servers:
+  - url: 'http://localhost:3000/api/atomic-physical-resource-specification-be/v1.0'
+    description: dev
+paths:
+  /physical-device-cpe-transport-spec:
+    parameters: []
+    get:
+      summary: Получить спецификации транспортного терминального оборудования
+      operationId: get-physical-device-cpe-transport-spec
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/aprCpeTransport'
+      tags:
+        - Спецификация транспортного терминального оборудования
+      description: Метод возвращает список спецификаций транспортного терминального оборудования по параметрам
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/inventorySystemId'
+        - $ref: '#/components/parameters/groupId'
+    post:
+      summary: Создать спецификацию транспортного терминального оборудования
+      operationId: post-physical-device-cpe-transport-spec
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseWithData'
+      description: Создать спецификацию транспортного терминального оборудования
+      tags:
+        - Спецификация транспортного терминального оборудования
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/aprCpeTransport'
+            examples:
+              Пример создания:
+                value:
+                  name_ru: string
+                  name_kz: string
+                  code: string
+                  inventorySystemId: 1
+                  groupId: 1
+                  functionId: 1
+                  externalMaterialSelectTypeId: 1
+                  externalMaterialNum: '3004567'
+                  mayUseClientEquipment: false
+                  shortDescription: Краткое описание
+                  isActive: true
+  '/physical-device-cpe-transport-spec/{physDevCpeTransportSpecId}':
+    parameters:
+      - $ref: '#/components/parameters/physDevCpeTransportSpecId'
+    get:
+      summary: Получить спецификацию транспортного терминального оборудования
+      tags:
+        - Спецификация транспортного терминального оборудования
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/aprCpeTransport'
+      operationId: get-physical-device-cpe-transport-spec-by-id
+      description: Метод возвращает спецификацию транспортного терминального оборудования по идентификатору
+    patch:
+      summary: Частичное изменение спецификации транспортного терминального оборудования
+      operationId: patch-physical-device-cpe-transport-spec-physDevCpeTransportSpecId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+      description: Метод позволяет частично измененять параметры спецификации транспортного терминального оборудования по идентификатору
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/aprCpeTransportPatch'
+      tags:
+        - Спецификация транспортного терминального оборудования
+  /physical-device-cpe-applied-spec:
+    get:
+      summary: Получить спецификации прикладного терминального оборудования
+      tags:
+        - Спецификация прикладного терминального оборудования
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/aprCpeApplied'
+      operationId: get-physical-device-cpe-applied-spec
+      description: Метод возвращает список спецификаций прикладного терминального оборудования по параметрам
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/inventorySystemId'
+        - $ref: '#/components/parameters/groupId'
+    post:
+      summary: Создать спецификацию прикладного терминального оборудования
+      operationId: post-physical-device-cpe-applied-spec
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseWithData'
+      description: Создать спецификацию прикладного терминального оборудования
+      tags:
+        - Спецификация прикладного терминального оборудования
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/aprCpeApplied'
+  '/physical-device-cpe-applied-spec/{physDevCpeAppliedSpecId}':
+    parameters:
+      - $ref: '#/components/parameters/physDevCpeAppliedSpecId'
+    get:
+      summary: Получить спецификацию прикладного терминального оборудования
+      tags:
+        - Спецификация прикладного терминального оборудования
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/aprCpeApplied'
+      operationId: get-physical-device-cpe-applied-spec-by-id
+      description: Метод возвращает спецификацию прикладного терминального оборудования по идентификатору
+    patch:
+      summary: Частичное изменение спецификации прикладного терминального оборудования
+      operationId: patch-physical-device-cpe-applied-spec-physDevCpeAppliedSpecId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+      tags:
+        - Спецификация прикладного терминального оборудования
+      description: Метод позволяет частично измененять параметры спецификации прикладного терминального оборудования по идентификатору
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/aprCpeAppliedPatch'
+  /physical-device-cpe-transport-l2-spec:
+    get:
+      summary: Получить спецификации транспортного терминального оборудования L2
+      tags:
+        - Спецификация транспортного терминального оборудования L2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/aprCpeTransportL2'
+      operationId: get-physical-device-cpe-transport-l2-spec
+      description: Метод возвращает список спецификаций транспортного терминального оборудования L2 по параметрам
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/inventorySystemId'
+        - $ref: '#/components/parameters/groupId'
+    post:
+      summary: Создать спецификацию транспортного терминального оборудования L2
+      operationId: post-physical-device-cpe-transport-l2-spec
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseWithData'
+      description: Создать спецификацию транспортного терминального оборудования L2
+      tags:
+        - Спецификация транспортного терминального оборудования L2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/aprCpeTransportL2'
+  '/physical-device-cpe-transport-l2-spec/{physDevCpeTransportL2SpecId}':
+    parameters:
+      - $ref: '#/components/parameters/physDevCpeTransportL2SpecId'
+    get:
+      summary: Получить спецификацию транспортного терминального оборудования L2
+      tags:
+        - Спецификация транспортного терминального оборудования L2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/aprCpeTransportL2'
+      operationId: get-physical-device-cpe-transport-l2-spec-by-id
+      description: Метод возвращает спецификацию транспортного терминального оборудования L2 по идентификатору
+    patch:
+      summary: Частичное изменение спецификации транспортного терминального оборудования L2
+      operationId: patch-physical-device-cpe-transport-l2-spec-by-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+      description: Метод позволяет частично измененять параметры спецификации транспортного терминального оборудования L2 по идентификатору
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/aprCpeTransportL2Patch'
+        description: ''
+      tags:
+        - Спецификация транспортного терминального оборудования L2
+  /physical-device-cross-connect-spec:
+    get:
+      summary: Получить спецификации оконечного устройства
+      tags:
+        - Спецификация оконечного устройства
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/aprCrossConnect'
+      operationId: get-physical-device-cross-connect-spec
+      description: Метод возвращает спецификации оконечного устройства по параметрам
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/inventorySystemId'
+        - $ref: '#/components/parameters/groupId'
+    post:
+      summary: Создать спецификацию оконечного устройства
+      operationId: post-physical-device-cross-connect-spec
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseWithData'
+      description: Создать спецификацию оконечного устройства
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/aprCrossConnect'
+      tags:
+        - Спецификация оконечного устройства
+  '/physical-device-cross-connect-spec/{physDevCrossConnectSpecId}':
+    parameters:
+      - $ref: '#/components/parameters/physDevCrossConnectSpecId'
+    get:
+      summary: Получить спецификацию оконечного устройства
+      tags:
+        - Спецификация оконечного устройства
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/aprCrossConnect'
+      operationId: get-physical-device-cross-connect-spec-by-id
+      description: Метод возвращает спецификацию оконечного устройства по идентификатору
+    patch:
+      summary: Частичное изменение спецификации оконечного устройства
+      operationId: patch-physical-device-cross-connect-spec-by-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+      tags:
+        - Спецификация оконечного устройства
+      description: Метод позволяет частично изменять спецификацию оконечного устройства по идентификатору
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/aprCrossConnectPatch'
+  /atomic-phys-res-spec-group:
+    get:
+      summary: Получить группы спецификации атомарного физического ресурса
+      tags:
+        - Группа спецификации атомарного физического ресурса
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/resourceSpecGroup'
+      operationId: get-atomic-phys-res-spec-group
+      description: Метод возвращает группы спецификации атомарного физического ресурса по параметрам
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+    post:
+      summary: Создать группу спецификации атомарного физического ресурса
+      operationId: post-atomic-phys-res-spec-group
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseWithData'
+      description: Создать группу спецификации атомарного физического ресурса
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/resourceSpecGroup'
+        description: ''
+      tags:
+        - Группа спецификации атомарного физического ресурса
+  '/atomic-phys-res-spec-group/{aprsGroupId}':
+    parameters:
+      - $ref: '#/components/parameters/aprsGroupId'
+    get:
+      summary: Получить группу спецификации атомарного физического ресурса
+      tags:
+        - Группа спецификации атомарного физического ресурса
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/resourceSpecGroup'
+      operationId: get-atomic-phys-res-spec-group-by-id
+      description: Метод возвращает группу спецификации атомарного физического ресурса по идентификатору
+    patch:
+      summary: Частичное изменение группы спецификации атомарного физического ресурса
+      operationId: patch-atomic-phys-res-spec-group-by-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+      description: Метод позволяет частично изменять параметры группы спецификации атомарного физического ресурса по идентификатору
+      tags:
+        - Группа спецификации атомарного физического ресурса
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/resourceSpecGroupPatch'
+  /physical-device-exchange-spec:
+    get:
+      summary: Получить спецификации станции
+      tags:
+        - Спецификация станции
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/aprExchange'
+      operationId: get-physical-device-exchange-spec
+      description: Метод возвращает спецификации станции по параметрам
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/groupId'
+        - $ref: '#/components/parameters/inventorySystemId'
+    post:
+      summary: Создать спецификацию станции
+      operationId: post-physical-device-exchange-spec
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseWithData'
+      description: Создать спецификацию станции
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/aprExchange'
+      tags:
+        - Спецификация станции
+  '/physical-device-exchange-spec/{physDevExchangeSpecId}':
+    parameters:
+      - $ref: '#/components/parameters/physDevExchangeSpecId'
+    get:
+      summary: Получить спецификацию станции
+      tags:
+        - Спецификация станции
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/aprExchange'
+      operationId: get-physical-device-exchange-spec-by-id
+      description: Метод возвращает спецификацию станции по идентификатору
+    patch:
+      summary: Частичное изменение спецификации станции
+      operationId: patch-physical-device-exchange-spec-by-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+      description: Метод позволяет частично изменять параметры спецификации станции по идентификатору
+      tags:
+        - Спецификация станции
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/aprExchangePatch'
+  /physical-device-sim-card-spec:
+    get:
+      summary: Получить спецификации сим-карты
+      tags:
+        - Спецификация сим-карты
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/aprSimCard'
+      operationId: get-physical-device-sim-card-spec
+      description: Метод возвращает спецификации сим-карты по параметрам
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/groupId'
+        - $ref: '#/components/parameters/inventorySystemId'
+    post:
+      summary: Создать спецификацию сим-карты
+      operationId: post-physical-device-sim-card-spec
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseWithData'
+      description: Создать спецификацию сим-карты
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/aprSimCard'
+      tags:
+        - Спецификация сим-карты
+  '/physical-device-sim-card-spec/{physDevSimCardSpecId}':
+    parameters:
+      - $ref: '#/components/parameters/physDevSimCardSpecId'
+    get:
+      summary: Получить спецификацию сим-карты
+      tags:
+        - Спецификация сим-карты
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/aprSimCard'
+      operationId: get-physical-device-sim-card-spec-by-id
+      description: Метод вовзращает спецификацию сим-карты по идентификатору
+    patch:
+      summary: Частичное изменение спецификации сим-карты
+      operationId: patch-physical-device-sim-card-spec-physDevSimCardSpecId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+      description: Метод позволяет частично изменять параметры спецификации сим-карты по идентификатору
+      tags:
+        - Спецификация сим-карты
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/aprSimCardPatch'
+  /physical-device-metrology-spec:
+    get:
+      summary: Получить спецификации метрологического оборудования
+      tags:
+        - Спецификация метрологического оборудования
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/aprMetrology'
+      operationId: get-physical-device-metrology-spec
+      description: Метод возвращает спецификации метрологического оборудования по параметрам
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/groupId'
+        - $ref: '#/components/parameters/inventorySystemId'
+    post:
+      summary: Создать спецификацию метрологического оборудования
+      operationId: post-physical-device-metrology-spec
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseWithData'
+      description: Создать спецификацию метрологического оборудования
+      tags:
+        - Спецификация метрологического оборудования
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/aprMetrology'
+  '/physical-device-metrology-spec/{physDevMetrologySpecId}':
+    parameters:
+      - $ref: '#/components/parameters/physDevMetrologySpecId'
+    get:
+      summary: Получить спецификацию метрологического оборудования
+      tags:
+        - Спецификация метрологического оборудования
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/aprMetrology'
+      operationId: get-physical-device-metrology-spec-by-id
+      description: Метод возвращает спецификацию метрологического оборудования по идентификатору
+    patch:
+      summary: Частичное изменение спецификации метрологического оборудования
+      operationId: patch-physical-device-metrology-spec-by-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+      tags:
+        - Спецификация метрологического оборудования
+      description: Метод позволяет частично изменять спецификации метрологического оборудования по идентификатору
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/aprMetrologyPatch'
+components:
+  schemas:
+    createDate:
+      type: string
+      title: createDate
+      description: Дата создания
+      format: date-time
+      example: '2022-06-28T14:15:22Z'
+      readOnly: true
+    updateDate:
+      type: string
+      title: updateDate
+      description: Дата изменения
+      format: date-time
+      example: '2022-06-28T14:15:22Z'
+      readOnly: true
+    createUser:
+      type: string
+      title: createUser
+      description: 'Логин пользователя, создавшего запись'
+      example: Japparov.S
+      readOnly: true
+    updateUser:
+      type: string
+      title: updateUser
+      description: 'Логин пользователя, изменившего запись'
+      example: Japparov.S
+      readOnly: true
+    createApp:
+      type: string
+      title: createApp
+      description: Приложение-создатель
+      example: product-specification-fe
+      readOnly: true
+    updateApp:
+      type: string
+      title: updateApp
+      description: Приложение-редактор
+      example: product-specification-fe
+      readOnly: true
+    response:
+      title: response
+      type: object
+      properties:
+        errCode:
+          type: number
+          description: Код ошибки
+          example: 0
+        errMsg:
+          type: string
+          description: Текст ошибки
+          example: Успешно
+      required:
+        - errCode
+        - errMsg
+    responseWithData:
+      title: responseWithData
+      type: object
+      properties:
+        errCode:
+          type: number
+          description: Код ошибки
+          example: 0
+        errMsg:
+          type: string
+          description: Текст ошибки
+          example: Успешно
+        data:
+          type: object
+          description: Данные ответа
+          required:
+            - id
+          properties:
+            id:
+              type: number
+              description: Идентификатор записи
+              example: 12
+      required:
+        - errCode
+        - errMsg
+        - data
+    aprCpeTransport:
+      title: aprCpeTransport
+      type: object
+      description: Спецификация транспортного терминального оборудования
+      properties:
+        id:
+          type: integer
+          example: 13
+          description: Спецификация транспортного терминального оборудования_ID
+          readOnly: true
+        name_ru:
+          type: string
+          description: Наименование на русском языке
+        name_kz:
+          type: string
+          description: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+        inventorySystemId:
+          type: integer
+          example: 1
+          description: Система технического учета_ID
+          writeOnly: true
+        inventorySystemData:
+          $ref: '#/components/schemas/inventorySystem'
+        groupId:
+          type: integer
+          example: 1
+          description: Группа спецификации атомарного физического ресурса_ID
+          writeOnly: true
+        groupData:
+          $ref: '#/components/schemas/resourceSpecGroupRO'
+        functionId:
+          type: integer
+          example: 1
+          description: Функциональное назначение спецификации атомарного физического ресурса_ID
+          writeOnly: true
+        functionData:
+          $ref: '#/components/schemas/function'
+        externalMaterialSelectTypeId:
+          type: integer
+          example: 1
+          description: Тип выбора номера материала в системе управления активами_ID
+          writeOnly: true
+        externalMaterialSelectTypeData:
+          $ref: '#/components/schemas/extMaterialSelectType'
+        externalMaterialNum:
+          type: string
+          description: Номер материала в системе управления активами
+          example: '3004587'
+        mayUseClientEquipment:
+          type: boolean
+          default: false
+          description: Можно использовать клиентское оборудование?
+        shortDescription:
+          type: string
+          description: Краткое описание
+          example: Краткое описание
+        isActive:
+          type: boolean
+          default: true
+          description: Признак активности
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - name_ru
+        - name_kz
+        - code
+        - inventorySystemId
+        - groupId
+        - functionId
+        - externalMaterialSelectTypeId
+        - externalMaterialNum
+        - mayUseClientEquipment
+        - shortDescription
+        - isActive
+    aprCpeTransportPatch:
+      title: aprCpeTransport
+      type: object
+      description: Спецификация транспортного терминального оборудования
+      properties:
+        name_ru:
+          type: string
+          description: Наименование на русском языке
+        name_kz:
+          type: string
+          description: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+        inventorySystemId:
+          type: integer
+          example: 1
+          description: Система технического учета_ID
+        groupId:
+          type: integer
+          example: 1
+          description: Группа спецификации атомарного физического ресурса_ID
+        functionId:
+          type: integer
+          example: 1
+          description: Функциональное назначение спецификации атомарного физического ресурса_ID
+        externalMaterialSelectTypeId:
+          type: integer
+          example: 1
+          description: Тип выбора номера материала в системе управления активами_ID
+        externalMaterialNum:
+          type: string
+          description: Номер материала в системе управления активами
+          example: '3004587'
+        mayUseClientEquipment:
+          type: boolean
+          default: false
+          description: Можно использовать клиентское оборудование?
+        shortDescription:
+          type: string
+          description: Краткое описание
+          example: Краткое описание
+        isActive:
+          type: boolean
+          default: true
+          description: Признак активности
+    inventorySystem:
+      type: object
+      title: inventorySystem
+      description: Данные системы технического учета
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Система технического учета_ID
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: VCIP
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: VCIP
+      readOnly: true
+    resourceSpecGroup:
+      title: resourceSpecGroup
+      type: object
+      description: Группа спецификации атомарного физического ресурса
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Группа спецификации атомарного физического ресурса_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Прямая
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Прямая
+        code:
+          type: string
+          description: Код
+          example: '11100'
+        isActive:
+          type: boolean
+          description: Признак активности
+          default: true
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - nameRu
+        - nameKz
+        - code
+        - isActive
+    resourceSpecGroupPatch:
+      title: resourceSpecGroup
+      type: object
+      description: Группа спецификации атомарного физического ресурса
+      properties:
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Прямая
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Прямая
+        code:
+          type: string
+          description: Код
+          example: '11100'
+        isActive:
+          type: boolean
+          description: Признак активности
+          default: true
+    resourceSpecGroupRO:
+      type: object
+      title: resourceSpecGroupRO
+      description: Группа спецификации атомарного физического ресурса
+      properties:
+        id:
+          type: number
+          example: 1
+          description: Группа спецификации атомарного физического ресурса_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Прямая
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Прямая
+      readOnly: true
+    function:
+      type: object
+      title: function
+      description: Функциональное назначение спецификации атомарного физического ресурса
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Функциональное назначение спецификации атомарного физического ресурса_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: OLT
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: OLT
+      readOnly: true
+    extMaterialSelectType:
+      type: object
+      title: External Material Select Type
+      description: Тип выбора номера материала в системе управления активами
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Тип выбора номера материала в системе управления активами_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Спецификация атомарного физического ресурса
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Спецификация атомарного физического ресурса
+      readOnly: true
+    measurementType:
+      type: object
+      title: measurementType
+      description: Тип измерения
+      x-stoplight:
+        id: 549fb43a68dba
+      properties:
+        id:
+          type: integer
+          example: 13
+          description: Тип измерения_ID
+          readOnly: true
+        nameRu:
+          type: string
+          description: Наименование на русском языке
+          example: Измерения электрических величин
+        nameKz:
+          type: string
+          description: Наименование на казахском языке
+          example: Измерения электрических величин
+      readOnly: true
+    aprCpeApplied:
+      title: aprCpeApplied
+      type: object
+      description: Спецификация прикладного терминального оборудования
+      properties:
+        id:
+          type: integer
+          example: 13
+          description: Спецификация прикладного терминального оборудования_ID
+          readOnly: true
+        name_ru:
+          type: string
+          description: Наименование на русском языке
+        name_kz:
+          type: string
+          description: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+        inventorySystemId:
+          type: integer
+          example: 1
+          description: Система технического учета_ID
+          writeOnly: true
+        inventorySystemData:
+          $ref: '#/components/schemas/inventorySystem'
+        groupId:
+          type: integer
+          example: 1
+          description: Группа спецификации атомарного физического ресурса_ID
+          writeOnly: true
+        groupData:
+          $ref: '#/components/schemas/resourceSpecGroupRO'
+        functionId:
+          type: integer
+          example: 1
+          description: Функциональное назначение спецификации атомарного физического ресурса_ID
+          writeOnly: true
+        functionData:
+          $ref: '#/components/schemas/function'
+        externalMaterialSelectTypeId:
+          type: integer
+          example: 1
+          description: Тип выбора номера материала в системе управления активами_ID
+          writeOnly: true
+        externalMaterialSelectTypeData:
+          $ref: '#/components/schemas/extMaterialSelectType'
+        externalMaterialNum:
+          type: string
+          description: Номер материала в системе управления активами
+          example: '3004587'
+        mayUseClientEquipment:
+          type: boolean
+          default: false
+          description: Можно использовать клиентское оборудование?
+        shortDescription:
+          type: string
+          description: Краткое описание
+          example: Краткое описание
+        isActive:
+          type: boolean
+          default: true
+          description: Признак активности
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - name_ru
+        - name_kz
+        - code
+        - inventorySystemId
+        - groupId
+        - functionId
+        - externalMaterialSelectTypeId
+        - externalMaterialNum
+        - mayUseClientEquipment
+        - shortDescription
+        - isActive
+    aprCpeAppliedPatch:
+      title: aprCpeApplied
+      type: object
+      description: Спецификация прикладного терминального оборудования
+      properties:
+        name_ru:
+          type: string
+          description: Наименование на русском языке
+        name_kz:
+          type: string
+          description: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+        inventorySystemId:
+          type: integer
+          example: 1
+          description: Система технического учета_ID
+        groupId:
+          type: integer
+          example: 1
+          description: Группа спецификации атомарного физического ресурса_ID
+        functionId:
+          type: integer
+          example: 1
+          description: Функциональное назначение спецификации атомарного физического ресурса_ID
+        externalMaterialSelectTypeId:
+          type: integer
+          example: 1
+          description: Тип выбора номера материала в системе управления активами_ID
+        externalMaterialNum:
+          type: string
+          description: Номер материала в системе управления активами
+          example: '3004587'
+        mayUseClientEquipment:
+          type: boolean
+          default: false
+          description: Можно использовать клиентское оборудование?
+        shortDescription:
+          type: string
+          description: Краткое описание
+          example: Краткое описание
+        isActive:
+          type: boolean
+          default: true
+          description: Признак активности
+    aprCpeTransportL2:
+      title: aprCpeTransportL2
+      type: object
+      description: Спецификация транспортного терминального оборудования L2
+      properties:
+        id:
+          type: integer
+          example: 13
+          description: Спецификация транспортного терминального оборудования L2_ID
+          readOnly: true
+        name_ru:
+          type: string
+          description: Наименование на русском языке
+        name_kz:
+          type: string
+          description: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+        inventorySystemId:
+          type: integer
+          example: 1
+          description: Система технического учета_ID
+          writeOnly: true
+        inventorySystemData:
+          $ref: '#/components/schemas/inventorySystem'
+        groupId:
+          type: integer
+          example: 1
+          description: Группа спецификации атомарного физического ресурса_ID
+          writeOnly: true
+        groupData:
+          $ref: '#/components/schemas/resourceSpecGroupRO'
+        functionId:
+          type: integer
+          example: 1
+          description: Функциональное назначение спецификации атомарного физического ресурса_ID
+          writeOnly: true
+        functionData:
+          $ref: '#/components/schemas/function'
+        externalMaterialSelectTypeId:
+          type: integer
+          example: 1
+          description: Тип выбора номера материала в системе управления активами_ID
+          writeOnly: true
+        externalMaterialSelectTypeData:
+          $ref: '#/components/schemas/extMaterialSelectType'
+        externalMaterialNum:
+          type: string
+          description: Номер материала в системе управления активами
+          example: '3004587'
+        mayUseClientEquipment:
+          type: boolean
+          default: false
+          description: Можно использовать клиентское оборудование?
+        shortDescription:
+          type: string
+          description: Краткое описание
+          example: Краткое описание
+        isActive:
+          type: boolean
+          default: true
+          description: Признак активности
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - name_ru
+        - name_kz
+        - code
+        - inventorySystemId
+        - groupId
+        - functionId
+        - externalMaterialSelectTypeId
+        - externalMaterialNum
+        - mayUseClientEquipment
+        - shortDescription
+        - isActive
+    aprCpeTransportL2Patch:
+      title: aprCpeTransportL2
+      type: object
+      description: Спецификация транспортного терминального оборудования L2
+      properties:
+        name_ru:
+          type: string
+          description: Наименование на русском языке
+        name_kz:
+          type: string
+          description: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+        inventorySystemId:
+          type: integer
+          example: 1
+          description: Система технического учета_ID
+        groupId:
+          type: integer
+          example: 1
+          description: Группа спецификации атомарного физического ресурса_ID
+        functionId:
+          type: integer
+          example: 1
+          description: Функциональное назначение спецификации атомарного физического ресурса_ID
+        externalMaterialSelectTypeId:
+          type: integer
+          example: 1
+          description: Тип выбора номера материала в системе управления активами_ID
+        externalMaterialNum:
+          type: string
+          description: Номер материала в системе управления активами
+          example: '3004587'
+        mayUseClientEquipment:
+          type: boolean
+          default: false
+          description: Можно использовать клиентское оборудование?
+        shortDescription:
+          type: string
+          description: Краткое описание
+          example: Краткое описание
+        isActive:
+          type: boolean
+          default: true
+          description: Признак активности
+    aprCrossConnect:
+      title: aprCrossConnect
+      type: object
+      description: Спецификация оконечного устройства
+      properties:
+        id:
+          type: integer
+          example: 13
+          description: Спецификация оконечного устройства_ID
+          readOnly: true
+        name_ru:
+          type: string
+          description: Наименование на русском языке
+        name_kz:
+          type: string
+          description: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+        inventorySystemId:
+          type: integer
+          example: 1
+          description: Система технического учета_ID
+          writeOnly: true
+        inventorySystemData:
+          $ref: '#/components/schemas/inventorySystem'
+        groupId:
+          type: integer
+          example: 1
+          description: Группа спецификации атомарного физического ресурса_ID
+          writeOnly: true
+        groupData:
+          $ref: '#/components/schemas/resourceSpecGroupRO'
+        functionId:
+          type: integer
+          example: 1
+          description: Функциональное назначение спецификации атомарного физического ресурса_ID
+          writeOnly: true
+        functionData:
+          $ref: '#/components/schemas/function'
+        externalMaterialSelectTypeId:
+          type: integer
+          example: 1
+          description: Тип выбора номера материала в системе управления активами_ID
+          writeOnly: true
+        externalMaterialSelectTypeData:
+          $ref: '#/components/schemas/extMaterialSelectType'
+        externalMaterialNum:
+          type: string
+          description: Номер материала в системе управления активами
+          example: '3004587'
+        shortDescription:
+          type: string
+          description: Краткое описание
+          example: Краткое описание
+        isActive:
+          type: boolean
+          default: true
+          description: Признак активности
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - name_ru
+        - name_kz
+        - code
+        - inventorySystemId
+        - groupId
+        - functionId
+        - externalMaterialSelectTypeId
+        - externalMaterialNum
+        - mayUseClientEquipment
+        - shortDescription
+        - isActive
+    aprCrossConnectPatch:
+      title: aprCrossConnectPatch
+      type: object
+      description: Спецификация оконечного устройства
+      properties:
+        name_ru:
+          type: string
+          description: Наименование на русском языке
+        name_kz:
+          type: string
+          description: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+        inventorySystemId:
+          type: integer
+          example: 1
+          description: Система технического учета_ID
+        groupId:
+          type: integer
+          example: 1
+          description: Группа спецификации атомарного физического ресурса_ID
+        functionId:
+          type: integer
+          example: 1
+          description: Функциональное назначение спецификации атомарного физического ресурса_ID
+        externalMaterialSelectTypeId:
+          type: integer
+          example: 1
+          description: Тип выбора номера материала в системе управления активами_ID
+        externalMaterialNum:
+          type: string
+          description: Номер материала в системе управления активами
+          example: '3004587'
+        shortDescription:
+          type: string
+          description: Краткое описание
+          example: Краткое описание
+        isActive:
+          type: boolean
+          default: true
+          description: Признак активности
+    aprExchange:
+      title: aprExchange
+      type: object
+      description: Спецификация станции
+      properties:
+        id:
+          type: integer
+          example: 13
+          description: Спецификация станции_ID
+          readOnly: true
+        name_ru:
+          type: string
+          description: Наименование на русском языке
+        name_kz:
+          type: string
+          description: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+        inventorySystemId:
+          type: integer
+          example: 1
+          description: Система технического учета_ID
+          writeOnly: true
+        inventorySystemData:
+          $ref: '#/components/schemas/inventorySystem'
+        groupId:
+          type: integer
+          example: 1
+          description: Группа спецификации атомарного физического ресурса_ID
+          writeOnly: true
+        groupData:
+          $ref: '#/components/schemas/resourceSpecGroupRO'
+        functionId:
+          type: integer
+          example: 1
+          description: Функциональное назначение спецификации атомарного физического ресурса_ID
+          writeOnly: true
+        functionData:
+          $ref: '#/components/schemas/function'
+        externalMaterialSelectTypeId:
+          type: integer
+          example: 1
+          description: Тип выбора номера материала в системе управления активами_ID
+          writeOnly: true
+        externalMaterialSelectTypeData:
+          $ref: '#/components/schemas/extMaterialSelectType'
+        externalMaterialNum:
+          type: string
+          description: Номер материала в системе управления активами
+          example: '3004587'
+        shortDescription:
+          type: string
+          description: Краткое описание
+          example: Краткое описание
+        isActive:
+          type: boolean
+          default: true
+          description: Признак активности
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - name_ru
+        - name_kz
+        - code
+        - inventorySystemId
+        - groupId
+        - functionId
+        - externalMaterialSelectTypeId
+        - externalMaterialNum
+        - mayUseClientEquipment
+        - shortDescription
+        - isActive
+    aprExchangePatch:
+      title: aprExchange
+      type: object
+      description: Спецификация станции
+      properties:
+        name_ru:
+          type: string
+          description: Наименование на русском языке
+        name_kz:
+          type: string
+          description: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+        inventorySystemId:
+          type: integer
+          example: 1
+          description: Система технического учета_ID
+        groupId:
+          type: integer
+          example: 1
+          description: Группа спецификации атомарного физического ресурса_ID
+        functionId:
+          type: integer
+          example: 1
+          description: Функциональное назначение спецификации атомарного физического ресурса_ID
+        externalMaterialSelectTypeId:
+          type: integer
+          example: 1
+          description: Тип выбора номера материала в системе управления активами_ID
+        externalMaterialNum:
+          type: string
+          description: Номер материала в системе управления активами
+          example: '3004587'
+        shortDescription:
+          type: string
+          description: Краткое описание
+          example: Краткое описание
+        isActive:
+          type: boolean
+          default: true
+          description: Признак активности
+    aprSimCard:
+      title: aprSimCard
+      type: object
+      description: Спецификация сим-карты
+      properties:
+        id:
+          type: integer
+          example: 13
+          description: Спецификация сим-карты_ID
+          readOnly: true
+        name_ru:
+          type: string
+          description: Наименование на русском языке
+        name_kz:
+          type: string
+          description: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+        inventorySystemId:
+          type: integer
+          example: 1
+          description: Система технического учета_ID
+          writeOnly: true
+        inventorySystemData:
+          $ref: '#/components/schemas/inventorySystem'
+        groupId:
+          type: integer
+          example: 1
+          description: Группа спецификации атомарного физического ресурса_ID
+          writeOnly: true
+        groupData:
+          $ref: '#/components/schemas/resourceSpecGroupRO'
+        functionId:
+          type: integer
+          example: 1
+          description: Функциональное назначение спецификации атомарного физического ресурса_ID
+          writeOnly: true
+        functionData:
+          $ref: '#/components/schemas/function'
+        externalMaterialSelectTypeId:
+          type: integer
+          example: 1
+          description: Тип выбора номера материала в системе управления активами_ID
+          writeOnly: true
+        externalMaterialSelectTypeData:
+          $ref: '#/components/schemas/extMaterialSelectType'
+        externalMaterialNum:
+          type: string
+          description: Номер материала в системе управления активами
+          example: '3004587'
+        shortDescription:
+          type: string
+          description: Краткое описание
+          example: Краткое описание
+        isActive:
+          type: boolean
+          default: true
+          description: Признак активности
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - name_ru
+        - name_kz
+        - code
+        - inventorySystemId
+        - groupId
+        - functionId
+        - externalMaterialSelectTypeId
+        - externalMaterialNum
+        - mayUseClientEquipment
+        - shortDescription
+        - isActive
+    aprSimCardPatch:
+      title: aprSimCard
+      type: object
+      description: Спецификация сим-карты
+      properties:
+        name_ru:
+          type: string
+          description: Наименование на русском языке
+        name_kz:
+          type: string
+          description: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+        inventorySystemId:
+          type: integer
+          example: 1
+          description: Система технического учета_ID
+        groupId:
+          type: integer
+          example: 1
+          description: Группа спецификации атомарного физического ресурса_ID
+        functionId:
+          type: integer
+          example: 1
+          description: Функциональное назначение спецификации атомарного физического ресурса_ID
+        externalMaterialSelectTypeId:
+          type: integer
+          example: 1
+          description: Тип выбора номера материала в системе управления активами_ID
+        externalMaterialNum:
+          type: string
+          description: Номер материала в системе управления активами
+          example: '3004587'
+        shortDescription:
+          type: string
+          description: Краткое описание
+          example: Краткое описание
+        isActive:
+          type: boolean
+          default: true
+          description: Признак активности
+    aprMetrology:
+      title: aprMetrology
+      type: object
+      description: Спецификация метрологического оборудования
+      properties:
+        id:
+          type: integer
+          example: 13
+          description: Спецификация метрологического оборудования_ID
+          readOnly: true
+        measurementTypeId:
+          type: integer
+          example: 13
+          description: Тип измерения_ID
+          writeOnly: true
+        measurementTypeData:
+          $ref: '#/components/schemas/measurementType'
+        name_ru:
+          type: string
+          description: Наименование на русском языке
+        name_kz:
+          type: string
+          description: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+        inventorySystemId:
+          type: integer
+          example: 1
+          description: Система технического учета_ID
+          writeOnly: true
+        inventorySystemData:
+          $ref: '#/components/schemas/inventorySystem'
+        groupId:
+          type: integer
+          example: 1
+          description: Группа спецификации атомарного физического ресурса_ID
+          writeOnly: true
+        groupData:
+          $ref: '#/components/schemas/resourceSpecGroupRO'
+        functionId:
+          type: integer
+          example: 1
+          description: Функциональное назначение спецификации атомарного физического ресурса_ID
+          writeOnly: true
+        functionData:
+          $ref: '#/components/schemas/function'
+        externalMaterialSelectTypeId:
+          type: integer
+          example: 1
+          description: Тип выбора номера материала в системе управления активами_ID
+          writeOnly: true
+        externalMaterialSelectTypeData:
+          $ref: '#/components/schemas/extMaterialSelectType'
+        externalMaterialNum:
+          type: string
+          description: Номер материала в системе управления активами
+          example: '3004587'
+        shortDescription:
+          type: string
+          description: Краткое описание
+          example: Краткое описание
+        isActive:
+          type: boolean
+          default: true
+          description: Признак активности
+        createDate:
+          $ref: '#/components/schemas/createDate'
+        updateDate:
+          $ref: '#/components/schemas/updateDate'
+        createUser:
+          $ref: '#/components/schemas/createUser'
+        updateUser:
+          $ref: '#/components/schemas/updateUser'
+        createApp:
+          $ref: '#/components/schemas/createApp'
+        updateApp:
+          $ref: '#/components/schemas/updateApp'
+      required:
+        - name_ru
+        - name_kz
+        - code
+        - inventorySystemId
+        - groupId
+        - functionId
+        - externalMaterialSelectTypeId
+        - externalMaterialNum
+        - shortDescription
+        - isActive
+        - measurementTypeId
+    aprMetrologyPatch:
+      title: aprMetrology
+      type: object
+      description: Спецификация метрологического оборудования
+      properties:
+        measurementTypeId:
+          type: integer
+          example: 13
+          description: Тип измерения_ID
+        name_ru:
+          type: string
+          description: Наименование на русском языке
+        name_kz:
+          type: string
+          description: Наименование на казахском языке
+        code:
+          type: string
+          description: Код
+        inventorySystemId:
+          type: integer
+          example: 1
+          description: Система технического учета_ID
+        groupId:
+          type: integer
+          example: 1
+          description: Группа спецификации атомарного физического ресурса_ID
+        functionId:
+          type: integer
+          example: 1
+          description: Функциональное назначение спецификации атомарного физического ресурса_ID
+        externalMaterialSelectTypeId:
+          type: integer
+          example: 1
+          description: Тип выбора номера материала в системе управления активами_ID
+        externalMaterialNum:
+          type: string
+          description: Номер материала в системе управления активами
+          example: '3004587'
+        shortDescription:
+          type: string
+          description: Краткое описание
+          example: Краткое описание
+        isActive:
+          type: boolean
+          default: true
+          description: Признак активности
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Access Token Keycloak
+  parameters:
+    limit:
+      name: limit
+      in: query
+      required: true
+      schema:
+        type: number
+        maximum: 100
+        format: double
+        example: 30
+      description: 'Используется для отсечения части результатов выдачи: вернуть указанное число записей. Записи возвращаются от начала или от значения, переданного в параметр offset'
+    offset:
+      name: offset
+      in: query
+      required: true
+      schema:
+        type: number
+        format: double
+        minimum: 0
+        example: 10
+      description: 'Используется для отсечения части результатов выдачи: пропустить указанное число записей'
+    groupId:
+      name: groupId
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Группа спецификации атомарного физического ресурса_ID
+    inventorySystemId:
+      name: inventorySystemId
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: Система технического учета_ID
+    physDevCpeTransportSpecId:
+      name: physDevCpeTransportSpecId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Спецификация транспортного терминального оборудования_ID
+    physDevCpeAppliedSpecId:
+      name: physDevCpeAppliedSpecId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Спецификация прикладного терминального оборудования_ID
+    physDevCpeTransportL2SpecId:
+      name: physDevCpeTransportL2SpecId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Спецификация транспортного терминального оборудования L2_ID
+    physDevCrossConnectSpecId:
+      name: physDevCrossConnectSpecId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Спецификация оконечного устройства_ID
+    aprsGroupId:
+      name: aprsGroupId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Группа спецификации атомарного физического ресурса_ID
+    physDevExchangeSpecId:
+      name: physDevExchangeSpecId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Спецификация станции_ID
+    physDevSimCardSpecId:
+      name: physDevSimCardSpecId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Спецификация сим-карты_ID
+    physDevMetrologySpecId:
+      name: physDevMetrologySpecId
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Спецификация метрологического оборудования_ID
+security:
+  - auth: []
+tags:
+  - name: Группа спецификации атомарного физического ресурса
+  - name: Спецификация транспортного терминального оборудования
+  - name: Спецификация транспортного терминального оборудования L2
+  - name: Спецификация прикладного терминального оборудования
+  - name: Спецификация оконечного устройства
+  - name: Спецификация станции
+  - name: Спецификация метрологического оборудования
+  - name: Спецификация сим-карты
