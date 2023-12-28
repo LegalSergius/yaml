@@ -24,7 +24,7 @@ class YAMLCommonTags(CustomEnum):
     REF_SIGN = '$ref'
     # REQUIRED = auto()
     RESPONSES = auto()
-    SCHEMA = auto()
+    # SCHEMA = auto()
     SCHEMAS = auto()
     SERVERS = auto()
     TITLE = auto()
@@ -35,6 +35,7 @@ class YAMLExclusiveTags(CustomEnum):
     ALIAS = auto()
     NAME = auto()
     REQUIRED = auto()
+    SCHEMA = auto()
     TYPE = auto()
 
 

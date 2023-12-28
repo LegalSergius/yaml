@@ -28,7 +28,7 @@ app = FastAPI()
     '{{ path }}', 
     response_model={{ response_models[path][method]['success_model'] }}, 
     tags={{ properties.tags | enumerate_tags }}, 
-    responses={{ opened_bracket }}{% for response_status, response_info in response_models[path][method]['responses'].items() %}'{{ response_status }}': {{ opened_bracket }}{% for response_property, property_value in response_info.items() %}'{{ response_property}}': {% if response_property == 'model' %}{{ property_value }}{% else %}'{{ property_value }}'{% endif %}, {% endfor %}{{ closed_bracket }}, {% endfor %}{{ closed_bracket }},
+    {% if 'responses' in response_models[path][method] %}responses={{ opened_bracket }}{% for response_status, response_info in response_models[path][method]['responses'].items() %}'{{ response_status }}': {{ opened_bracket }}{% for response_property, property_value in response_info.items() %}'{{ response_property}}': {% if response_property == 'model' %}{{ property_value }}{% else %}'{{ property_value }}'{% endif %}, {% endfor %}{{ closed_bracket }}, {% endfor %}{{ closed_bracket }},{% endif %}
     description='{{ properties.description}}')
 async def {{ properties.operationId.replace('-', '_') }}({{ api_parameters[path][method] }}
 ) -> {{ response_models[path][method]['return_value'] }}:

@@ -192,13 +192,16 @@ class BackEndGenerator:
 
         is_property_required = copied_parameter_info.pop(YAMLExclusiveTags.REQUIRED.yaml_repr(), True)
     
-        if YAMLCommonTags.SCHEMA.yaml_repr() in parameter_info:
-            copied_parameter_info.update(parameter_info.pop(YAMLCommonTags.SCHEMA.yaml_repr()))
+        if YAMLExclusiveTags.SCHEMA.yaml_repr() in parameter_info:
+            copied_parameter_info.update(parameter_info.get(YAMLExclusiveTags.SCHEMA.yaml_repr()))
 
-        # property_value = self.__get_property_value(YAMLRepresentationTags.QUERY.yaml_repr(), 
-        #     is_property_required, parameter_name, parameter_info)
+
         property_value = self.__get_property_value(YAMLRepresentationTags.QUERY.yaml_repr(), 
-            is_property_required, parameter_name, copied_parameter_info)
+            is_property_required, parameter_name, parameter_info)
+        
+        # property_value = self.__get_property_value(YAMLRepresentationTags.QUERY.yaml_repr(), 
+        #     is_property_required, parameter_name, copied_parameter_info)
+        print(f'{property_value=}')
 
         return f'\n\t{parameter_name}: {property_value},'
         # parameter_type = self.__type_mapping(parameter_info[str(yamlParser.YAMLTags.SCHEMA)][self.__TYPE])
@@ -323,9 +326,10 @@ class BackEndGenerator:
         copied_type_condition_content = type_condition_content_dict.copy()
         # print(f'{copied_type_condition_content=}')
         # if self.__TYPE not in type_condition_content_dict:
+        print(f'{self.__TYPE=}', f'{copied_type_condition_content=}')
         if self.__TYPE not in copied_type_condition_content:
             # type_schema = type_condition_content_dict.get(YAMLCommonTags.SCHEMA.yaml_repr())
-            type_schema = copied_type_condition_content.pop(YAMLCommonTags.SCHEMA.yaml_repr())
+            type_schema = copied_type_condition_content.pop(YAMLExclusiveTags.SCHEMA.yaml_repr())
             # type_condition_content_dict = type_schema.copy()
             copied_type_condition_content = type_schema.copy()
 
@@ -442,6 +446,7 @@ class BackEndGenerator:
         else:
             # print(f'{insights=}', f'{class_name=}', f'{property=}')
             custom_type = self.__parse_properties(insights, class_name, property)
+            print(f'{custom_type=}')
         return null_flag, custom_type
 
 
@@ -459,6 +464,7 @@ class BackEndGenerator:
         else:
             # print(f'{representation_name=}', f'{is_property_required=}', f'{property=}', f'{property_insights=}', f'{class_name=}')
             null_flag, property_type = self.__check_type_conditions(property_insights, class_name, property)
+            print(f'{null_flag=}', f'{property_type=}')
                     
             # current_field_info = utils.field_info(is_property_required, property_insights)
             # checked_requirement = self.__check_requirement(property and not null_flag, property_type)
